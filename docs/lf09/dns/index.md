@@ -42,6 +42,63 @@ Dieser gesamte Prozess dauert nur wenige Millisekunden und läuft vollautomatisc
 
 ## Der DNS-Auflösungsprozess
 
+Der DNS-Auflösungsprozess durchläuft mehrere Stufen, um einen Domainnamen in eine IP-Adresse aufzulösen. Dieser Prozess wird als **rekursive DNS-Abfrage** bezeichnet und folgt der hierarchischen Struktur des Domain Name Systems.
+
+### Ablauf einer DNS-Auflösung
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant Resolver as DNS-Resolver<br/>(z.B. 1.1.1.1)
+    participant Root as Root-Server<br/>(i.root-servers.net)
+    participant TLD as .de TLD-Server<br/>(n.de.net)
+    participant Auth as Autoritativer Server<br/>(tina.ns.cloudflare.com)
+
+    Client->>Resolver: DNS-Query: fa24b.de
+    Note over Resolver: Cache-Prüfung
+    Resolver->>Root: Wo finde ich .de?
+    Root-->>Resolver: Verweis auf .de TLD-Server<br/>(a.nic.de, n.de.net, ...)
+    Resolver->>TLD: Wo finde ich fa24b.de?
+    TLD-->>Resolver: Verweis auf Cloudflare NS<br/>(tina.ns.cloudflare.com,<br/>curt.ns.cloudflare.com)
+    Resolver->>Auth: A-Record für fa24b.de?
+    Auth-->>Resolver: 104.21.63.26<br/>172.67.142.147
+    Resolver-->>Client: IP-Adressen zurückgeben
+```
+
+### Detaillierter Ablauf am Beispiel von fa24b.de
+
+Die folgende Abfrage zeigt den tatsächlichen Auflösungsprozess für `fa24b.de`:
+
+1. **Start beim Root-Server**
+   - Der DNS-Resolver (z.B. 1.1.1.1 von Cloudflare) beginnt bei einem der 13 Root-Server
+   - Root-Server: `a.root-servers.net` bis `m.root-servers.net`
+   - Antwort: Verweis auf die `.de` TLD-Server
+
+2. **Anfrage beim TLD-Server (.de)**
+   - Kontaktierter Server: `n.de.net` (194.146.107.6)
+   - Weitere .de TLD-Server: `a.nic.de`, `f.nic.de`, `z.nic.de`, `l.de.net`, `s.de.net`
+   - Antwort: Verweis auf die autoritativen Nameserver von fa24b.de
+
+3. **Anfrage beim autoritativen Nameserver**
+   - Kontaktierter Server: `tina.ns.cloudflare.com` (172.64.32.230)
+   - Alternativer Server: `curt.ns.cloudflare.com`
+   - Antwort: Die tatsächlichen IP-Adressen
+     ```
+     fa24b.de.    300    IN    A    104.21.63.26
+     fa24b.de.    300    IN    A    172.67.142.147
+     ```
+
+4. **Rückgabe an den Client**
+   - Der Resolver gibt die IP-Adressen an den Client zurück
+   - Die Antwort wird für 300 Sekunden (TTL) gecacht
+
+### Rekursive vs. Iterative Abfrage
+
+- **Rekursive Abfrage**: Der DNS-Resolver übernimmt die gesamte Arbeit und liefert die finale Antwort
+- **Iterative Abfrage**: Der Resolver erhält Verweise und muss jeden Server selbst kontaktieren
+
+Der oben gezeigte Prozess ist eine rekursive Abfrage vom Client zum Resolver, kombiniert mit iterativen Abfragen zwischen Resolver und den DNS-Servern.
+
 ## DNS-Record-Typen (Resource Records)
 
 DNS-Records (auch Resource Records genannt) sind Datensätze in der DNS-Datenbank, die verschiedene Informationen über eine Domain enthalten. Jeder Record-Typ erfüllt eine spezifische Aufgabe.
