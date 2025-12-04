@@ -95,7 +95,7 @@ Unterhalb der Second\-Level\-Domain können beliebig viele \**Subdomains\** ange
 
 - `www.example.com` \- Webserver
 - `mail.example.com` \- Mailserver
-- `intranet.example.com` \- internes Portal
+- `intranet.example.com` \- internes Portal 
 
 Subdomains können wiederum zu \**eigenen Zonen\** mit eigenen autoritativen Nameservern werden. Dies nennt man
 \**Delegation\**. So lässt sich die Verwaltung auf verschiedene Abteilungen oder Standorte aufteilen.
