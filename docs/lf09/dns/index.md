@@ -1,5 +1,10 @@
 # DNS
 
+<video controls preload="metadata">
+  <source src="dns_einleitung.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
 ## Was ist DNS und warum brauchen wir es?
 
 Das **Domain Name System (DNS)** funktioniert wie ein Telefonbuch für Netzwerke. Seine Hauptfunktion ist die Umwandlung
