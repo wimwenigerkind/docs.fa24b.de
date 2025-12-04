@@ -605,10 +605,30 @@ unautorisierten Ausstellungsversuchen erfolgt eine Benachrichtigung per E-Mail a
 
 ## Zusammenfassung und Ausblick
 
-Das Domain Name System (DNS) ist ein grundlegender Bestandteil des Internets. Es sorgt dafür, dass wir Webseiten über leicht merkbare Namen wie docs.fa24b.de aufrufen können, statt uns komplizierte Zahlenfolgen zu merken. Wenn man eine Adresse in den Browser eingibt, sucht DNS im Hintergrund automatisch die passende IP-Adresse des Servers heraus, sodass die gewünschte Seite erreicht werden kann. Dieser Vorgang passiert in Millisekunden und ist für den Nutzer unsichtbar.
+### Zusammenfassung
 
-DNS ist hierarchisch aufgebaut und arbeitet in mehreren Schritten: Zuerst wird geprüft, ob die Information bereits gespeichert ist. Wenn nicht, wird schrittweise bei verschiedenen Servern nachgefragt, die jeweils wissen, wer für den nächsten Bereich zuständig ist – bis schließlich der Server erreicht wird, der die endgültige Information über die Domain besitzt. Dieser liefert dann die passende Adresse zurück.
+Das Domain Name System (DNS) bildet eine fundamentale Infrastrukturkomponente des Internets. Als dezentrales, hierarchisches Verzeichnissystem ermöglicht es die Auflösung menschenlesbarer Domainnamen in maschinenlesbare IP-Adressen und erfüllt damit eine zentrale Vermittlerfunktion in der Netzwerkkommunikation.
 
-Damit verschiedene Dienste im Internet funktionieren – etwa Webseiten, E-Mail oder bestimmte Anwendungen – speichert DNS verschiedenartige Informationen über eine Domain. Dazu gehören einfache Zuordnungen von Namen zu Adressen, Hinweise auf andere Server, Angaben zu Mailservern oder Verifizierungsinfos für Sicherheitsfunktionen. DNS hilft somit nicht nur bei der Navigation im Web, sondern trägt auch zu Stabilität, Ausfallsicherheit und Sicherheit im Netzwerkverkehr bei.
+**Hierarchische Struktur**: Die DNS-Architektur folgt einem mehrstufigen, baumartig aufgebauten System, das von den 13 Root-Server-Systemen über TLD-Server bis zu autoritativen Nameservern reicht. Jede Ebene übernimmt spezifische Verantwortlichkeiten und ermöglicht durch Delegation eine dezentrale Verwaltung des globalen Namensraums.
 
-Zusammengefasst macht DNS das Internet benutzbar, indem es komplexe technische Abläufe übernimmt und Menschen ermöglicht, Dienste bequem über verständliche Namen zu erreichen, ohne die dahinterliegenden Strukturen und Prozesse kennen zu müssen.
+**Server-Typen und Auflösungsprozess**: Der DNS-Auflösungsprozess involviert verschiedene Server-Typen mit unterschiedlichen Aufgaben: Rekursive Resolver übernehmen die Anfragen von Clients, Root-Server verweisen auf zuständige TLD-Server, diese wiederum auf autoritative Nameserver, welche die endgültigen DNS-Einträge bereitstellen. Caching-Mechanismen optimieren dabei die Performance und reduzieren die Last auf der Infrastruktur.
+
+**Record-Typen**: DNS unterstützt verschiedene Record-Typen (A, AAAA, CNAME, MX, TXT, NS, PTR, SOA, SRV, CAA), die unterschiedliche Dienste und Funktionen ermöglichen – von der grundlegenden Namensauflösung über E-Mail-Routing bis hin zu Sicherheitsmechanismen wie DKIM und SPF.
+
+**Lokale Auflösung**: Neben der globalen DNS-Infrastruktur existieren lokale Auflösungsmechanismen (Hosts-Datei, lokale DNS-Server, mDNS, Split-DNS), die insbesondere in Unternehmensnetzwerken und Heimnetzwerken zum Einsatz kommen und eine DNS-Auflösung ohne Kontakt zu Root-Servern ermöglichen.
+
+### Ausblick
+
+Die DNS-Technologie entwickelt sich kontinuierlich weiter, um aktuellen Anforderungen an Sicherheit, Datenschutz und Performance gerecht zu werden:
+
+**DNS-Sicherheit (DNSSEC)**: Die Implementierung von DNS Security Extensions (DNSSEC) gewinnt zunehmend an Bedeutung. Durch kryptografische Signaturen werden DNS-Antworten authentifiziert und Manipulationen wie DNS-Spoofing und Cache-Poisoning verhindert. Die schrittweise weltweite DNSSEC-Einführung erhöht die Vertrauenswürdigkeit des DNS-Systems.
+
+**Verschlüsselte DNS-Protokolle**: DNS over HTTPS (DoH) und DNS over TLS (DoT) adressieren Datenschutzbedenken durch Verschlüsselung der DNS-Kommunikation. Diese Protokolle verhindern, dass Dritte DNS-Anfragen mitlesen oder manipulieren können, und werden zunehmend von Browsern und Betriebssystemen nativ unterstützt.
+
+**IPv6-Transition**: Der fortschreitende Übergang zu IPv6 führt zu einer vermehrten Nutzung von AAAA-Records. DNS spielt eine zentrale Rolle bei der parallelen Unterstützung von IPv4 und IPv6 (Dual-Stack) und ermöglicht einen reibungslosen Migrationsprozess.
+
+**Performance-Optimierungen**: Technologien wie EDNS (Extension Mechanisms for DNS) erweitern die Möglichkeiten des DNS-Protokolls. Anycast-Routing, geografisch verteilte DNS-Server und intelligente Caching-Strategien verbessern kontinuierlich die Auflösungsgeschwindigkeit und Verfügbarkeit.
+
+**Zukünftige Herausforderungen**: Die zunehmende Komplexität vernetzter Systeme, die steigende Anzahl IoT-Geräte und die Notwendigkeit schnellerer Auflösungszeiten stellen neue Anforderungen an die DNS-Infrastruktur. Gleichzeitig muss DNS gegen zunehmend ausgefeilte Angriffsvektoren wie DDoS-Attacken auf kritische DNS-Infrastruktur geschützt werden.
+
+DNS bleibt damit ein dynamisches System, das sich an technologische Entwicklungen anpasst und eine unverzichtbare Grundlage für die Funktionsfähigkeit des Internets darstellt.
