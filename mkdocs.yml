@@ -41,6 +41,8 @@ extra:
   version:
     provider: mike
 plugins:
+  - search:
+      lang: de
   - git-revision-date-localized:
       enable_creation_date: true
   - git-committers:
