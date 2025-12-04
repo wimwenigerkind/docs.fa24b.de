@@ -1,0 +1,2175 @@
+
+<!doctype html>
+<html lang="de" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://docs.fa24b.de/feature-fa24b-3/lf09/dns/">
+      
+      
+        <link rel="prev" href="../..">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
+    
+    
+      
+        <title>DNS - Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dns" class="md-skip">
+          Zum Inhalt
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Kopfzeile">
+    <a href="../.." title="Docs" class="md-header__button md-logo" aria-label="Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              DNS
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Suche" placeholder="Suche" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Suche">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Zurücksetzen" aria-label="Zurücksetzen" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Suche wird initialisiert
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/wimwenigerkind/docs.fa24b.de" title="Zum Repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    wimwenigerkind/docs.fa24b.de
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Hauptnavigation" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  FA24B
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  Lf09
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Docs" class="md-nav__button md-logo" aria-label="Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Docs
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/wimwenigerkind/docs.fa24b.de" title="Zum Repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    wimwenigerkind/docs.fa24b.de
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    FA24B
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Lf09
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Lf09
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Dns
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Dns
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    DNS
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    DNS
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhaltsverzeichnis
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#was-ist-dns-und-warum-brauchen-wir-es" class="md-nav__link">
+    <span class="md-ellipsis">
+      Was ist DNS und warum brauchen wir es?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Was ist DNS und warum brauchen wir es?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#warum-ist-dns-notwendig" class="md-nav__link">
+    <span class="md-ellipsis">
+      Warum ist DNS notwendig?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#die-hauptaufgaben-des-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Die Hauptaufgaben des DNS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beispiel-einer-dns-anfrage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Beispiel einer DNS-Anfrage
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aufbau-und-hierarchie-des-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Aufbau und Hierarchie des DNS
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Aufbau und Hierarchie des DNS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#die-dns-hierarchieebenen" class="md-nav__link">
+    <span class="md-ellipsis">
+      Die DNS-Hierarchieebenen
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aufbau-einer-domain" class="md-nav__link">
+    <span class="md-ellipsis">
+      Aufbau einer Domain
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#root-ebene" class="md-nav__link">
+    <span class="md-ellipsis">
+      Root-Ebene
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#top-level-domains-tlds" class="md-nav__link">
+    <span class="md-ellipsis">
+      Top-Level-Domains (TLDs)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#second-level-domains" class="md-nav__link">
+    <span class="md-ellipsis">
+      Second-Level-Domains
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subdomains-und-delegation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Subdomains und Delegation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zonen-und-verantwortlichkeiten" class="md-nav__link">
+    <span class="md-ellipsis">
+      Zonen und Verantwortlichkeiten
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dns-server-typen-und-ihre-aufgaben" class="md-nav__link">
+    <span class="md-ellipsis">
+      DNS-Server-Typen und ihre Aufgaben
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="DNS-Server-Typen und ihre Aufgaben">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rekursiver-resolver-dns-resolver" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rekursiver Resolver (DNS-Resolver)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#root-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      Root-Server
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Root-Server">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#die-13-root-server-systeme" class="md-nav__link">
+    <span class="md-ellipsis">
+      Die 13 Root-Server-Systeme
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tld-server-top-level-domain-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      TLD-Server (Top-Level-Domain-Server)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autoritative-nameserver" class="md-nav__link">
+    <span class="md-ellipsis">
+      Autoritative Nameserver
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#caching-dns-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      Caching-DNS-Server
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lokaler-dns-server-zb-im-unternehmen-oder-heimnetz" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lokaler DNS-Server (z.B. im Unternehmen oder Heimnetz)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lokaler DNS-Server (z.B. im Unternehmen oder Heimnetz)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lokale-dns-auflosung-ohne-root-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lokale DNS-Auflösung ohne Root-Server
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zusammenspiel-der-server-typen" class="md-nav__link">
+    <span class="md-ellipsis">
+      Zusammenspiel der Server-Typen
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#der-dns-auflosungsprozess" class="md-nav__link">
+    <span class="md-ellipsis">
+      Der DNS-Auflösungsprozess
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Der DNS-Auflösungsprozess">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ablauf-einer-dns-auflosung" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ablauf einer DNS-Auflösung
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#detaillierter-ablauf-am-beispiel-von-fa24bde" class="md-nav__link">
+    <span class="md-ellipsis">
+      Detaillierter Ablauf am Beispiel von fa24b.de
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rekursive-vs-iterative-abfrage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rekursive vs. Iterative Abfrage
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dns-record-typen-resource-records" class="md-nav__link">
+    <span class="md-ellipsis">
+      DNS-Record-Typen (Resource Records)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="DNS-Record-Typen (Resource Records)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-record-address-record" class="md-nav__link">
+    <span class="md-ellipsis">
+      A-Record (Address Record)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aaaa-record-ipv6-address-record" class="md-nav__link">
+    <span class="md-ellipsis">
+      AAAA-Record (IPv6 Address Record)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cname-record-canonical-name" class="md-nav__link">
+    <span class="md-ellipsis">
+      CNAME-Record (Canonical Name)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mx-record-mail-exchange" class="md-nav__link">
+    <span class="md-ellipsis">
+      MX-Record (Mail Exchange)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#txt-record-text-record" class="md-nav__link">
+    <span class="md-ellipsis">
+      TXT-Record (Text Record)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ns-record-name-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      NS-Record (Name Server)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ptr-record-pointer-record" class="md-nav__link">
+    <span class="md-ellipsis">
+      PTR-Record (Pointer Record)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#soa-record-start-of-authority" class="md-nav__link">
+    <span class="md-ellipsis">
+      SOA-Record (Start of Authority)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#srv-record-service-record" class="md-nav__link">
+    <span class="md-ellipsis">
+      SRV-Record (Service Record)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#caa-record-certification-authority-authorization" class="md-nav__link">
+    <span class="md-ellipsis">
+      CAA-Record (Certification Authority Authorization)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zusammenfassung-der-wichtigsten-record-typen" class="md-nav__link">
+    <span class="md-ellipsis">
+      Zusammenfassung der wichtigsten Record-Typen
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dns-caching-und-ttl-time-to-live" class="md-nav__link">
+    <span class="md-ellipsis">
+      DNS-Caching und TTL (Time to Live)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dns-sicherheit-bedrohungen-und-schutzmanahmen" class="md-nav__link">
+    <span class="md-ellipsis">
+      DNS-Sicherheit: Bedrohungen und Schutzmaßnahmen
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#praktische-dns-tools-und-befehle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Praktische DNS-Tools und Befehle
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dns-in-der-praxis-konfiguration-und-verwaltung" class="md-nav__link">
+    <span class="md-ellipsis">
+      DNS in der Praxis: Konfiguration und Verwaltung
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#zusammenfassung-und-ausblick" class="md-nav__link">
+    <span class="md-ellipsis">
+      Zusammenfassung und Ausblick
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhaltsverzeichnis
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#was-ist-dns-und-warum-brauchen-wir-es" class="md-nav__link">
+    <span class="md-ellipsis">
+      Was ist DNS und warum brauchen wir es?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Was ist DNS und warum brauchen wir es?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#warum-ist-dns-notwendig" class="md-nav__link">
+    <span class="md-ellipsis">
+      Warum ist DNS notwendig?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#die-hauptaufgaben-des-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Die Hauptaufgaben des DNS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beispiel-einer-dns-anfrage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Beispiel einer DNS-Anfrage
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aufbau-und-hierarchie-des-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Aufbau und Hierarchie des DNS
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Aufbau und Hierarchie des DNS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#die-dns-hierarchieebenen" class="md-nav__link">
+    <span class="md-ellipsis">
+      Die DNS-Hierarchieebenen
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aufbau-einer-domain" class="md-nav__link">
+    <span class="md-ellipsis">
+      Aufbau einer Domain
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#root-ebene" class="md-nav__link">
+    <span class="md-ellipsis">
+      Root-Ebene
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#top-level-domains-tlds" class="md-nav__link">
+    <span class="md-ellipsis">
+      Top-Level-Domains (TLDs)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#second-level-domains" class="md-nav__link">
+    <span class="md-ellipsis">
+      Second-Level-Domains
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subdomains-und-delegation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Subdomains und Delegation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zonen-und-verantwortlichkeiten" class="md-nav__link">
+    <span class="md-ellipsis">
+      Zonen und Verantwortlichkeiten
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dns-server-typen-und-ihre-aufgaben" class="md-nav__link">
+    <span class="md-ellipsis">
+      DNS-Server-Typen und ihre Aufgaben
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="DNS-Server-Typen und ihre Aufgaben">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rekursiver-resolver-dns-resolver" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rekursiver Resolver (DNS-Resolver)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#root-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      Root-Server
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Root-Server">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#die-13-root-server-systeme" class="md-nav__link">
+    <span class="md-ellipsis">
+      Die 13 Root-Server-Systeme
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tld-server-top-level-domain-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      TLD-Server (Top-Level-Domain-Server)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autoritative-nameserver" class="md-nav__link">
+    <span class="md-ellipsis">
+      Autoritative Nameserver
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#caching-dns-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      Caching-DNS-Server
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lokaler-dns-server-zb-im-unternehmen-oder-heimnetz" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lokaler DNS-Server (z.B. im Unternehmen oder Heimnetz)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lokaler DNS-Server (z.B. im Unternehmen oder Heimnetz)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lokale-dns-auflosung-ohne-root-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lokale DNS-Auflösung ohne Root-Server
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zusammenspiel-der-server-typen" class="md-nav__link">
+    <span class="md-ellipsis">
+      Zusammenspiel der Server-Typen
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#der-dns-auflosungsprozess" class="md-nav__link">
+    <span class="md-ellipsis">
+      Der DNS-Auflösungsprozess
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Der DNS-Auflösungsprozess">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ablauf-einer-dns-auflosung" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ablauf einer DNS-Auflösung
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#detaillierter-ablauf-am-beispiel-von-fa24bde" class="md-nav__link">
+    <span class="md-ellipsis">
+      Detaillierter Ablauf am Beispiel von fa24b.de
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rekursive-vs-iterative-abfrage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rekursive vs. Iterative Abfrage
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dns-record-typen-resource-records" class="md-nav__link">
+    <span class="md-ellipsis">
+      DNS-Record-Typen (Resource Records)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="DNS-Record-Typen (Resource Records)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-record-address-record" class="md-nav__link">
+    <span class="md-ellipsis">
+      A-Record (Address Record)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aaaa-record-ipv6-address-record" class="md-nav__link">
+    <span class="md-ellipsis">
+      AAAA-Record (IPv6 Address Record)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cname-record-canonical-name" class="md-nav__link">
+    <span class="md-ellipsis">
+      CNAME-Record (Canonical Name)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mx-record-mail-exchange" class="md-nav__link">
+    <span class="md-ellipsis">
+      MX-Record (Mail Exchange)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#txt-record-text-record" class="md-nav__link">
+    <span class="md-ellipsis">
+      TXT-Record (Text Record)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ns-record-name-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      NS-Record (Name Server)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ptr-record-pointer-record" class="md-nav__link">
+    <span class="md-ellipsis">
+      PTR-Record (Pointer Record)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#soa-record-start-of-authority" class="md-nav__link">
+    <span class="md-ellipsis">
+      SOA-Record (Start of Authority)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#srv-record-service-record" class="md-nav__link">
+    <span class="md-ellipsis">
+      SRV-Record (Service Record)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#caa-record-certification-authority-authorization" class="md-nav__link">
+    <span class="md-ellipsis">
+      CAA-Record (Certification Authority Authorization)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zusammenfassung-der-wichtigsten-record-typen" class="md-nav__link">
+    <span class="md-ellipsis">
+      Zusammenfassung der wichtigsten Record-Typen
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dns-caching-und-ttl-time-to-live" class="md-nav__link">
+    <span class="md-ellipsis">
+      DNS-Caching und TTL (Time to Live)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dns-sicherheit-bedrohungen-und-schutzmanahmen" class="md-nav__link">
+    <span class="md-ellipsis">
+      DNS-Sicherheit: Bedrohungen und Schutzmaßnahmen
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#praktische-dns-tools-und-befehle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Praktische DNS-Tools und Befehle
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dns-in-der-praxis-konfiguration-und-verwaltung" class="md-nav__link">
+    <span class="md-ellipsis">
+      DNS in der Praxis: Konfiguration und Verwaltung
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#zusammenfassung-und-ausblick" class="md-nav__link">
+    <span class="md-ellipsis">
+      Zusammenfassung und Ausblick
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/wimwenigerkind/docs.fa24b.de/edit/main/docs/lf09/dns/index.md" title="Seite editieren" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/wimwenigerkind/docs.fa24b.de/raw/main/docs/lf09/dns/index.md" title="Quellcode der Seite anzeigen" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
+    </a>
+  
+
+
+<h1 id="dns">DNS</h1>
+<h2 id="was-ist-dns-und-warum-brauchen-wir-es">Was ist DNS und warum brauchen wir es?</h2>
+<p>Das <strong>Domain Name System (DNS)</strong> funktioniert wie ein Telefonbuch für Netzwerke. Seine Hauptfunktion ist die Umwandlung
+von menschenlesbaren Domainnamen (wie <a href="https://docs.fa24b.de">docs.fa24b.de</a>) in maschinenlesbare
+IP-Adressen (wie 185.199.108.153). So können Webbrowser, E-Mail-Clients und andere Netzwerkdienste die
+richtigen Server erreichen – sowohl im Internet als auch in lokalen Netzwerken.</p>
+<h3 id="warum-ist-dns-notwendig">Warum ist DNS notwendig?</h3>
+<p>Computer kommunizieren über IP-Adressen miteinander. Für Menschen sind diese Zahlenfolgen jedoch schwer zu merken und
+unpraktisch.
+Ohne DNS wäre es erforderlich, sich für jede Website die entsprechende IP-Adresse zu merken:</p>
+<ul>
+<li><strong>Mit DNS</strong>: Es wird <code>www.google.com</code> eingegeben</li>
+<li><strong>Ohne DNS</strong>: Es müsste <code>142.250.185.46</code> eingegeben werden</li>
+</ul>
+<p>DNS löst dieses Problem, indem es als Vermittler zwischen Menschen und Maschinen fungiert.</p>
+<h3 id="die-hauptaufgaben-des-dns">Die Hauptaufgaben des DNS</h3>
+<ol>
+<li><strong>Namensauflösung</strong>: Übersetzung von Domainnamen in IP-Adressen (Forward Lookup)</li>
+<li><strong>Reverse Lookup</strong>: Übersetzung von IP-Adressen zurück in Domainnamen</li>
+<li><strong>Lastverteilung</strong>: Verteilung von Anfragen auf mehrere Server</li>
+<li><strong>Redundanz</strong>: Bereitstellung von Ausfallsicherheit durch mehrere DNS-Server</li>
+<li><strong>E-Mail-Routing</strong>: Bestimmung zuständiger Mailserver über MX-Records</li>
+</ol>
+<h3 id="beispiel-einer-dns-anfrage">Beispiel einer DNS-Anfrage</h3>
+<p>Bei der Eingabe von <code>docs.fa24b.de</code> in einem Browser läuft folgender Prozess ab:</p>
+<ol>
+<li>Der Browser fragt den lokalen DNS-Resolver nach der IP-Adresse</li>
+<li>Falls nicht im Cache vorhanden, werden verschiedene DNS-Server abgefragt</li>
+<li>Die IP-Adresse <code>185.199.108.153</code> wird zurückgeliefert</li>
+<li>Der Browser kann nun eine Verbindung zum Webserver herstellen</li>
+</ol>
+<p>Dieser gesamte Prozess dauert nur wenige Millisekunden und läuft vollautomatisch im Hintergrund ab.</p>
+<h2 id="aufbau-und-hierarchie-des-dns">Aufbau und Hierarchie des DNS</h2>
+<p>Das DNS ist hierarchisch strukturiert, ähnlich einem umgekehrten Baum. Die Hierarchie besteht aus mehreren Ebenen, wobei
+jede Ebene für einen Teil des Domainnamens verantwortlich ist. Diese Struktur ermöglicht eine
+skalierbare, ausfallsichere und dezentrale Verwaltung von Domainnamen.</p>
+<h3 id="die-dns-hierarchieebenen">Die DNS-Hierarchieebenen</h3>
+<pre class="mermaid"><code>graph TD
+    Root[". (Root)"]
+    Root --&gt; DE[".de"]
+    Root --&gt; COM[".com"]
+    Root --&gt; ORG[".org"]
+    DE --&gt; FA24B["fa24b.de"]
+    DE --&gt; EXAMPLE["example.de"]
+    COM --&gt; GOOGLE["google.com"]
+    COM --&gt; GITHUB["github.com"]
+    ORG --&gt; WIKI["wikipedia.org"]
+    FA24B --&gt; DOCS["docs.fa24b.de"]</code></pre>
+<h3 id="aufbau-einer-domain">Aufbau einer Domain</h3>
+<p>Eine Domain wie <code>docs.fa24b.de</code> wird von <strong>rechts nach links</strong> gelesen und besteht aus mehreren Ebenen:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docs  .  fa24b  .  de  .
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a> │        │        │   │
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a> │        │        │   └─── Root-Ebene (meist unsichtbar)
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a> │        │        └─────── Top-Level-Domain (TLD)
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a> │        └──────────────── Second-Level-Domain
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a> └───────────────────────── Subdomain
+</span></code></pre></div>
+<p><strong>Die vier Ebenen im Detail:</strong></p>
+<ol>
+<li><strong>Root-Ebene (.)</strong>: Die oberste Ebene, verwaltet von 13 Root-Server-Systemen</li>
+<li><strong>Top-Level-Domain (TLD)</strong>: Länder- oder themenbezogene Endungen (<code>.de</code>, <code>.com</code>, <code>.org</code>)</li>
+<li><strong>Second-Level-Domain</strong>: Der registrierte Domainname (z.B. <code>fa24b</code>)</li>
+<li><strong>Subdomain</strong>: Optionale Unterteilungen unterhalb der Domain (z.B. <code>docs</code>, <code>mail</code>)</li>
+</ol>
+<p>Jede Ebene kann von unterschiedlichen Organisationen oder DNS-Registrars verwaltet werden, was eine dezentrale
+Verwaltung ermöglicht.</p>
+<h3 id="root-ebene">Root-Ebene</h3>
+<p>An der Spitze der Hierarchie steht die Root-Zone (<code>.</code>), die von 13 Root-Server-Systemen betrieben wird.</p>
+<h3 id="top-level-domains-tlds">Top-Level-Domains (TLDs)</h3>
+<p>Unterhalb der Root-Zone befinden sich die Top-Level-Domains wie <code>.com</code>, <code>.org</code>, <code>.net</code>, <code>.de</code>, <code>.fr</code> oder <code>.ch</code>.</p>
+<h3 id="second-level-domains">Second-Level-Domains</h3>
+<p>Die <strong>Second-Level-Domain</strong> ist der Teil direkt unterhalb der TLD:</p>
+<ul>
+<li><code>fa24b</code> in <code>fa24b.de</code></li>
+</ul>
+<p>In diesem Bereich verwalten typischerweise Firmen, Organisationen oder Provider ihren eigenen DNS-Namensraum.</p>
+<h3 id="subdomains-und-delegation">Subdomains und Delegation</h3>
+<p>Unterhalb der Second-Level-Domain können beliebig viele <strong>Subdomains</strong> angelegt werden:</p>
+<ul>
+<li><code>docs.fa24b.de</code> - Webserver mit Dokumentation</li>
+<li><code>mail.fa24b.de</code> - Mailserver</li>
+<li><code>intranet.fa24b.de</code> - internes Portal</li>
+</ul>
+<p><strong>Verschachtelte Subdomains</strong>: Subdomains können beliebig tief verschachtelt werden, sodass mehrere Ebenen möglich sind:</p>
+<ul>
+<li><code>api.docs.fa24b.de</code> - API-Dokumentation (Subdomain der Subdomain)</li>
+<li><code>dev.api.docs.fa24b.de</code> - Entwicklungs-API (drei Ebenen tief)</li>
+<li><code>server1.datacenter.berlin.firma.de</code> - Mehrstufige Hierarchie für Organisation</li>
+</ul>
+<p>Es gibt keine technische Begrenzung der Tiefe, jedoch ist die Gesamtlänge eines vollständigen Domainnamens (FQDN) auf
+253 Zeichen begrenzt, wobei jedes Label (Teil zwischen den Punkten) maximal 63 Zeichen lang sein darf.</p>
+<p><strong>Delegation</strong>: Subdomains können wiederum zu <strong>eigenen Zonen</strong> mit eigenen autoritativen Nameservern werden. Dies nennt
+man <strong>Delegation</strong>. So lässt sich die Verwaltung auf verschiedene Abteilungen oder Standorte aufteilen.</p>
+<h3 id="zonen-und-verantwortlichkeiten">Zonen und Verantwortlichkeiten</h3>
+<p>Wichtiger Begriff im DNS ist die <strong>Zone</strong>:</p>
+<ul>
+<li>eine Zone ist der Teil der DNS-Hierarchie, der von einem Satz autoritativer Nameserver verwaltet wird</li>
+<li>eine Domain kann mehrere Zonen enthalten, wenn Teilbereiche delegiert werden</li>
+</ul>
+<p>Beispiel:</p>
+<ul>
+<li><code>schule.de</code> wird zentral vom Schulträger verwaltet</li>
+<li><code>it.schule.de</code> wird an die IT-Abteilung delegiert und von deren eigenen Nameservern verwaltet</li>
+</ul>
+<p>Dadurch entsteht eine <strong>dezentrale</strong>, aber logisch klar strukturierte Verwaltung des Namensraums.</p>
+<h2 id="dns-server-typen-und-ihre-aufgaben">DNS-Server-Typen und ihre Aufgaben</h2>
+<p>Im Domain Name System übernehmen unterschiedliche DNS-Server spezielle Aufgaben. Zusammengenommen sorgen sie dafür, dass
+Domains wie <code>docs.fa24b.de</code> zuverlässig und schnell aufgelöst werden können.</p>
+<h3 id="rekursiver-resolver-dns-resolver">Rekursiver Resolver (DNS-Resolver)</h3>
+<p>Der <strong>rekursive Resolver</strong> ist meist der erste Ansprechpartner für Clients:</p>
+<ul>
+<li>läuft oft beim Internetprovider, in Unternehmen oder auf öffentlichen DNS-Diensten z.B. <a href="https://1.1.1.1">1.1.1.1</a>(
+  Cloudflare), <a href="https://8.8.8.8">8.8.8.8</a>(Google)</li>
+<li>nimmt Anfragen von Clients entgegen (z.B. für <code>docs.fa24b.de</code>)</li>
+<li>fragt bei Bedarf weitere DNS-Server (Root, TLD, autoritative Server) ab</li>
+<li>speichert Antworten im <strong>Cache</strong>, um zukünftige Anfragen schneller zu beantworten</li>
+</ul>
+<p>Der rekursive Resolver wird typischerweise im Router oder in den Netzwerkeinstellungen des Clients konfiguriert.</p>
+<h3 id="root-server">Root-Server</h3>
+<p>Die <strong>Root-Server</strong> stehen an der Spitze der DNS-Hierarchie:</p>
+<ul>
+<li>kennen keine einzelnen Domains wie <code>fa24b.de</code></li>
+<li>liefern nur Hinweise, welche <strong>TLD-Server</strong> für eine Endung wie <code>.de</code> zuständig sind</li>
+<li>sind weltweit verteilt und in 13 logische Servergruppen eingeteilt (<code>a.root-servers.net</code> bis <code>m.root-servers.net</code>)</li>
+</ul>
+<p>Die Root-Server bilden die Grundlage für die gesamte DNS-Infrastruktur und ermöglichen die Auflösung aller Domainnamen
+weltweit.</p>
+<h4 id="die-13-root-server-systeme">Die 13 Root-Server-Systeme</h4>
+<p>Es gibt weltweit <a href="https://root-servers.org/">13 Root-Server-Systeme</a>, die durch Buchstaben von A bis M identifiziert
+werden:</p>
+<table>
+<thead>
+<tr>
+<th>Bezeichnung</th>
+<th>Hostname</th>
+<th>IPv4</th>
+<th>IPv6</th>
+<th>Betreiber</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A</strong></td>
+<td>a.root-servers.net</td>
+<td>198.41.0.4</td>
+<td>2001:503:ba3e::2:30</td>
+<td>Verisign, Inc.</td>
+</tr>
+<tr>
+<td><strong>B</strong></td>
+<td>b.root-servers.net</td>
+<td>170.247.170.2</td>
+<td>2801:1b8:10::b</td>
+<td>USC-ISI</td>
+</tr>
+<tr>
+<td><strong>C</strong></td>
+<td>c.root-servers.net</td>
+<td>192.33.4.12</td>
+<td>2001:500:2::c</td>
+<td>Cogent Communications</td>
+</tr>
+<tr>
+<td><strong>D</strong></td>
+<td>d.root-servers.net</td>
+<td>199.7.91.13</td>
+<td>2001:500:2d::d</td>
+<td>University of Maryland</td>
+</tr>
+<tr>
+<td><strong>E</strong></td>
+<td>e.root-servers.net</td>
+<td>192.203.230.10</td>
+<td>2001:500:a8::e</td>
+<td>NASA</td>
+</tr>
+<tr>
+<td><strong>F</strong></td>
+<td>f.root-servers.net</td>
+<td>192.5.5.241</td>
+<td>2001:500:2f::f</td>
+<td>Internet Systems Consortium</td>
+</tr>
+<tr>
+<td><strong>G</strong></td>
+<td>g.root-servers.net</td>
+<td>192.112.36.4</td>
+<td>2001:500:12::d0d</td>
+<td>US DoD Network Information Center</td>
+</tr>
+<tr>
+<td><strong>H</strong></td>
+<td>h.root-servers.net</td>
+<td>198.97.190.53</td>
+<td>2001:500:1::53</td>
+<td>US Army Research Lab</td>
+</tr>
+<tr>
+<td><strong>I</strong></td>
+<td>i.root-servers.net</td>
+<td>192.36.148.17</td>
+<td>2001:7fe::53</td>
+<td>Netnod (Schweden)</td>
+</tr>
+<tr>
+<td><strong>J</strong></td>
+<td>j.root-servers.net</td>
+<td>192.58.128.30</td>
+<td>2001:503:c27::2:30</td>
+<td>Verisign, Inc.</td>
+</tr>
+<tr>
+<td><strong>K</strong></td>
+<td>k.root-servers.net</td>
+<td>193.0.14.129</td>
+<td>2001:7fd::1</td>
+<td>RIPE NCC (Europa)</td>
+</tr>
+<tr>
+<td><strong>L</strong></td>
+<td>l.root-servers.net</td>
+<td>199.7.83.42</td>
+<td>2001:500:9f::42</td>
+<td>ICANN</td>
+</tr>
+<tr>
+<td><strong>M</strong></td>
+<td>m.root-servers.net</td>
+<td>202.12.27.33</td>
+<td>2001:dc3::35</td>
+<td>WIDE Project (Japan)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Wichtig</strong>: Jedes dieser 13 Root-Server-Systeme wird durch <strong>Anycast</strong> auf hunderte von physischen Servern weltweit
+verteilt. Dadurch gibt es tatsächlich über 1.000 physische Root-Server-Instanzen.</p>
+<p><strong>Weiterführende Informationen:</strong></p>
+<ul>
+<li><a href="https://www.iana.org/domains/root/servers">IANA Root Servers</a> - Offizielle Liste der Root-Server</li>
+<li><a href="https://root-servers.org/">Root Server Technical Operations</a> - Technische Details und Statistiken</li>
+<li><a href="https://www.internic.net/domain/root.zone">DNS Root Zone</a> - Aktuelle Root-Zone-Datei</li>
+<li><a href="https://www.verisign.com/en_US/innovation/dnssec/root-server-map/index.xhtml">Verisign Root Server Map</a> -
+  Geografische Verteilung</li>
+</ul>
+<h3 id="tld-server-top-level-domain-server">TLD-Server (Top-Level-Domain-Server)</h3>
+<p>Die <strong>TLD-Server</strong> sind für eine bestimmte Domain-Endung zuständig, z.B. <code>.de</code>:</p>
+<ul>
+<li>verwalten Informationen darüber, welche <strong>autoritativen Nameserver</strong> für eine Domain wie <code>fa24b.de</code> zuständig sind</li>
+<li>speichern <em>keine</em> A-Records für <code>docs.fa24b.de</code>, sondern nur NS-Records für <code>fa24b.de</code></li>
+<li>Beispiel: <code>.de</code>-Server wie <code>a.nic.de</code>, <code>n.de.net</code>, <code>z.nic.de</code></li>
+</ul>
+<p>Bei einer Anfrage nach <code>fa24b.de</code> liefern die <code>.de</code>-TLD-Server die zuständigen Cloudflare-Nameserver zurück.</p>
+<p><strong>TLD-Kategorien:</strong></p>
+<ul>
+<li><strong>Generische TLDs (gTLDs)</strong>: z.B. <code>.com</code>, <code>.org</code>, <code>.net</code></li>
+<li><strong>Länderspezifische TLDs (ccTLDs)</strong>: z.B. <code>.de</code>, <code>.fr</code>, <code>.ch</code></li>
+</ul>
+<h3 id="autoritative-nameserver">Autoritative Nameserver</h3>
+<p><strong>Autoritative Nameserver</strong> liefern die „endgültige Wahrheit" für eine Zone:</p>
+<ul>
+<li>sind für eine bestimmte Domain oder Subdomain zuständig, z.B. <code>fa24b.de</code></li>
+<li>enthalten die eigentlichen DNS-Einträge (A, AAAA, MX, TXT, CNAME, ...)</li>
+<li>Beispiel für <code>fa24b.de</code>:<ul>
+<li><code>tina.ns.cloudflare.com</code></li>
+<li><code>curt.ns.cloudflare.com</code></li>
+</ul>
+</li>
+</ul>
+<p>Wenn der rekursive Resolver die autoritativen Nameserver von <code>fa24b.de</code> fragt, bekommt er z.B. die A-Records und CNAMEs,
+die für <code>fa24b.de</code> und <code>docs.fa24b.de</code> konfiguriert sind.</p>
+<h3 id="caching-dns-server">Caching-DNS-Server</h3>
+<p>Viele rekursive Resolver arbeiten gleichzeitig als <strong>Caching-DNS-Server</strong>:</p>
+<ul>
+<li>speichern Antworten für die Dauer der <strong>TTL</strong> (Time to Live)</li>
+<li>entlasten Root-, TLD- und autoritative Server</li>
+<li>sorgen dafür, dass häufig angefragte Domains wie <code>docs.fa24b.de</code> schneller beantwortet werden</li>
+</ul>
+<p>Beispiel: Wenn viele Nutzer kurz hintereinander <code>docs.fa24b.de</code> aufrufen, kommt nach der ersten Auflösung die Antwort
+für eine gewisse Zeit direkt aus dem Cache.</p>
+<h3 id="lokaler-dns-server-zb-im-unternehmen-oder-heimnetz">Lokaler DNS-Server (z.B. im Unternehmen oder Heimnetz)</h3>
+<p>In Unternehmen oder komplexeren Heimnetzen gibt es oft eigene <strong>lokale DNS-Server</strong>:</p>
+<ul>
+<li>können interne Namen auflösen (z.B. <code>fileserver.fa24b.de</code>, <code>intranet.fa24b.de</code>)</li>
+<li>leiten externe Anfragen (z.B. <code>docs.fa24b.de</code>) an öffentliche rekursive Resolver weiter</li>
+<li>ermöglichen zentrale Verwaltung und Protokollierung von DNS-Anfragen</li>
+</ul>
+<p>Im Heimnetz übernimmt diese Rolle häufig der Router, der Anfragen der Clients sammelt und an den Provider-DNS
+weitergibt.</p>
+<h4 id="lokale-dns-auflosung-ohne-root-server">Lokale DNS-Auflösung ohne Root-Server</h4>
+<p>In lokalen Netzwerken kann die DNS-Auflösung auch ohne Kontakt zu Root-Servern erfolgen:</p>
+<p><strong>1. Lokaler DNS-Server mit eigenen Zonen</strong></p>
+<p>Ein lokaler DNS-Server kann interne Domainnamen direkt auflösen, ohne Root-Server zu kontaktieren:</p>
+<pre class="mermaid"><code>sequenceDiagram
+    participant Client
+    participant LocalDNS as Lokaler DNS-Server
+    participant ZoneFile as Lokale Zone-Datei
+    Client -&gt;&gt; LocalDNS: DNS-Query: server.local
+    LocalDNS -&gt;&gt; ZoneFile: Suche in lokaler Zone
+    ZoneFile --&gt;&gt; LocalDNS: 192.168.1.100
+    LocalDNS --&gt;&gt; Client: IP-Adresse: 192.168.1.100
+    Note over Client, LocalDNS: Keine Root-Server&lt;br/&gt;beteiligt!</code></pre>
+<p><strong>Beispiel</strong>: In einem Unternehmensnetzwerk kann <code>server.local</code> oder <code>intranet.firma.de</code> direkt vom lokalen DNS-Server
+aufgelöst werden.</p>
+<p><strong>2. Hosts-Datei</strong></p>
+<p>Noch vor der DNS-Abfrage prüft jedes Betriebssystem die lokale Hosts-Datei:</p>
+<ul>
+<li><strong>Linux/macOS</strong>: <code>/etc/hosts</code></li>
+<li><strong>Windows</strong>: <code>C:\Windows\System32\drivers\etc\hosts</code></li>
+</ul>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a># /etc/hosts
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>127.0.0.1       localhost
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>192.168.1.10    server.local
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>192.168.1.20    nas.local
+</span></code></pre></div>
+<p><strong>3. mDNS (Multicast DNS)</strong></p>
+<p>Für lokale Netzwerke ohne DNS-Server existiert <strong>mDNS</strong> (verwendet von Apple Bonjour, Avahi):</p>
+<ul>
+<li>Auflösung von <code>.local</code> Domainnamen</li>
+<li>Broadcast-basiert im lokalen Netzwerk</li>
+<li>Beispiel: <code>rechner.local</code> wird automatisch gefunden</li>
+<li>Keine zentrale Serverinfrastruktur erforderlich</li>
+</ul>
+<p><strong>4. Split-DNS / Split-Horizon DNS</strong></p>
+<p>Bei Split-DNS liefert ein DNS-Server unterschiedliche Antworten, abhängig davon, ob die Anfrage aus dem internen oder
+externen Netzwerk kommt:</p>
+<pre class="mermaid"><code>graph LR
+    A[Client intern] --&gt;|Query: intranet . firma . de| B[DNS-Server]
+    C[Client extern] --&gt;|Query: intranet . firma . de| B
+    B --&gt;|Intern| D[192.168.1.100&lt;br/&gt;private IP]
+    B --&gt;|Extern| E[Keine Antwort&lt;br/&gt;NXDOMAIN]</code></pre>
+<h3 id="zusammenspiel-der-server-typen">Zusammenspiel der Server-Typen</h3>
+<p>Bei einer Anfrage nach <code>docs.fa24b.de</code> arbeiten mehrere Servertypen zusammen:</p>
+<ol>
+<li>Client fragt den <strong>rekursiven Resolver</strong> (z.B. beim Provider oder im Router)</li>
+<li>Resolver fragt bei Bedarf <strong>Root-Server</strong> → erhält Verweis auf <code>.de</code>-TLD-Server</li>
+<li>Resolver fragt <strong>.de TLD-Server</strong> → erhält Verweis auf die autoritativen Nameserver von <code>fa24b.de</code></li>
+<li>Resolver fragt <strong>autoritativen Nameserver</strong> von <code>fa24b.de</code> → erhält z.B. CNAME/A-Records für <code>docs.fa24b.de</code></li>
+<li>Resolver speichert die Antwort im <strong>Cache</strong> und gibt sie an den Client zurück</li>
+</ol>
+<p>So wird die Last verteilt und die Auflösung bleibt trotz der verteilten Struktur performant und ausfallsicher.</p>
+<h2 id="der-dns-auflosungsprozess">Der DNS-Auflösungsprozess</h2>
+<p>Der DNS-Auflösungsprozess durchläuft mehrere Stufen, um einen Domainnamen in eine IP-Adresse aufzulösen. Dieser Prozess
+wird als <strong>rekursive DNS-Abfrage</strong> bezeichnet und folgt der hierarchischen Struktur des Domain Name Systems.</p>
+<h3 id="ablauf-einer-dns-auflosung">Ablauf einer DNS-Auflösung</h3>
+<pre class="mermaid"><code>sequenceDiagram
+    participant Client
+    participant Resolver as DNS-Resolver&lt;br/&gt;(z.B. 1.1.1.1)
+    participant Root as Root-Server&lt;br/&gt;(i.root-servers.net)
+    participant TLD as .de TLD-Server&lt;br/&gt;(n.de.net)
+    participant Auth as Autoritativer Server&lt;br/&gt;(tina.ns.cloudflare.com)
+    Client -&gt;&gt; Resolver: DNS-Query: fa24b.de
+    Note over Resolver: Cache-Prüfung
+    Resolver -&gt;&gt; Root: Wo finde ich .de?
+    Root --&gt;&gt; Resolver: Verweis auf .de TLD-Server&lt;br/&gt;(a.nic.de, n.de.net, ...)
+    Resolver -&gt;&gt; TLD: Wo finde ich fa24b.de?
+    TLD --&gt;&gt; Resolver: Verweis auf Cloudflare NS&lt;br/&gt;(tina.ns.cloudflare.com,&lt;br/&gt;curt.ns.cloudflare.com)
+    Resolver -&gt;&gt; Auth: A-Record für fa24b.de?
+    Auth --&gt;&gt; Resolver: 104.21.63.26&lt;br/&gt;172.67.142.147
+    Resolver --&gt;&gt; Client: IP-Adressen zurückgeben</code></pre>
+<h3 id="detaillierter-ablauf-am-beispiel-von-fa24bde">Detaillierter Ablauf am Beispiel von fa24b.de</h3>
+<p>Die folgende Abfrage zeigt den tatsächlichen Auflösungsprozess für <code>fa24b.de</code>:</p>
+<ol>
+<li>
+<p><strong>Start beim Root-Server</strong></p>
+<ul>
+<li>Der DNS-Resolver (z.B. 1.1.1.1 von Cloudflare) beginnt bei einem der 13 Root-Server</li>
+<li>Root-Server: <code>a.root-servers.net</code> bis <code>m.root-servers.net</code></li>
+<li>Antwort: Verweis auf die <code>.de</code> TLD-Server</li>
+</ul>
+</li>
+<li>
+<p><strong>Anfrage beim TLD-Server (.de)</strong></p>
+<ul>
+<li>Kontaktierter Server: <code>n.de.net</code> (194.146.107.6)</li>
+<li>Weitere .de TLD-Server: <code>a.nic.de</code>, <code>f.nic.de</code>, <code>z.nic.de</code>, <code>l.de.net</code>, <code>s.de.net</code></li>
+<li>Antwort: Verweis auf die autoritativen Nameserver von fa24b.de</li>
+</ul>
+</li>
+<li>
+<p><strong>Anfrage beim autoritativen Nameserver</strong></p>
+<ul>
+<li>Kontaktierter Server: <code>tina.ns.cloudflare.com</code> (172.64.32.230)</li>
+<li>Alternativer Server: <code>curt.ns.cloudflare.com</code></li>
+<li>Antwort: Die tatsächlichen IP-Adressen
+  <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>fa24b.de.    300    IN    A    104.21.63.26
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>fa24b.de.    300    IN    A    172.67.142.147
+</span></code></pre></div></li>
+</ul>
+</li>
+<li>
+<p><strong>Rückgabe an den Client</strong></p>
+<ul>
+<li>Der Resolver gibt die IP-Adressen an den Client zurück</li>
+<li>Die Antwort wird für 300 Sekunden (TTL) gecacht</li>
+</ul>
+</li>
+</ol>
+<h3 id="rekursive-vs-iterative-abfrage">Rekursive vs. Iterative Abfrage</h3>
+<ul>
+<li><strong>Rekursive Abfrage</strong>: Der DNS-Resolver übernimmt die gesamte Arbeit und liefert die finale Antwort</li>
+<li><strong>Iterative Abfrage</strong>: Der Resolver erhält Verweise und muss jeden Server selbst kontaktieren</li>
+</ul>
+<p>Der oben gezeigte Prozess ist eine rekursive Abfrage vom Client zum Resolver, kombiniert mit iterativen Abfragen
+zwischen Resolver und den DNS-Servern.</p>
+<h2 id="dns-record-typen-resource-records">DNS-Record-Typen (Resource Records)</h2>
+<p>DNS-Records (auch Resource Records genannt) sind Datensätze in der DNS-Datenbank, die verschiedene Informationen über
+eine Domain enthalten. Jeder Record-Typ erfüllt eine spezifische Aufgabe.</p>
+<h3 id="a-record-address-record">A-Record (Address Record)</h3>
+<p><strong>Funktion</strong>: Ordnet einem Domainnamen eine IPv4-Adresse zu.</p>
+<p><strong>Verwendung</strong>: Dies ist der wichtigste und am häufigsten verwendete Record-Typ für Webseiten und Dienste.</p>
+<p><strong>Beispiel</strong>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>docs.fa24b.de.    3600    IN    A    185.199.108.153
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>docs.fa24b.de.    3600    IN    A    185.199.109.153
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>docs.fa24b.de.    3600    IN    A    185.199.110.153
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>docs.fa24b.de.    3600    IN    A    185.199.111.153
+</span></code></pre></div>
+<p><strong>Praxisbeispiel</strong>: Die Domain <code>docs.fa24b.de</code> verfügt über mehrere A-Records, die auf verschiedene GitHub Pages Server
+zeigen. Dies ermöglicht Lastverteilung und erhöht die Verfügbarkeit der Website.</p>
+<h3 id="aaaa-record-ipv6-address-record">AAAA-Record (IPv6 Address Record)</h3>
+<p><strong>Funktion</strong>: Ordnet einem Domainnamen eine IPv6-Adresse zu.</p>
+<p><strong>Verwendung</strong>: Funktioniert wie A-Records, jedoch für IPv6-Netzwerke.</p>
+<p><strong>Beispiel</strong>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>docs.fa24b.de.    3600    IN    AAAA    2606:50c0:8000::153
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>docs.fa24b.de.    3600    IN    AAAA    2606:50c0:8001::153
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>docs.fa24b.de.    3600    IN    AAAA    2606:50c0:8002::153
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>docs.fa24b.de.    3600    IN    AAAA    2606:50c0:8003::153
+</span></code></pre></div>
+<p><strong>Praxisbeispiel</strong>: Die Domain <code>docs.fa24b.de</code> verfügt über mehrere AAAA-Records für IPv6-Konnektivität. Moderne Geräte
+und Netzwerke nutzen zunehmend IPv6, und diese Records stellen sicher, dass die Website auch über IPv6 erreichbar ist.</p>
+<h3 id="cname-record-canonical-name">CNAME-Record (Canonical Name)</h3>
+<p><strong>Funktion</strong>: Erstellt einen Alias für einen anderen Domainnamen (Weiterleitung auf einen anderen Namen).</p>
+<p><strong>Verwendung</strong>: Wenn mehrere Namen auf dasselbe Ziel zeigen sollen.</p>
+<p><strong>Beispiel 1 - Website-Hosting</strong>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>docs.fa24b.de.    300    IN    CNAME    wimwenigerkind.github.io.
+</span></code></pre></div>
+<p><strong>Beispiel 2 - DKIM E-Mail-Signierung</strong>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>selector1._domainkey.fa24b.de.    3600    IN    CNAME    selector1-fa24b-de._domainkey.wimdevgroup.w-v1.dkim.mail.microsoft.
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>selector2._domainkey.fa24b.de.    3600    IN    CNAME    selector2-fa24b-de._domainkey.wimdevgroup.w-v1.dkim.mail.microsoft.
+</span></code></pre></div>
+<p><strong>Praxisbeispiel 1</strong>: Die Domain <code>docs.fa24b.de</code> ist ein CNAME-Record, der auf <code>wimwenigerkind.github.io</code> zeigt. Wenn
+eine Anfrage für <code>docs.fa24b.de</code> eingeht, wird sie zu <code>wimwenigerkind.github.io</code> aufgelöst, welches dann zu den
+tatsächlichen GitHub Pages IP-Adressen aufgelöst wird. Dies ermöglicht eine flexible Verwaltung, da nur die IP-Adressen
+von <code>wimwenigerkind.github.io</code> aktualisiert werden müssen, ohne den CNAME zu ändern.</p>
+<p><strong>Praxisbeispiel 2</strong>: Die DKIM-Selektoren für <code>fa24b.de</code> werden über CNAME-Records auf die Microsoft-DKIM-Infrastruktur
+delegiert. Dies ermöglicht Microsoft, die DKIM-Schlüssel zentral zu verwalten und zu rotieren, ohne dass Änderungen in
+der Domain-Konfiguration erforderlich sind.</p>
+<p><strong>Wichtig</strong>: Ein CNAME-Record kann nicht zusammen mit anderen Records für denselben Namen existieren.</p>
+<h3 id="mx-record-mail-exchange">MX-Record (Mail Exchange)</h3>
+<p><strong>Funktion</strong>: Gibt an, welcher Mailserver für den E-Mail-Empfang einer Domain zuständig ist.</p>
+<p><strong>Verwendung</strong>: Für E-Mail-Routing und -Zustellung.</p>
+<p><strong>Beispiel</strong>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>fa24b.de.    3600    IN    MX    0    fa24b-de.mail.protection.outlook.com.
+</span></code></pre></div>
+<p><strong>Praxisbeispiel</strong>: E-Mails an <code>user@fa24b.de</code> werden an den Microsoft Exchange Online Protection Server
+<code>fa24b-de.mail.protection.outlook.com</code> zugestellt. Die Priorität 0 ist die höchste Priorität. Bei mehreren MX-Records
+würde der Server mit der niedrigsten Prioritätszahl bevorzugt.</p>
+<p>Die Zahl vor dem Servernamen gibt die Priorität an (niedriger = höher priorisiert).</p>
+<h3 id="txt-record-text-record">TXT-Record (Text Record)</h3>
+<p><strong>Funktion</strong>: Speichert beliebige Textinformationen zu einer Domain.</p>
+<p><strong>Verwendung</strong>: Für verschiedene Zwecke wie SPF, DKIM, Domain-Verifizierung, etc.</p>
+<p><strong>Beispiele</strong>:</p>
+<p><strong>SPF (Sender Policy Framework)</strong> - Verhindert E-Mail-Spoofing:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>fa24b.de.    3600    IN    TXT    &quot;v=spf1 include:spf.protection.outlook.com ~all&quot;
+</span></code></pre></div>
+<p><strong>Domain-Verifizierung</strong> - Nachweis der Domain-Inhaberschaft (Microsoft):</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>fa24b.de.    3600    IN    TXT    &quot;MS=ms37803661&quot;
+</span></code></pre></div>
+<p><strong>DKIM</strong> - E-Mail-Authentifizierung:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>default._domainkey.fa24b.de.    IN    TXT    &quot;v=DKIM1; k=rsa; p=MIGfMA0...&quot;
+</span></code></pre></div>
+<p><strong>Praxisbeispiel</strong>: Die Domain <code>fa24b.de</code> nutzt Microsoft Exchange Online Protection. Der SPF-Record
+<code>v=spf1 include:spf.protection.outlook.com ~all</code> erlaubt den Microsoft-Servern, E-Mails im Namen der Domain zu
+versenden. Der Microsoft-Verifizierungsrecord <code>MS=ms37803661</code> bestätigt die Domain-Inhaberschaft. Die DKIM-Signierung
+erfolgt über CNAME-Delegation an die Microsoft-Infrastruktur (siehe CNAME-Record-Beispiele).</p>
+<h3 id="ns-record-name-server">NS-Record (Name Server)</h3>
+<p><strong>Funktion</strong>: Gibt an, welche DNS-Server für eine Domain oder Subdomain zuständig sind.</p>
+<p><strong>Verwendung</strong>: Delegation der DNS-Verantwortung an bestimmte Nameserver.</p>
+<p><strong>Beispiel</strong>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>fa24b.de.    86400    IN    NS    tina.ns.cloudflare.com.
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>fa24b.de.    86400    IN    NS    curt.ns.cloudflare.com.
+</span></code></pre></div>
+<p><strong>Praxisbeispiel</strong>: Die Domain <code>fa24b.de</code> wird von den Cloudflare-Nameservern <code>tina.ns.cloudflare.com</code> und
+<code>curt.ns.cloudflare.com</code> verwaltet. Diese sind für die Auflösung aller DNS-Anfragen der Domain verantwortlich.</p>
+<h3 id="ptr-record-pointer-record">PTR-Record (Pointer Record)</h3>
+<p><strong>Funktion</strong>: Reverse DNS-Lookup - ordnet einer IP-Adresse einen Domainnamen zu (umgekehrte Richtung).</p>
+<p><strong>Verwendung</strong>: Hauptsächlich für E-Mail-Server und Netzwerk-Troubleshooting.</p>
+<p><strong>Beispiel</strong>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>153.108.199.185.in-addr.arpa.    3600    IN    PTR    cdn-185-199-108-153.github.com.
+</span></code></pre></div>
+<p><strong>Praxisbeispiel</strong>: Der PTR-Record für die IP-Adresse <code>185.199.108.153</code> zeigt auf <code>cdn-185-199-108-153.github.com</code>.
+E-Mail-Server prüfen häufig PTR-Records, um die Legitimität der sendenden IP-Adresse zu verifizieren und Spam zu
+reduzieren.</p>
+<h3 id="soa-record-start-of-authority">SOA-Record (Start of Authority)</h3>
+<p><strong>Funktion</strong>: Enthält administrative Informationen über die DNS-Zone.</p>
+<p><strong>Verwendung</strong>: Definiert den primären Nameserver und verschiedene Timing-Parameter für die Zone.</p>
+<p><strong>Beispiel</strong>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>fa24b.de.    1800    IN    SOA    curt.ns.cloudflare.com. dns.cloudflare.com. (
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>                                   2390319800  ; Serial (Versionsnummer)
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>                                   10000       ; Refresh (ca. 2,7 Stunden)
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>                                   2400        ; Retry (40 Minuten)
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>                                   604800      ; Expire (7 Tage)
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>                                   1800 )      ; Minimum TTL (30 Minuten)
+</span></code></pre></div>
+<p><strong>Praxisbeispiel</strong>: Der SOA-Record für <code>fa24b.de</code> definiert <code>curt.ns.cloudflare.com</code> als primären Nameserver mit
+<code>dns.cloudflare.com</code> als Kontakt-E-Mail. Die Serial-Nummer wird bei jeder Änderung erhöht, um sekundären DNS-Servern zu
+signalisieren, dass Updates verfügbar sind.</p>
+<h3 id="srv-record-service-record">SRV-Record (Service Record)</h3>
+<p><strong>Funktion</strong>: Gibt Informationen über verfügbare Dienste an (Server, Port, Priorität, Gewichtung).</p>
+<p><strong>Verwendung</strong>: Für spezielle Dienste wie VoIP, Instant Messaging, LDAP, etc.</p>
+<p><strong>Beispiel</strong>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>_sip._tcp.fa24b.de.    3600    IN    SRV    10    60    5060    sipserver.fa24b.de.
+</span></code></pre></div>
+<p>Format: <code>Priorität Gewichtung Port Zielserver</code></p>
+<p><strong>Praxisbeispiel</strong>: Microsoft Teams oder Skype for Business nutzen SRV-Records, um automatisch die richtigen Server und
+Ports für die Kommunikation zu finden.</p>
+<h3 id="caa-record-certification-authority-authorization">CAA-Record (Certification Authority Authorization)</h3>
+<p><strong>Funktion</strong>: Gibt an, welche Zertifizierungsstellen (CAs) SSL/TLS-Zertifikate für die Domain ausstellen dürfen.</p>
+<p><strong>Verwendung</strong>: Erhöhte Sicherheit durch Kontrolle der Zertifikatsausstellung.</p>
+<p><strong>Beispiel</strong>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>fa24b.de.    3600    IN    CAA    0    issue    &quot;letsencrypt.org&quot;
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>fa24b.de.    3600    IN    CAA    0    issuewild &quot;letsencrypt.org&quot;
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>fa24b.de.    3600    IN    CAA    0    iodef    &quot;mailto:security@fa24b.de&quot;
+</span></code></pre></div>
+<p><strong>Praxisbeispiel</strong>: Ausschließlich Let's Encrypt ist berechtigt, Zertifikate für <code>fa24b.de</code> auszustellen. Bei
+unautorisierten Ausstellungsversuchen erfolgt eine Benachrichtigung per E-Mail an <code>security@fa24b.de</code>.</p>
+<h3 id="zusammenfassung-der-wichtigsten-record-typen">Zusammenfassung der wichtigsten Record-Typen</h3>
+<table>
+<thead>
+<tr>
+<th>Record-Typ</th>
+<th>Hauptverwendung</th>
+<th>Beispiel-Szenario</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A</strong></td>
+<td>IPv4-Adresse</td>
+<td>Website erreichbar machen</td>
+</tr>
+<tr>
+<td><strong>AAAA</strong></td>
+<td>IPv6-Adresse</td>
+<td>Website über IPv6 erreichbar machen</td>
+</tr>
+<tr>
+<td><strong>CNAME</strong></td>
+<td>Alias/Weiterleitung</td>
+<td><code>www</code> auf Hauptdomain umleiten</td>
+</tr>
+<tr>
+<td><strong>MX</strong></td>
+<td>E-Mail-Routing</td>
+<td>E-Mails empfangen</td>
+</tr>
+<tr>
+<td><strong>TXT</strong></td>
+<td>Textinformationen</td>
+<td>SPF, Domain-Verifizierung</td>
+</tr>
+<tr>
+<td><strong>NS</strong></td>
+<td>Nameserver-Delegation</td>
+<td>DNS-Server festlegen</td>
+</tr>
+<tr>
+<td><strong>PTR</strong></td>
+<td>Reverse DNS</td>
+<td>E-Mail-Reputation</td>
+</tr>
+<tr>
+<td><strong>SOA</strong></td>
+<td>Zone-Verwaltung</td>
+<td>DNS-Zone-Konfiguration</td>
+</tr>
+<tr>
+<td><strong>SRV</strong></td>
+<td>Dienst-Lokalisierung</td>
+<td>VoIP, Chat-Dienste</td>
+</tr>
+<tr>
+<td><strong>CAA</strong></td>
+<td>Zertifikats-Kontrolle</td>
+<td>SSL/TLS-Sicherheit</td>
+</tr>
+</tbody>
+</table>
+<h2 id="dns-caching-und-ttl-time-to-live">DNS-Caching und TTL (Time to Live)</h2>
+<h2 id="dns-sicherheit-bedrohungen-und-schutzmanahmen">DNS-Sicherheit: Bedrohungen und Schutzmaßnahmen</h2>
+<h2 id="praktische-dns-tools-und-befehle">Praktische DNS-Tools und Befehle</h2>
+<h2 id="dns-in-der-praxis-konfiguration-und-verwaltung">DNS in der Praxis: Konfiguration und Verwaltung</h2>
+<h2 id="zusammenfassung-und-ausblick">Zusammenfassung und Ausblick</h2>
+
+
+
+
+
+
+
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Letztes Update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="4. Dezember 2025 16:43:04 UTC">4. Dezember 2025</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Erstellt">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="4. Dezember 2025 07:49:46 UTC">4. Dezember 2025</span>
+  </span>
+
+    
+    
+    
+      
+  <span class="md-source-file__fact">
+    
+      
+  <span class="md-icon" title="Mitwirkende">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2"/></svg>
+  </span>
+  <span>GitHub</span>
+
+    
+    <nav>
+      
+        <a href="https://github.com/wimwenigerkind" class="md-author" title="@wimwenigerkind">
+          
+          <img src="https://avatars.githubusercontent.com/u/159561025?v=4&size=72" alt="wimwenigerkind">
+        </a>
+      
+        <a href="https://github.com/web-flow" class="md-author" title="@web-flow">
+          
+          <img src="https://avatars.githubusercontent.com/u/19864447?v=4&size=72" alt="web-flow">
+        </a>
+      
+        <a href="https://github.com/NiklasLehmann" class="md-author" title="@NiklasLehmann">
+          
+          <img src="https://avatars.githubusercontent.com/u/177529908?v=4&size=72" alt="NiklasLehmann">
+        </a>
+      
+      
+      
+    </nav>
+  </span>
+
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Fußzeile" >
+        
+          
+          <a href="../.." class="md-footer__link md-footer__link--prev" aria-label="Zurück: FA24B">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Zurück
+              </span>
+              <div class="md-ellipsis">
+                FA24B
+              </div>
+            </div>
+          </a>
+        
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 fa24b.de
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "content.code.copy", "content.code.select", "content.code.annotate", "navigation.tabs", "search.highlight", "navigation.instant", "content.action.edit", "content.action.view"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "In Zwischenablage kopiert", "clipboard.copy": "In Zwischenablage kopieren", "search.result.more.one": "1 weiteres Suchergebnis auf dieser Seite", "search.result.more.other": "# weitere Suchergebnisse auf dieser Seite", "search.result.none": "Keine Suchergebnisse", "search.result.one": "1 Suchergebnis", "search.result.other": "# Suchergebnisse", "search.result.placeholder": "Suchbegriff eingeben", "search.result.term.missing": "Es fehlt", "select.version": "Version ausw\u00e4hlen"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.56ea9cef.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -8,5 +8,10 @@
     "version": "latest",
     "title": "latest",
     "aliases": []
+  },
+  {
+    "version": "feature-fa24b-3",
+    "title": "feature-fa24b-3",
+    "aliases": []
   }
 ]
