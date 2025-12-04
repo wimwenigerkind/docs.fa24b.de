@@ -43,7 +43,14 @@ jobs:
       run: |
         git config user.name github-actions[bot]
         git config user.email github-actions[bot]@users.noreply.github.com
-    
+
+    - name: Sanitize version name
+      id: sanitize
+      run: |
+        VERSION="${{ github.ref_name }}"
+        SANITIZED="${VERSION//\//-}"
+        echo "version=$SANITIZED" >> $GITHUB_OUTPUT
+
     - name: Deploy branch documentation
       run: |
-        devenv shell mike deploy --push --update-aliases ${{ github.ref_name }}
+        devenv shell mike deploy --push --update-aliases ${{ steps.sanitize.outputs.version }}
