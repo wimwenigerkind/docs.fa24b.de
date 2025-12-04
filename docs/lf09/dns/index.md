@@ -710,6 +710,551 @@ bei Auffälligkeiten Alarme erstellen.
 
 ## DNS in der Praxis: Konfiguration und Verwaltung
 
+Die praktische Konfiguration und Verwaltung von DNS-Einträgen stellt eine zentrale Aufgabe in der Netzwerkadministration
+dar. Dieser Abschnitt behandelt die wichtigsten Aspekte der DNS-Verwaltung anhand konkreter Beispiele.
+
+### DNS-Provider und Nameserver-Delegation
+
+Die Wahl des DNS-Providers und die korrekte Delegation der Nameserver bilden die Grundlage der DNS-Konfiguration.
+
+#### Nameserver-Konfiguration
+
+Für die Domain `fa24b.de` sind folgende autoritative Nameserver konfiguriert:
+
+```
+fa24b.de.    86400    IN    NS    tina.ns.cloudflare.com.
+fa24b.de.    86400    IN    NS    curt.ns.cloudflare.com.
+```
+
+**Wichtige Aspekte der Nameserver-Delegation:**
+
+- **Mindestens zwei Nameserver**: Redundanz durch mehrere NS-Records erhöht die Ausfallsicherheit
+- **TTL-Wert**: 86400 Sekunden (24 Stunden) für NS-Records ist Standard, da Nameserver-Änderungen selten erfolgen
+- **Geografische Verteilung**: Cloudflare nutzt Anycast-Routing für globale Verfügbarkeit
+- **Registrar-Einstellungen**: NS-Records müssen sowohl beim DNS-Provider als auch beim Domain-Registrar konfiguriert
+  werden
+
+#### Provider-Wechsel durchführen
+
+Bei einem Wechsel des DNS-Providers müssen folgende Schritte beachtet werden:
+
+1. **Vorbereitung**: Alle bestehenden DNS-Records dokumentieren
+2. **TTL-Reduzierung**: TTL-Werte der kritischen Records 24-48 Stunden vor dem Wechsel reduzieren (z.B. auf 300
+   Sekunden)
+3. **Records übertragen**: Alle DNS-Einträge beim neuen Provider anlegen und überprüfen
+4. **Nameserver-Update**: NS-Records beim Registrar auf die neuen Nameserver ändern
+5. **Propagation abwarten**: DNS-Propagation kann bis zu 48 Stunden dauern (abhängig von den ursprünglichen TTL-Werten)
+6. **Monitoring**: DNS-Auflösung von verschiedenen Standorten aus überwachen
+7. **TTL-Normalisierung**: Nach erfolgreicher Propagation TTL-Werte wieder erhöhen
+
+### DNS-Records verwalten
+
+Die Verwaltung von DNS-Records erfordert Verständnis für die verschiedenen Record-Typen und deren Zusammenspiel.
+
+#### Domain-Konfiguration für Webhosting
+
+Für das Hosting von `docs.fa24b.de` auf GitHub Pages wird folgende Konfiguration verwendet:
+
+```
+docs.fa24b.de.    300    IN    CNAME    wimwenigerkind.github.io.
+```
+
+GitHub Pages löst den CNAME dann zu mehreren A- und AAAA-Records auf:
+
+```
+wimwenigerkind.github.io.    3600    IN    A       185.199.108.153
+wimwenigerkind.github.io.    3600    IN    A       185.199.109.153
+wimwenigerkind.github.io.    3600    IN    A       185.199.110.153
+wimwenigerkind.github.io.    3600    IN    A       185.199.111.153
+wimwenigerkind.github.io.    3600    IN    AAAA    2606:50c0:8000::153
+wimwenigerkind.github.io.    3600    IN    AAAA    2606:50c0:8001::153
+wimwenigerkind.github.io.    3600    IN    AAAA    2606:50c0:8002::153
+wimwenigerkind.github.io.    3600    IN    AAAA    2606:50c0:8003::153
+```
+
+**Vorteil dieser Konfiguration**:
+
+- Flexibilität: GitHub kann IP-Adressen ändern, ohne dass der CNAME-Record angepasst werden muss
+- Lastverteilung: Mehrere IP-Adressen ermöglichen Load Balancing
+- IPv6-Unterstützung: Automatische Dual-Stack-Konfiguration
+
+**Alternative Konfiguration (direkte A-Records)**:
+
+Für die Root-Domain wird häufig eine direkte A-Record-Konfiguration benötigt:
+
+```
+fa24b.de.    300    IN    A    104.21.63.26
+fa24b.de.    300    IN    A    172.67.142.147
+```
+
+**Wichtig**: CNAME-Records können nicht auf der Root-Domain (Apex) verwendet werden, da dies mit anderen Record-Typen (
+MX, TXT, SOA) kollidieren würde.
+
+### DNS-Zonen und Zone-Files
+
+In professionellen Umgebungen werden DNS-Einträge häufig als Zone-Files verwaltet.
+
+#### Aufbau eines Zone-Files
+
+Ein vollständiges Zone-File für `fa24b.de` könnte folgendermaßen strukturiert sein:
+
+```bind
+$ORIGIN fa24b.de.
+$TTL 3600
+
+; SOA-Record
+@    IN    SOA    curt.ns.cloudflare.com. dns.cloudflare.com. (
+                  2390319800  ; Serial
+                  10000       ; Refresh (2,7 Stunden)
+                  2400        ; Retry (40 Minuten)
+                  604800      ; Expire (7 Tage)
+                  1800 )      ; Minimum TTL (30 Minuten)
+
+; Nameserver-Records
+@    IN    NS     tina.ns.cloudflare.com.
+@    IN    NS     curt.ns.cloudflare.com.
+
+; A-Records für Root-Domain
+@    IN    A      104.21.63.26
+@    IN    A      172.67.142.147
+
+; AAAA-Records für IPv6
+@    IN    AAAA   2606:4700:3030::6815:3f1a
+@    IN    AAAA   2606:4700:3030::ac43:8e93
+
+; CNAME-Records für Subdomains
+docs       IN    CNAME    wimwenigerkind.github.io.
+www        IN    CNAME    fa24b.de.
+
+; MX-Record für E-Mail
+@    IN    MX     0    fa24b-de.mail.protection.outlook.com.
+
+; TXT-Records für E-Mail-Authentifizierung
+@    IN    TXT    "v=spf1 include:spf.protection.outlook.com ~all"
+@    IN    TXT    "MS=ms37803661"
+
+; DKIM-Records (CNAME-Delegation)
+selector1._domainkey    IN    CNAME    selector1-fa24b-de._domainkey.wimdevgroup.w-v1.dkim.mail.microsoft.
+selector2._domainkey    IN    CNAME    selector2-fa24b-de._domainkey.wimdevgroup.w-v1.dkim.mail.microsoft.
+
+; DMARC-Record
+_dmarc    IN    TXT    "v=DMARC1; p=quarantine; rua=mailto:dmarc@fa24b.de"
+
+; CAA-Records für Zertifikatskontrolle
+@    IN    CAA    0    issue    "letsencrypt.org"
+@    IN    CAA    0    issuewild "letsencrypt.org"
+@    IN    CAA    0    iodef    "mailto:security@fa24b.de"
+```
+
+**Wichtige Syntax-Elemente:**
+
+- `$ORIGIN`: Definiert die Basis-Domain
+- `$TTL`: Standard-TTL für alle Records ohne explizite TTL-Angabe
+- `@`: Platzhalter für die Origin-Domain (`fa24b.de.`)
+- `;`: Kommentarzeichen
+- Trailing Dot (`.`): Vollqualifizierter Domain-Name (FQDN)
+
+#### Serial-Nummer verwalten
+
+Die Serial-Nummer im SOA-Record ist kritisch für DNS-Replikation:
+
+**Format-Konventionen:**
+
+1. **YYYYMMDDNN** (empfohlen):
+    - `2025120401` = 4. Dezember 2025, 1. Änderung des Tages
+    - Vorteil: Lesbar und chronologisch sortierbar
+
+2. **Unix Timestamp**:
+    - `2390319800` (wie bei Cloudflare)
+    - Vorteil: Automatische Eindeutigkeit
+
+**Regel**: Die Serial-Nummer muss bei jeder Änderung erhöht werden, damit sekundäre DNS-Server Updates erkennen.
+
+### Subdomain-Delegation
+
+Subdomains können an andere Nameserver delegiert werden, um dezentrale Verwaltung zu ermöglichen.
+
+#### Beispiel: IT-Abteilung delegieren
+
+Angenommen, die IT-Abteilung soll `it.fa24b.de` eigenständig verwalten:
+
+**Im Haupt-Zone-File von fa24b.de:**
+
+```bind
+; Delegation von it.fa24b.de an separate Nameserver
+it    IN    NS    ns1.it-intern.fa24b.de.
+it    IN    NS    ns2.it-intern.fa24b.de.
+
+; Glue-Records (erforderlich, wenn NS innerhalb der Subdomain liegt)
+ns1.it-intern.fa24b.de.    IN    A    192.168.10.10
+ns2.it-intern.fa24b.de.    IN    A    192.168.10.11
+```
+
+**Im Zone-File von it.fa24b.de (auf den IT-Nameservern):**
+
+```bind
+$ORIGIN it.fa24b.de.
+$TTL 3600
+
+@    IN    SOA    ns1.it-intern.fa24b.de. admin.it.fa24b.de. (
+                  2025120401
+                  7200
+                  3600
+                  1209600
+                  3600 )
+
+@    IN    NS     ns1.it-intern.fa24b.de.
+@    IN    NS     ns2.it-intern.fa24b.de.
+
+; IT-spezifische Records
+server1       IN    A      192.168.10.20
+server2       IN    A      192.168.10.21
+fileserver    IN    A      192.168.10.30
+```
+
+**Vorteile der Delegation:**
+
+- Autonome Verwaltung durch IT-Abteilung
+- Keine Änderungen am Haupt-Zone-File erforderlich
+- Getrennte Verantwortlichkeiten
+
+### DNS-Server-Software
+
+Verschiedene DNS-Server-Softwarelösungen bieten unterschiedliche Features für verschiedene Anforderungen.
+
+#### Professionelle DNS-Server
+
+| Software     | Typ                    | Haupteinsatzgebiet              | Besonderheiten                                                   |
+|--------------|------------------------|---------------------------------|------------------------------------------------------------------|
+| **BIND**     | Autoritativ & Rekursiv | Unternehmensumgebungen, ISPs    | Am weitesten verbreitet, Zone-Files, sehr konfigurierbar         |
+| **Unbound**  | Rekursiv               | Sicherheitsorientierte Resolver | DNSSEC-Validierung, Privacy-Features, hohe Performance           |
+| **PowerDNS** | Autoritativ & Rekursiv | Hosting-Provider, Cloud         | Datenbank-Backend (MySQL/PostgreSQL), RESTful API, Web-Interface |
+| **Knot DNS** | Autoritativ            | High-Performance Nameserver     | Sehr schnell, DNSSEC-Signing, moderne Architektur                |
+| **dnsmasq**  | Rekursiv & DHCP        | Router, Embedded Systems        | Leichtgewichtig, DNS + DHCP kombiniert, einfache Konfiguration   |
+| **CoreDNS**  | Rekursiv & Autoritativ | Kubernetes, Cloud-Native        | Plugin-basiert, Container-optimiert, Service Discovery           |
+
+#### DNS-Server für Heimnetzwerke
+
+Für Heimnetzwerke existieren spezialisierte DNS-Lösungen mit Fokus auf Werbeblocker und Privacy-Schutz:
+
+**Pi-hole**
+
+Pi-hole fungiert als netzwerkweiter Werbeblocker durch DNS-Filterung:
+
+**Funktionsweise:**
+
+- DNS-Anfragen zu Werbe- und Tracking-Domains werden blockiert
+- Basiert auf dnsmasq als DNS-Server
+- Blocklists mit Millionen bekannter Werbe-Domains
+- Web-Interface zur Verwaltung und Statistiken
+
+**Einsatzszenario:**
+
+```mermaid
+graph LR
+    A[Geräte im Heimnetz] --> B[Pi-hole<br/>192.168.1.2]
+    B --> C{Domain blockiert?}
+    C -->|Ja| D[0.0.0.0<br/>Werbung blockiert]
+    C -->|Nein| E[Upstream DNS<br/>1.1.1.1]
+    E --> F[Legitime Antwort]
+```
+
+**Vorteile:**
+
+- Netzwerkweiter Werbeschutz für alle Geräte (Smartphones, Smart-TVs, IoT)
+- Reduzierter Datenverbrauch und schnellere Ladezeiten
+- Schutz vor Tracking und Malware-Domains
+- Keine Client-Konfiguration erforderlich (außer DNS-Server-Einstellung)
+
+**Typische Installation:**
+
+- Raspberry Pi (oder andere Hardware/VM)
+- Automatische Installation via `curl -sSL https://install.pi-hole.net | bash`
+- Als DNS-Server im Router konfigurieren (z.B. 192.168.1.2)
+
+**AdGuard Home**
+
+AdGuard Home ist eine moderne Alternative zu Pi-hole mit erweiterten Features:
+
+**Zusätzliche Features gegenüber Pi-hole:**
+
+- DNS-over-HTTPS (DoH) und DNS-over-TLS (DoT) integriert
+- Parental Controls (Jugendschutzfilter)
+- Safe Browsing (Malware/Phishing-Schutz)
+- Pro-Gerät-Statistiken und individuelle Filterregeln
+- Moderne Web-UI mit detaillierteren Analysen
+
+**Vergleich Pi-hole vs. AdGuard Home:**
+
+| Feature                   | Pi-hole               | AdGuard Home     |
+|---------------------------|-----------------------|------------------|
+| **Werbeblocker**          | Ja                    | Ja               |
+| **Web-Interface**         | Ja                    | Ja (moderner)    |
+| **DoH/DoT**               | Via Zusatzsoftware    | Nativ integriert |
+| **DHCP-Server**           | Ja                    | Ja               |
+| **Parental Controls**     | Nein                  | Ja               |
+| **Client-Identifikation** | IP-basiert            | IP + ClientID    |
+| **Ressourcenverbrauch**   | Sehr gering           | Gering           |
+| **Installation**          | Bash-Script/Container | Binary/Container |
+
+**Praktisches Beispiel: Pi-hole Konfiguration**
+
+Nach der Installation wird Pi-hole als primärer DNS-Server im Netzwerk konfiguriert:
+
+1. **Router-Konfiguration**: DNS-Server auf Pi-hole-IP (z.B. 192.168.1.2) setzen
+2. **Upstream DNS wählen**: Cloudflare (1.1.1.1), Google (8.8.8.8) oder Quad9 (9.9.9.9)
+3. **Blocklists aktivieren**: Standard-Listen + optionale Listen (z.B. für Tracking, Malware)
+4. **Whitelist pflegen**: Legitime Domains, die fälschlicherweise blockiert werden
+
+**Beispiel blockierte Anfrage:**
+
+```
+Query: ads.google.com
+Status: Blocked (Advertising)
+Antwort: 0.0.0.0
+```
+
+**Beispiel erlaubte Anfrage:**
+
+```
+Query: docs.fa24b.de
+Status: Forwarded to 1.1.1.1
+Antwort: 185.199.108.153
+```
+
+#### DNS-Server-Auswahl-Kriterien
+
+Die Wahl der DNS-Server-Software hängt vom Einsatzzweck ab:
+
+**Für Unternehmen:**
+
+- BIND: Maximale Kompatibilität und Funktionsumfang
+- PowerDNS: Dynamische Umgebungen mit API-Integration
+- Unbound: Rekursive Resolver mit DNSSEC-Fokus
+
+**Für Heimnetzwerke:**
+
+- Pi-hole: Werbeblocker mit geringem Ressourcenverbrauch
+- AdGuard Home: Moderner Werbeblocker mit Privacy-Features
+- dnsmasq: Einfacher DNS + DHCP Server (oft in Routern integriert)
+
+**Für Cloud/Container:**
+
+- CoreDNS: Kubernetes-native Service Discovery
+- PowerDNS: API-gesteuerte Verwaltung
+
+### DNS-Verwaltungs-Strategien
+
+#### Infrastructure as Code (IaC)
+
+Moderne DNS-Verwaltung erfolgt zunehmend über Infrastructure-as-Code-Tools.
+
+**Beispiel mit Terraform (Cloudflare Provider):**
+
+```hcl
+# Provider-Konfiguration
+terraform {
+  required_providers {
+    cloudflare = {
+      source  = "cloudflare/cloudflare"
+      version = "~> 4.0"
+    }
+  }
+}
+
+# DNS-Zone
+resource "cloudflare_zone" "fa24b" {
+  account_id = var.cloudflare_account_id
+  zone       = "fa24b.de"
+}
+
+# A-Record für Root-Domain
+resource "cloudflare_record" "root" {
+  zone_id = cloudflare_zone.fa24b.id
+  name    = "@"
+  value   = "104.21.63.26"
+  type    = "A"
+  ttl     = 300
+  proxied = true
+}
+
+# CNAME für Subdomain
+resource "cloudflare_record" "docs" {
+  zone_id = cloudflare_zone.fa24b.id
+  name    = "docs"
+  value   = "wimwenigerkind.github.io"
+  type    = "CNAME"
+  ttl     = 300
+  proxied = false
+}
+
+# MX-Record
+resource "cloudflare_record" "mx" {
+  zone_id  = cloudflare_zone.fa24b.id
+  name     = "@"
+  value    = "fa24b-de.mail.protection.outlook.com"
+  type     = "MX"
+  ttl      = 3600
+  priority = 0
+}
+```
+
+**Vorteile von IaC für DNS:**
+
+- Versionskontrolle der DNS-Konfiguration (Git)
+- Reproduzierbare Deployments
+- Code-Review-Prozesse für DNS-Änderungen
+- Automatisierte Tests vor Änderungen
+- Dokumentation durch Code
+
+#### GitOps-Workflow
+
+Ein moderner DNS-Verwaltungs-Workflow:
+
+```mermaid
+graph LR
+    A[DNS-Änderung in Git] --> B[Pull Request erstellen]
+    B --> C[Automatische Tests]
+    C --> D{Tests bestanden?}
+    D -->|Ja| E[Code Review]
+    D -->|Nein| F[Änderungen korrigieren]
+    F --> B
+    E --> G[Merge in Main Branch]
+    G --> H[Terraform Apply]
+    H --> I[DNS-Records aktualisiert]
+    I --> J[Monitoring & Alerting]
+```
+
+**Best Practices:**
+
+1. **Staging-Umgebung**: DNS-Änderungen zuerst in Test-Zone testen
+2. **Atomic Changes**: Zusammengehörige Änderungen in einem Commit
+3. **Rollback-Plan**: Jede Änderung muss rückgängig gemacht werden können
+4. **Monitoring**: DNS-Auflösung kontinuierlich überwachen
+
+### TTL-Management
+
+Die Time to Live (TTL) ist ein kritischer Parameter für DNS-Performance und Flexibilität.
+
+#### TTL-Strategien
+
+| Szenario                        | Empfohlene TTL      | Begründung                                    |
+|---------------------------------|---------------------|-----------------------------------------------|
+| **Stabile Produktions-Website** | 3600-86400s (1-24h) | Reduziert DNS-Traffic, verbessert Performance |
+| **Vor geplanten Änderungen**    | 300-600s (5-10min)  | Schnelle Propagation bei Änderungen           |
+| **Load-Balancer**               | 60-300s (1-5min)    | Flexibles Failover und Traffic-Management     |
+| **Development/Staging**         | 300s (5min)         | Häufige Änderungen während Entwicklung        |
+| **MX-Records**                  | 3600s (1h)          | Mailserver ändern sich selten                 |
+| **NS-Records**                  | 86400s (24h)        | Nameserver sind sehr stabil                   |
+| **TXT-Records (SPF, DKIM)**     | 3600s (1h)          | Ändern sich selten, aber wichtig für E-Mail   |
+
+#### TTL vor Migrationen anpassen
+
+**Typischer Migrations-Zeitplan:**
+
+```
+Tag -2: TTL auf 300s reduzieren (warten 48h bis alte TTL abgelaufen)
+Tag 0:  Migration durchführen
+        - Records beim neuen Provider erstellen
+        - Nameserver beim Registrar aktualisieren
+        - DNS-Propagation überwachen
+Tag +1: Verifizierung abgeschlossen
+        - Alter Provider kann deaktiviert werden
+Tag +3: TTL schrittweise wieder erhöhen (z.B. auf 3600s)
+```
+
+### DNS-Monitoring und Troubleshooting
+
+Kontinuierliches Monitoring der DNS-Infrastruktur ist essenziell für Verfügbarkeit und Performance.
+
+#### Monitoring-Metriken
+
+**Wichtige Metriken:**
+
+1. **DNS-Auflösungszeit**: Wie lange dauert die Auflösung?
+2. **Erfolgsrate**: Werden alle Anfragen erfolgreich beantwortet?
+3. **TTL-Einhaltung**: Werden Caching-Zeiten eingehalten?
+4. **Nameserver-Verfügbarkeit**: Sind alle NS erreichbar?
+5. **Propagation-Status**: Sind Änderungen weltweit sichtbar?
+
+#### Externe Monitoring-Services
+
+**Beispiele für DNS-Monitoring-Tools:**
+
+- **DNSPerf**: Performance-Monitoring von verschiedenen Standorten
+- **Pingdom**: Synthetic Monitoring mit DNS-Checks
+- **UptimeRobot**: Einfaches DNS-Monitoring
+- **DNS Checker** (dnschecker.org): Manuelle Propagation-Überprüfung
+- **What's My DNS** (whatsmydns.net): Globale DNS-Propagation visualisieren
+
+#### Häufige DNS-Probleme und Lösungen
+
+**Problem 1: DNS-Propagation dauert zu lange**
+
+*Ursache*: Hohe TTL-Werte auf alten Records
+
+*Lösung*:
+
+- TTL-Werte 24-48 Stunden vor Änderungen reduzieren
+- Cache-Flush bei wichtigen DNS-Resolvern anfragen
+- Monitoring aus verschiedenen geografischen Regionen
+
+**Problem 2: Intermittierende DNS-Fehler**
+
+*Ursache*: Ein Nameserver ist ausgefallen oder langsam
+
+*Lösung*:
+
+```bash
+# Alle Nameserver einzeln testen
+dig @tina.ns.cloudflare.com fa24b.de
+dig @curt.ns.cloudflare.com fa24b.de
+
+# Response-Zeiten messen
+dig +stats fa24b.de
+```
+
+**Problem 3: CNAME und andere Records kollidieren**
+
+*Ursache*: CNAME-Record existiert zusammen mit anderen Record-Typen für denselben Namen
+
+*Lösung*:
+
+- CNAME-Records können nicht mit anderen Record-Typen koexistieren
+- Für Root-Domain (@) A-Records statt CNAME verwenden
+- Alternative: ALIAS-Records (bei Providern wie Cloudflare)
+
+### Best Practices für DNS-Verwaltung
+
+#### Sicherheit
+
+1. **DNSSEC implementieren**: Schutz vor DNS-Spoofing und Cache-Poisoning
+2. **Zugriffskontrolle**: Mehrfaktor-Authentifizierung für DNS-Provider-Accounts
+3. **Audit-Logs aktivieren**: Alle DNS-Änderungen protokollieren
+4. **Registry Lock**: Domain-Transfer-Lock beim Registrar aktivieren
+5. **CAA-Records**: Zertifikatsausstellung auf autorisierte CAs beschränken
+
+#### Redundanz
+
+1. **Mehrere Nameserver**: Minimum 2, empfohlen 3-4 Nameserver
+2. **Geografische Verteilung**: Nameserver in verschiedenen Rechenzentren
+3. **Verschiedene AS-Nummern**: Nameserver bei verschiedenen Providern
+4. **Anycast-Routing**: Bei kritischen Domains für globale Verfügbarkeit
+
+#### Dokumentation
+
+1. **DNS-Inventar führen**: Alle Domains und deren Zweck dokumentieren
+2. **Änderungsprotokoll**: Wer hat wann was geändert?
+3. **Runbooks**: Standardprozeduren für häufige Aufgaben
+4. **Notfall-Kontakte**: DNS-Provider-Support-Kontakte hinterlegen
+
+#### Testing
+
+1. **Vor Produktion testen**: DNS-Änderungen in Staging-Umgebung verifizieren
+2. **Automatisierte Tests**: DNS-Auflösung in CI/CD-Pipeline testen
+3. **Rollback-Tests**: Recovery-Prozeduren regelmäßig üben
+4. **Load-Testing**: DNS-Server-Kapazität unter Last testen
+
 ## Zusammenfassung und Ausblick
 
 ### Zusammenfassung
