@@ -234,6 +234,66 @@ In Unternehmen oder komplexeren Heimnetzen gibt es oft eigene **lokale DNS-Serve
 
 Im Heimnetz übernimmt diese Rolle häufig der Router, der Anfragen der Clients sammelt und an den Provider-DNS weitergibt.
 
+#### Lokale DNS-Auflösung ohne Root-Server
+
+In lokalen Netzwerken kann die DNS-Auflösung auch ohne Kontakt zu Root-Servern erfolgen:
+
+**1. Lokaler DNS-Server mit eigenen Zonen**
+
+Ein lokaler DNS-Server kann interne Domainnamen direkt auflösen, ohne Root-Server zu kontaktieren:
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant LocalDNS as Lokaler DNS-Server
+    participant ZoneFile as Lokale Zone-Datei
+
+    Client->>LocalDNS: DNS-Query: server.local
+    LocalDNS->>ZoneFile: Suche in lokaler Zone
+    ZoneFile-->>LocalDNS: 192.168.1.100
+    LocalDNS-->>Client: IP-Adresse: 192.168.1.100
+
+    Note over Client,LocalDNS: Keine Root-Server<br/>beteiligt!
+```
+
+**Beispiel**: In einem Unternehmensnetzwerk kann `server.local` oder `intranet.firma.de` direkt vom lokalen DNS-Server aufgelöst werden.
+
+**2. Hosts-Datei**
+
+Noch vor der DNS-Abfrage prüft jedes Betriebssystem die lokale Hosts-Datei:
+
+- **Linux/macOS**: `/etc/hosts`
+- **Windows**: `C:\Windows\System32\drivers\etc\hosts`
+
+```
+# /etc/hosts
+127.0.0.1       localhost
+192.168.1.10    server.local
+192.168.1.20    nas.local
+```
+
+**3. mDNS (Multicast DNS)**
+
+Für lokale Netzwerke ohne DNS-Server existiert **mDNS** (verwendet von Apple Bonjour, Avahi):
+
+- Auflösung von `.local` Domainnamen
+- Broadcast-basiert im lokalen Netzwerk
+- Beispiel: `rechner.local` wird automatisch gefunden
+- Keine zentrale Serverinfrastruktur erforderlich
+
+**4. Split-DNS / Split-Horizon DNS**
+
+Bei Split-DNS liefert ein DNS-Server unterschiedliche Antworten, abhängig davon, ob die Anfrage aus dem internen oder externen Netzwerk kommt:
+
+```mermaid
+graph LR
+    A[Client intern] -->|Query: intranet.firma.de| B[DNS-Server]
+    C[Client extern] -->|Query: intranet.firma.de| B
+
+    B -->|Intern| D[192.168.1.100<br/>private IP]
+    B -->|Extern| E[Keine Antwort<br/>NXDOMAIN]
+```
+
 ### Zusammenspiel der Server-Typen
 
 Bei einer Anfrage nach `docs.fa24b.de` arbeiten mehrere Servertypen zusammen:
