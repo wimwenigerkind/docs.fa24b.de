@@ -885,6 +885,39 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="DNS-Caching und TTL (Time to Live)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wichtige-konzepte" class="md-nav__link">
+    <span class="md-ellipsis">
+      Wichtige Konzepte
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vor-und-nachteile-verschiedener-ttl-werte" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vor- und Nachteile verschiedener TTL-Werte
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beispiel-ttl-prufen" class="md-nav__link">
+    <span class="md-ellipsis">
+      Beispiel: TTL prüfen
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -894,6 +927,30 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="DNS-Sicherheit: Bedrohungen und Schutzmaßnahmen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#schutzmanahmen-kurzuberblick" class="md-nav__link">
+    <span class="md-ellipsis">
+      Schutzmaßnahmen (Kurzüberblick)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kurze-praxis-checks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kurze Praxis-Checks
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -902,6 +959,21 @@
       Praktische DNS-Tools und Befehle
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Praktische DNS-Tools und Befehle">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#haufige-admin-aufgaben-kurzreferenz" class="md-nav__link">
+    <span class="md-ellipsis">
+      Häufige Admin-Aufgaben (Kurzreferenz)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1388,6 +1460,39 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="DNS-Caching und TTL (Time to Live)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wichtige-konzepte" class="md-nav__link">
+    <span class="md-ellipsis">
+      Wichtige Konzepte
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vor-und-nachteile-verschiedener-ttl-werte" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vor- und Nachteile verschiedener TTL-Werte
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beispiel-ttl-prufen" class="md-nav__link">
+    <span class="md-ellipsis">
+      Beispiel: TTL prüfen
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1397,6 +1502,30 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="DNS-Sicherheit: Bedrohungen und Schutzmaßnahmen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#schutzmanahmen-kurzuberblick" class="md-nav__link">
+    <span class="md-ellipsis">
+      Schutzmaßnahmen (Kurzüberblick)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kurze-praxis-checks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kurze Praxis-Checks
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1405,6 +1534,21 @@
       Praktische DNS-Tools und Befehle
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Praktische DNS-Tools und Befehle">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#haufige-admin-aufgaben-kurzreferenz" class="md-nav__link">
+    <span class="md-ellipsis">
+      Häufige Admin-Aufgaben (Kurzreferenz)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2070,8 +2214,131 @@ unautorisierten Ausstellungsversuchen erfolgt eine Benachrichtigung per E-Mail a
 </tbody>
 </table>
 <h2 id="dns-caching-und-ttl-time-to-live"><abbr title="Domain Name System">DNS</abbr>-Caching und <abbr title="Time to Live">TTL</abbr> (Time to Live)</h2>
+<p><abbr title="Domain Name System">DNS</abbr>-Resolver speichern Antworten temporär im Cache, um die Auflösungsgeschwindigkeit zu erhöhen und die Last
+auf Root-, <abbr title="Top-Level-Domain">TLD</abbr>- und autoritativen Nameservern zu reduzieren. Die Lebensdauer einer gecachten Antwort wird durch die
+<abbr title="Time to Live">TTL</abbr> (Time to Live) in Sekunden bestimmt. Eine typische <abbr title="Time to Live">TTL</abbr>-Angabe steht direkt in <abbr title="Domain Name System">DNS</abbr>-Records und wird von
+rekursiven Resolvern beim Zwischenspeichern respektiert.</p>
+<h3 id="wichtige-konzepte">Wichtige Konzepte</h3>
+<ul>
+<li><strong><abbr title="Time to Live">TTL</abbr> (Beispiel)</strong>: <code>docs.fa24b.de. 3600 IN A 185.199.108.153</code> → <abbr title="Time to Live">TTL</abbr> = 3600s (1 Stunde).</li>
+<li><strong>Cache-Hierarchie</strong>: Clients ↔️ lokaler Resolver ↔️ rekursiver Resolver ↔️ autoritativer Server. Jeder Caching-Layer
+    hält Antworten unabhängig vor.</li>
+<li><strong>Negative Caching</strong>: Auch Nicht-Antworten (z.B. <code>NXDOMAIN</code>) werden für eine Zeit zwischengespeichert (gemäß
+    <abbr title="Start of Authority">SOA</abbr>/MinTTL-Angaben).</li>
+</ul>
+<h3 id="vor-und-nachteile-verschiedener-ttl-werte">Vor- und Nachteile verschiedener <abbr title="Time to Live">TTL</abbr>-Werte</h3>
+<ul>
+<li><strong>Lange TTLs (z. B. 86400s / 24h)</strong>: weniger Abfragen, geringere Last, bessere Verfügbarkeit bei Ausfall von
+    Nameservern. Nachteil: Änderungen (IP-Wechsel, Short-lived Failover) propagieren langsam.</li>
+<li><strong>Kurze TTLs (z. B. 60–300s)</strong>: schnelle Propagation bei Änderungen, aber höhere Abfragezahl und erhöhte Last.</li>
+</ul>
+<p>Praktische Empfehlung: Setze TTLs situativ. Für stabile Ressourcen längere TTLs, für Dienste mit häufigen
+Änderungen kurze TTLs während der Umstellung und danach wieder erhöhen.</p>
+<h3 id="beispiel-ttl-prufen">Beispiel: <abbr title="Time to Live">TTL</abbr> prüfen</h3>
+<p>Mit <code>dig</code> lässt sich die verbleibende <abbr title="Time to Live">TTL</abbr> direkt sehen:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>dig<span class="w"> </span>+noall<span class="w"> </span>+answer<span class="w"> </span>docs.fa24b.de<span class="w"> </span>A
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="p">;</span><span class="w"> </span>Ausgabe:<span class="w"> </span>docs.fa24b.de.<span class="w"> </span><span class="m">3600</span><span class="w"> </span>IN<span class="w"> </span>A<span class="w"> </span><span class="m">185</span>.199.108.153
+</span></code></pre></div>
+<p>Mit <code>dig +trace</code> lässt sich außerdem der komplette Auflösungsweg (inkl. <abbr title="Time to Live">TTL</abbr>-Anzeigen) nachvollziehen.</p>
 <h2 id="dns-sicherheit-bedrohungen-und-schutzmanahmen"><abbr title="Domain Name System">DNS</abbr>-Sicherheit: Bedrohungen und Schutzmaßnahmen</h2>
+<p><abbr title="Domain Name System">DNS</abbr> ist ein attraktives Ziel für Angriffe und Manipulationen. Häufige Bedrohungen sind <strong>Cache Poisoning/<abbr title="Domain Name System">DNS</abbr> Spoofing</strong>,
+<strong><abbr title="Distributed Denial of Service">DDoS</abbr>-Angriffe auf Nameserver</strong>, <strong>Registrar-/WHOIS-Hijacking</strong>, <strong><abbr title="Domain Name System">DNS</abbr>-Tunneling</strong> (Datenexfiltration) und <strong>Man-in-the-Middle</strong>-Angriffe
+auf unverschlüsselten <abbr title="Domain Name System">DNS</abbr>-Transporten.</p>
+<h3 id="schutzmanahmen-kurzuberblick">Schutzmaßnahmen (Kurzüberblick)</h3>
+<ul>
+<li><strong><abbr title="DNS Security Extensions">DNSSEC</abbr></strong>: Signiert <abbr title="Domain Name System">DNS</abbr>-Antworten kryptographisch (RRSIG, DNSKEY). Schützt gegen Manipulation und Cache-Poisoning,
+    indem die Integrität von Records geprüft wird. Wichtiger Hinweis: <abbr title="DNS Security Extensions">DNSSEC</abbr> authentifiziert, verschlüsselt aber nicht.</li>
+<li><strong>Verschlüsselte <abbr title="Domain Name System">DNS</abbr>-Protokolle</strong>: <abbr title="DNS over TLS">DoT</abbr> (<abbr title="Domain Name System">DNS</abbr> over TLS) und <abbr title="DNS over HTTPS">DoH</abbr> (<abbr title="Domain Name System">DNS</abbr> over HTTPS) schützen die Privatsphäre und
+    Integrität der Transportverbindung gegen Mitlesen und Blockaden.</li>
+<li><strong>Harte Authentisierung für Registrar/Nameserver-Accounts</strong>: 2FA, starke Passwörter und Zugangskontrollen
+    verhindern Domain-Hijacking.</li>
+<li><strong>TSIG</strong>: Absicherung von Zonentransfers zwischen Nameservern mittels Shared Secrets.</li>
+<li><strong>Rate Limiting &amp; Anycast</strong>: <abbr title="Distributed Denial of Service">DDoS</abbr>-Resilienz durch Anycast-Deployment und Anfragelimits auf Resolver/Autoren.</li>
+<li><strong>Monitoring &amp; Logging</strong>: Anomalien (plötzliche <abbr title="Time to Live">TTL</abbr>-Änderungen, ungewöhnliche Antwortmuster) frühzeitig erkennen.</li>
+<li><strong>Minimale Angriffsfläche</strong>: Nur notwendige Records publizieren, administrative Kontakte schützen, <abbr title="Certification Authority Authorization">CAA</abbr> für
+    Zertifikats-Aussteller setzen.</li>
+</ul>
+<h3 id="kurze-praxis-checks">Kurze Praxis-Checks</h3>
+<ul>
+<li><strong><abbr title="DNS Security Extensions">DNSSEC</abbr> prüfen</strong>: <code>dig +dnssec example.com</code> → prüft Vorhandensein von RRSIG/DNSKEY.</li>
+<li><strong><abbr title="Certification Authority Authorization">CAA</abbr> prüfen</strong>: <code>dig example.com CAA +short</code> → zeigt, welche CAs zertifizieren dürfen.</li>
+</ul>
+<p>Beispiel: <abbr title="DNS Security Extensions">DNSSEC</abbr>-gestützte Abfrage mit <code>dig</code>:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>dig<span class="w"> </span>+dnssec<span class="w"> </span>fa24b.de<span class="w"> </span>A
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="p">;</span><span class="w"> </span>RRSIG-Einträge<span class="w"> </span><span class="k">in</span><span class="w"> </span>der<span class="w"> </span>Antwort<span class="w"> </span>zeigen,<span class="w"> </span>dass<span class="w"> </span>die<span class="w"> </span>Zone<span class="w"> </span>signiert<span class="w"> </span>ist
+</span></code></pre></div>
+<p>Hinweis: <abbr title="DNS Security Extensions">DNSSEC</abbr>-Einführung erfordert Koordination mit Registrar/Hosting und korrekte Key-Rotation.</p>
 <h2 id="praktische-dns-tools-und-befehle">Praktische <abbr title="Domain Name System">DNS</abbr>-Tools und Befehle</h2>
+<p>Für Troubleshooting und Audits sind folgende Tools essenziell. Die Beispiele zeigen typische Prüfaufgaben.</p>
+<ul>
+<li>
+<p><strong>dig (Linux/macOS, auch Windows via BIND-utils)</strong> – universelles <abbr title="Domain Name System">DNS</abbr>-Diagnosewerkzeug</p>
+<ul>
+<li>A-Record: <code>dig +noall +answer docs.fa24b.de A</code></li>
+<li>Trace: <code>dig +trace docs.fa24b.de</code></li>
+<li><abbr title="DNS Security Extensions">DNSSEC</abbr>: <code>dig +dnssec docs.fa24b.de</code></li>
+</ul>
+</li>
+<li>
+<p><strong>nslookup</strong> – älteres, aber weit verbreitetes Tool</p>
+<ul>
+<li>Interaktive Nutzung: <code>nslookup</code> → <code>server 8.8.8.8</code> → <code>set type=MX</code> → <code>fa24b.de</code></li>
+</ul>
+</li>
+<li>
+<p><strong>host</strong> – einfache Abfragen</p>
+<ul>
+<li><code>host -t A docs.fa24b.de</code></li>
+</ul>
+</li>
+<li>
+<p><strong>PowerShell (Windows)</strong> – <code>Resolve-DnsName</code></p>
+<ul>
+<li>Beispiel: <code>Resolve-DnsName docs.fa24b.de -Type A</code></li>
+</ul>
+</li>
+<li>
+<p><strong>rndc / named-checkzone</strong> – Werkzeuge für Administratoren von BIND-Servern (Zonenprüfung, Cache-Management)</p>
+</li>
+<li>
+<p><strong>tcpdump / Wireshark</strong> – Netzwerk-Captures für tiefgehende Analyse von <abbr title="Domain Name System">DNS</abbr>-Paketen</p>
+<ul>
+<li>Beispiel: <code>sudo tcpdump -n -s 0 -vvv port 53</code></li>
+</ul>
+</li>
+<li>
+<p><strong>systemd-resolve / systemd-resolved</strong> – Abfragen und Cache-Management auf modernen Linux-Clients</p>
+</li>
+<li>
+<p><strong>Online-Tools</strong> – DNSViz, Zonemaster, intoDNS: grafische/automatisierte Checks (<abbr title="DNS Security Extensions">DNSSEC</abbr>, Delegation, Konfiguration)</p>
+</li>
+</ul>
+<h3 id="haufige-admin-aufgaben-kurzreferenz">Häufige Admin-Aufgaben (Kurzreferenz)</h3>
+<ul>
+<li>
+<p><strong><abbr title="Domain Name System">DNS</abbr>-Cache leeren</strong>:</p>
+<ul>
+<li>Windows: <code>ipconfig /flushdns</code></li>
+<li>macOS (aktuelles): <code>sudo killall -HUP mDNSResponder</code></li>
+<li>systemd/Linux: <code>sudo systemd-resolve --flush-caches</code> oder <code>sudo rndc flush</code> (BIND)</li>
+</ul>
+</li>
+<li>
+<p><strong>Schnell prüfen, welche Nameserver eine Domain verwendet</strong>:</p>
+<ul>
+<li><code>dig +short NS fa24b.de</code></li>
+</ul>
+</li>
+<li>
+<p><strong><abbr title="Time to Live">TTL</abbr> und <abbr title="Start of Authority">SOA</abbr>-Info anzeigen</strong>:</p>
+<ul>
+<li><code>dig +nocmd fa24b.de SOA +noall +answer</code></li>
+</ul>
+</li>
+</ul>
+<p>Diese Tools erlauben sowohl schnelle Checks als auch tiefergehende Untersuchungen bei Incidents. Für Automatisierung
+eignen sich Skripte, die wiederkehrende Prüfungen (<abbr title="DNS Security Extensions">DNSSEC</abbr>-Status, <abbr title="Time to Live">TTL</abbr>-Änderungen, <abbr title="Mail Exchange">MX</abbr>/<abbr title="Start of Authority">SOA</abbr>-Checks) ausführen und
+bei Auffälligkeiten Alarme erstellen.</p>
 <h2 id="dns-in-der-praxis-konfiguration-und-verwaltung"><abbr title="Domain Name System">DNS</abbr> in der Praxis: Konfiguration und Verwaltung</h2>
 <h2 id="zusammenfassung-und-ausblick">Zusammenfassung und Ausblick</h2>
 <h3 id="zusammenfassung">Zusammenfassung</h3>
@@ -2134,7 +2401,7 @@ Grundlage für die Funktionsfähigkeit des Internets darstellt.</p>
     <span class="md-icon" title="Letztes Update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="4. Dezember 2025 20:08:49 UTC">4. Dezember 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="4. Dezember 2025 20:45:03 UTC">4. Dezember 2025</span>
   </span>
 
     
@@ -2162,6 +2429,11 @@ Grundlage für die Funktionsfähigkeit des Internets darstellt.</p>
     
     <nav>
       
+        <a href="https://github.com/b-m-b30" class="md-author" title="@b-m-b30">
+          
+          <img src="https://avatars.githubusercontent.com/u/179261876?v=4&size=72" alt="b-m-b30">
+        </a>
+      
         <a href="https://github.com/wimwenigerkind" class="md-author" title="@wimwenigerkind">
           
           <img src="https://avatars.githubusercontent.com/u/159561025?v=4&size=72" alt="wimwenigerkind">
@@ -2177,12 +2449,13 @@ Grundlage für die Funktionsfähigkeit des Internets darstellt.</p>
           <img src="https://avatars.githubusercontent.com/u/19864447?v=4&size=72" alt="web-flow">
         </a>
       
-        <a href="https://github.com/NiklasLehmann" class="md-author" title="@NiklasLehmann">
-          
-          <img src="https://avatars.githubusercontent.com/u/177529908?v=4&size=72" alt="NiklasLehmann">
-        </a>
       
       
+        
+          <a href="https://github.com/wimwenigerkind/docs.fa24b.de/blob/main/docs/lf09/dns/index.md" class="md-author md-author--more">
+            +1
+          </a>
+        
       
     </nav>
   </span>
