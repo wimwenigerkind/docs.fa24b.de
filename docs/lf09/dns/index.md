@@ -141,7 +141,7 @@ Domains wie `docs.fa24b.de` zuverlässig und schnell aufgelöst werden können.
 
 Der **rekursive Resolver** ist meist der erste Ansprechpartner für Clients:
 
-- läuft oft beim Internetprovider, in Unternehmen oder auf öffentlichen DNS-Diensten z.B. [1.1.1.1](1.1.1.1)(Cloudflare), [8.8.8.8](8.8.8.8)(Google)
+- läuft oft beim Internetprovider, in Unternehmen oder auf öffentlichen DNS-Diensten z.B. [1.1.1.1](https://1.1.1.1)(Cloudflare), [8.8.8.8](https://8.8.8.8)(Google)
 - nimmt Anfragen von Clients entgegen (z.B. für `docs.fa24b.de`)
 - fragt bei Bedarf weitere DNS-Server (Root, TLD, autoritative Server) ab
 - speichert Antworten im **Cache**, um zukünftige Anfragen schneller zu beantworten
