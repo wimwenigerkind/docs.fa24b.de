@@ -38,81 +38,200 @@ Dieser gesamte Prozess dauert nur wenige Millisekunden und läuft vollautomatisc
 
 ## Aufbau und Hierarchie des DNS
 
-Das \**Domain Name System (DNS)\** ist hierarchisch aufgebaut und weltweit verteilt. Diese Struktur ermöglicht eine
+Das DNS ist hierarchisch strukturiert, ähnlich einem umgekehrten Baum. Die Hierarchie besteht aus mehreren Ebenen, wobei jede Ebene für einen Teil des Domainnamens verantwortlich ist. Diese Struktur ermöglicht eine
 skalierbare, ausfallsichere und dezentrale Verwaltung von Domainnamen.
+
+### Die DNS-Hierarchie-Ebenen
+
+```mermaid
+graph TD
+    Root[". (Root)"]
+
+    Root --> DE[".de"]
+    Root --> COM[".com"]
+    Root --> ORG[".org"]
+
+    DE --> FA24B["fa24b.de"]
+    DE --> EXAMPLE["example.de"]
+
+    COM --> GOOGLE["google.com"]
+    COM --> GITHUB["github.com"]
+
+    ORG --> WIKI["wikipedia.org"]
+
+    FA24B --> DOCS["docs.fa24b.de"]
+```
 
 ### Aufbau einer Domain
 
-Eine Domain wie `docs.fa24b.de` wird von rechts nach links gelesen:
+Eine Domain wie `docs.fa24b.de` wird von **rechts nach links** gelesen und besteht aus mehreren Ebenen:
 
-- `.` \- die (meist unsichtbare) \**Root\-Zone\**
-- `de` \- \**Top\-Level\-Domain (TLD)\**
-- `fa24b` \- \**Second\-Level\-Domain\**
-- `docs` \- \**Subdomain\** bzw. Hostname
+```
+docs  .  fa24b  .  de  .
+ │        │        │   │
+ │        │        │   └─── Root-Ebene (meist unsichtbar)
+ │        │        └─────── Top-Level-Domain (TLD)
+ │        └──────────────── Second-Level-Domain
+ └───────────────────────── Subdomain
+```
 
-Jede Ebene kann von unterschiedlichen Organisationen verwaltet werden.
+**Die vier Ebenen im Detail:**
 
-### Root\-Ebene
+1. **Root-Ebene (.)**: Die oberste Ebene, verwaltet von 13 Root-Server-Systemen
+2. **Top-Level-Domain (TLD)**: Länder- oder themenbezogene Endungen (`.de`, `.com`, `.org`)
+3. **Second-Level-Domain**: Der registrierte Domainname (z.B. `fa24b`)
+4. **Subdomain**: Optionale Unterteilungen unterhalb der Domain (z.B. `docs`, `mail`)
 
-An der Spitze der Hierarchie steht die \**Root\-Zone\**:
+Jede Ebene kann von unterschiedlichen Organisationen oder DNS-Registrars verwaltet werden, was eine dezentrale Verwaltung ermöglicht.
 
-- wird von einer kleinen Anzahl von \**Root\-Servern\** betrieben
+### Root-Ebene
+
+An der Spitze der Hierarchie steht die Root-Zone:
+
+- wird von 13 **Root-Server-Systemen** betrieben
 - kennt keine einzelnen Hostnamen
-- verweist nur auf die zuständigen Nameserver der TLDs (z\.B. `.de`, `.com`, `.org`)
+- verweist ausschließlich auf die zuständigen Nameserver der TLDs (z.B. `.de`, `.com`, `.org`)
 
-Ohne die Root\-Server könnte das DNS nicht von Grund auf funktionieren.
+Die Root-Server bilden die Grundlage für die gesamte DNS-Infrastruktur und ermöglichen die Auflösung aller Domainnamen weltweit.
 
-### Top\-Level\-Domains (TLDs)
+### Top-Level-Domains (TLDs)
 
-Unterhalb der Root\-Zone befinden sich die \**Top\-Level\-Domains\**:
+Unterhalb der Root-Zone befinden sich die Top-Level-Domains:
 
-- \**Generische TLDs (gTLDs)\**: z\.B. `.com`, `.org`, `.net`
-- \**Länderspezifische TLDs (ccTLDs)\**: z\.B. `.de`, `.fr`, `.ch`
+- **Generische TLDs (gTLDs)**: z.B. `.com`, `.org`, `.net`
+- **Länderspezifische TLDs (ccTLDs)**: z.B. `.de`, `.fr`, `.ch`
 
-Die TLD\-Server wissen, welche Nameserver für die darunterliegenden Domains zuständig sind, z\.B.:
+Die TLD-Server kennen die autoritativen Nameserver für die darunterliegenden Domains:
 
-- `fa24b.de` → autoritative Nameserver von `fa24b.de`
-- `schule.de` → autoritative Nameserver von `schule.de`
+- Anfrage nach `fa24b.de` → Verweis auf `tina.ns.cloudflare.com` und `curt.ns.cloudflare.com`
 
-### Second\-Level\-Domains
+### Second-Level-Domains
 
-Die \**Second\-Level\-Domain\** ist der Teil direkt unterhalb der TLD:
+Die **Second-Level-Domain** ist der Teil direkt unterhalb der TLD:
 
 - `fa24b` in `fa24b.de`
-- `schule` in `schule.de`
 
-In diesem Bereich verwalten typischerweise Firmen, Organisationen oder Provider ihren eigenen DNS\-Namensraum. Dort
-werden u\.a. festgelegt:
-
-- welche Hostnamen existieren (z\.B. `docs.fa24b.de`, `mail.fa24b.de`)
-- auf welche IP\-Adressen diese zeigen
-- welche Mailserver zuständig sind (MX\-Records)
-- welche Nameserver autoritativ für die Zone sind (NS\-Records)
+In diesem Bereich verwalten typischerweise Firmen, Organisationen oder Provider ihren eigenen DNS-Namensraum.
 
 ### Subdomains und Delegation
 
-Unterhalb der Second\-Level\-Domain können beliebig viele \**Subdomains\** angelegt werden:
+Unterhalb der Second-Level-Domain können beliebig viele **Subdomains** angelegt werden:
 
-- `docs.fa24b.de` \- Webserver mit Dokumentation
-- `mail.fa24b.de` \- Mailserver
-- `intranet.fa24b.de` \- internes Portal
+- `docs.fa24b.de` - Webserver mit Dokumentation
+- `mail.fa24b.de` - Mailserver
+- `intranet.fa24b.de` - internes Portal
 
-Subdomains können wiederum zu \**eigenen Zonen\** mit eigenen autoritativen Nameservern werden. Dies nennt man
-\**Delegation\**. So lässt sich die Verwaltung auf verschiedene Abteilungen oder Standorte aufteilen.
+**Verschachtelte Subdomains**: Subdomains können beliebig tief verschachtelt werden, sodass mehrere Ebenen möglich sind:
+
+- `api.docs.fa24b.de` - API-Dokumentation (Subdomain der Subdomain)
+- `dev.api.docs.fa24b.de` - Entwicklungs-API (drei Ebenen tief)
+- `server1.datacenter.berlin.firma.de` - Mehrstufige Hierarchie für Organisation
+
+Es gibt keine technische Begrenzung der Tiefe, jedoch ist die Gesamtlänge eines vollständigen Domainnamens (FQDN) auf 253 Zeichen begrenzt, wobei jedes Label (Teil zwischen den Punkten) maximal 63 Zeichen lang sein darf.
+
+**Delegation**: Subdomains können wiederum zu **eigenen Zonen** mit eigenen autoritativen Nameservern werden. Dies nennt man **Delegation**. So lässt sich die Verwaltung auf verschiedene Abteilungen oder Standorte aufteilen.
 
 ### Zonen und Verantwortlichkeiten
 
-Wichtiger Begriff im DNS ist die \**Zone\**:
+Wichtiger Begriff im DNS ist die **Zone**:
 
-- eine Zone ist der Teil der DNS\-Hierarchie, der von einem Satz autoritativer Nameserver verwaltet wird
+- eine Zone ist der Teil der DNS-Hierarchie, der von einem Satz autoritativer Nameserver verwaltet wird
 - eine Domain kann mehrere Zonen enthalten, wenn Teilbereiche delegiert werden
 
 Beispiel:
 
 - `schule.de` wird zentral vom Schulträger verwaltet
-- `it.schule.de` wird an die IT\-Abteilung delegiert und von deren eigenen Nameservern verwaltet
+- `it.schule.de` wird an die IT-Abteilung delegiert und von deren eigenen Nameservern verwaltet
 
-Dadurch entsteht eine \**dezentrale\**, aber logisch klar strukturierte Verwaltung des Namensraums.
+Dadurch entsteht eine **dezentrale**, aber logisch klar strukturierte Verwaltung des Namensraums.
+
+### Die 13 Root-Server-Systeme
+
+Es gibt weltweit [13 Root-Server-Systeme](https://root-servers.org/), die durch Buchstaben von A bis M identifiziert werden. Diese Server bilden die Grundlage des globalen DNS-Systems:
+
+| Bezeichnung | Hostname | IPv4 | IPv6 | Betreiber |
+|-------------|----------|------|------|-----------|
+| **A** | a.root-servers.net | 198.41.0.4 | 2001:503:ba3e::2:30 | Verisign, Inc. |
+| **B** | b.root-servers.net | 170.247.170.2 | 2801:1b8:10::b | USC-ISI |
+| **C** | c.root-servers.net | 192.33.4.12 | 2001:500:2::c | Cogent Communications |
+| **D** | d.root-servers.net | 199.7.91.13 | 2001:500:2d::d | University of Maryland |
+| **E** | e.root-servers.net | 192.203.230.10 | 2001:500:a8::e | NASA |
+| **F** | f.root-servers.net | 192.5.5.241 | 2001:500:2f::f | Internet Systems Consortium |
+| **G** | g.root-servers.net | 192.112.36.4 | 2001:500:12::d0d | US DoD Network Information Center |
+| **H** | h.root-servers.net | 198.97.190.53 | 2001:500:1::53 | US Army Research Lab |
+| **I** | i.root-servers.net | 192.36.148.17 | 2001:7fe::53 | Netnod (Schweden) |
+| **J** | j.root-servers.net | 192.58.128.30 | 2001:503:c27::2:30 | Verisign, Inc. |
+| **K** | k.root-servers.net | 193.0.14.129 | 2001:7fd::1 | RIPE NCC (Europa) |
+| **L** | l.root-servers.net | 199.7.83.42 | 2001:500:9f::42 | ICANN |
+| **M** | m.root-servers.net | 202.12.27.33 | 2001:dc3::35 | WIDE Project (Japan) |
+
+**Wichtig**: Jedes dieser 13 Root-Server-Systeme wird durch **Anycast** auf hunderte von physischen Servern weltweit verteilt. Dadurch gibt es tatsächlich über 1.000 physische Root-Server-Instanzen.
+
+**Weiterführende Informationen:**
+
+- [IANA Root Servers](https://www.iana.org/domains/root/servers) - Offizielle Liste der Root-Server
+- [Root Server Technical Operations](https://root-servers.org/) - Technische Details und Statistiken
+- [DNS Root Zone](https://www.internic.net/domain/root.zone) - Aktuelle Root-Zone-Datei
+- [Verisign Root Server Map](https://www.verisign.com/en_US/innovation/dnssec/root-server-map/index.xhtml) - Geografische Verteilung
+
+### DNS-Auflösung im lokalen Netzwerk
+
+Die DNS-Auflösung muss nicht immer über die Root-Server erfolgen. In lokalen Netzwerken gibt es alternative Wege:
+
+#### 1. Lokaler DNS-Server (ohne Root-Server)
+
+In Unternehmensnetzwerken oder Heimnetzwerken kann ein lokaler DNS-Server interne Domainnamen auflösen, ohne jemals Root-Server zu kontaktieren:
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant LocalDNS as Lokaler DNS-Server
+    participant ZoneFile as Lokale Zone-Datei
+
+    Client->>LocalDNS: DNS-Query: server.local
+    LocalDNS->>ZoneFile: Suche in lokaler Zone
+    ZoneFile-->>LocalDNS: 192.168.1.100
+    LocalDNS-->>Client: IP-Adresse: 192.168.1.100
+
+    Note over Client,LocalDNS: Keine Root-Server<br/>beteiligt!
+```
+
+**Beispiel**: In einem Unternehmensnetzwerk kann `server.local` oder `intranet.firma.de` direkt vom lokalen DNS-Server aufgelöst werden.
+
+#### 2. Hosts-Datei
+
+Noch vor der DNS-Abfrage prüft jedes Betriebssystem die lokale Hosts-Datei:
+
+- **Linux/macOS**: `/etc/hosts`
+- **Windows**: `C:\Windows\System32\drivers\etc\hosts`
+
+```
+# /etc/hosts
+127.0.0.1       localhost
+192.168.1.10    server.local
+192.168.1.20    nas.local
+```
+
+#### 3. Split-DNS / Split-Horizon DNS
+
+Bei Split-DNS liefert ein DNS-Server unterschiedliche Antworten, abhängig davon, ob die Anfrage aus dem internen oder externen Netzwerk kommt:
+
+```mermaid
+graph LR
+    A[Client intern] -->|Query: intranet.firma.de| B[DNS-Server]
+    C[Client extern] -->|Query: intranet.firma.de| B
+
+    B -->|Intern| D[192.168.1.100<br/>private IP]
+    B -->|Extern| E[Keine Antwort<br/>NXDOMAIN]
+```
+
+#### 4. mDNS (Multicast DNS)
+
+Für lokale Netzwerke ohne DNS-Server existiert **mDNS** (verwendet von Apple Bonjour, Avahi):
+
+- Auflösung von `.local` Domainnamen
+- Broadcast-basiert im lokalen Netzwerk
+- Beispiel: `rechner.local` wird automatisch gefunden
 
 ## DNS-Server-Typen und ihre Aufgaben
 
