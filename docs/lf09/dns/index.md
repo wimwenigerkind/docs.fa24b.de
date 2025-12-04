@@ -40,6 +40,84 @@ Dieser gesamte Prozess dauert nur wenige Millisekunden und läuft vollautomatisc
 
 ## DNS-Server-Typen und ihre Aufgaben
 
+Im Domain Name System übernehmen unterschiedliche DNS-Server spezielle Aufgaben. Zusammengenommen sorgen sie dafür, dass
+Domains wie `docs.fa24b.de` zuverlässig und schnell aufgelöst werden können.
+
+### Rekursiver Resolver (DNS-Resolver)
+
+Der **rekursive Resolver** ist meist der erste Ansprechpartner für Clients:
+
+- läuft oft beim Internetprovider, in Unternehmen oder auf öffentlichen DNS-Diensten (z\.B. 1\.1\.1\.1, 8\.8\.8\.8)
+- nimmt Anfragen von Clients entgegen (z\.B. für `docs.fa24b.de`)
+- fragt bei Bedarf weitere DNS-Server (Root, TLD, autoritative Server) ab
+- speichert Antworten im **Cache**, um zukünftige Anfragen schneller zu beantworten
+
+Für deinen Rechner ist der rekursive Resolver typischerweise im Router oder in den Netzwerkeinstellungen konfiguriert.
+
+### Root-Server
+
+Die **Root-Server** stehen an der Spitze der DNS-Hierarchie:
+
+- kennen keine einzelnen Domains wie `fa24b.de`
+- liefern nur Hinweise, welche **TLD-Server** für eine Endung wie `.de` zuständig sind
+- sind weltweit verteilt und in 13 logische Servergruppen eingeteilt (`a.root-servers.net` bis `m.root-servers.net`)
+
+Ohne Root-Server könnte der Auflösungsprozess nicht bei Null gestartet werden.
+
+### TLD-Server (Top-Level-Domain-Server)
+
+Die **TLD-Server** sind für eine bestimmte Domain-Endung zuständig, z\.B. `.de`:
+
+- verwalten Informationen darüber, welche **autoritativen Nameserver** für eine Domain wie `fa24b.de` zuständig sind
+- speichern \*keine\* A\-Records für `docs.fa24b.de`, sondern nur NS\-Records für `fa24b.de`
+- Beispiel: `.de`\-Server wie `a.nic.de`, `n.de.net`, `z.nic.de`
+
+Bei einer Anfrage nach `fa24b.de` liefern die `.de`\-TLD\-Server die zuständigen Cloudflare\-Nameserver zurück.
+
+### Autoritative Nameserver
+
+**Autoritative Nameserver** liefern die „endgültige Wahrheit“ für eine Zone:
+
+- sind für eine bestimmte Domain oder Subdomain zuständig, z\.B. `fa24b.de`
+- enthalten die eigentlichen DNS\-Einträge (A, AAAA, MX, TXT, CNAME, \...)
+- Beispiel für `fa24b.de`:
+    - `tina.ns.cloudflare.com`
+    - `curt.ns.cloudflare.com`
+
+Wenn der rekursive Resolver die autoritativen Nameserver von `fa24b.de` fragt, bekommt er z\.B. die A\-Records und CNAMEs, die für `fa24b.de` und `docs.fa24b.de` konfiguriert sind.
+
+### Caching-DNS-Server
+
+Viele rekursive Resolver arbeiten gleichzeitig als **Caching-DNS-Server**:
+
+- speichern Antworten für die Dauer der **TTL** (Time to Live)
+- entlasten Root\-, TLD\- und autoritative Server
+- sorgen dafür, dass häufig angefragte Domains wie `docs.fa24b.de` schneller beantwortet werden
+
+Beispiel: Wenn viele Nutzer kurz hintereinander `docs.fa24b.de` aufrufen, kommt nach der ersten Auflösung die Antwort für eine gewisse Zeit direkt aus dem Cache.
+
+### Lokaler DNS-Server (z.B. im Unternehmen oder Heimnetz)
+
+In Unternehmen oder komplexeren Heimnetzen gibt es oft eigene **lokale DNS-Server**:
+
+- können interne Namen auflösen (z\.B. `fileserver.fa24b.de`, `intranet.fa24b.de`)
+- leiten externe Anfragen (z\.B. `docs.fa24b.de`) an öffentliche rekursive Resolver weiter
+- ermöglichen zentrale Verwaltung und Protokollierung von DNS-Anfragen
+
+Im Heimnetz übernimmt diese Rolle häufig der Router, der Anfragen der Clients sammelt und an den Provider\-DNS weitergibt.
+
+### Zusammenspiel der Server-Typen
+
+Bei einer Anfrage nach `docs.fa24b.de` arbeiten mehrere Servertypen zusammen:
+
+1. Client fragt den **rekursiven Resolver** (z\.B. beim Provider oder im Router)
+2. Resolver fragt bei Bedarf **Root-Server** → erhält Verweis auf `.de`\-TLD\-Server
+3. Resolver fragt **.de TLD-Server** → erhält Verweis auf die autoritativen Nameserver von `fa24b.de`
+4. Resolver fragt **autoritativen Nameserver** von `fa24b.de` → erhält z\.B. CNAME/A\-Records für `docs.fa24b.de`
+5. Resolver speichert die Antwort im **Cache** und gibt sie an den Client zurück
+
+So wird die Last verteilt und die Auflösung bleibt trotz der verteilten Struktur performant und ausfallsicher.
+
 ## Der DNS-Auflösungsprozess
 
 Der DNS-Auflösungsprozess durchläuft mehrere Stufen, um einen Domainnamen in eine IP-Adresse aufzulösen. Dieser Prozess wird als **rekursive DNS-Abfrage** bezeichnet und folgt der hierarchischen Struktur des Domain Name Systems.
