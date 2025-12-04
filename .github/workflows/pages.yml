@@ -1,0 +1,65 @@
+name: Deploy Latest Version to GitHub Pages
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to deploy as latest'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy-latest:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Install Nix
+      uses: cachix/install-nix-action@v26
+      with:
+        github_access_token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Setup Cachix
+      uses: cachix/cachix-action@v14
+      with:
+        name: devenv
+    
+    - name: Install DevEnv
+      run: nix profile install nixpkgs#devenv
+    
+    - name: Configure git
+      run: |
+        git config user.name github-actions[bot]
+        git config user.email github-actions[bot]@users.noreply.github.com
+    
+    - name: Extract version from tag
+      if: github.event_name == 'push'
+      run: |
+        VERSION=${GITHUB_REF#refs/tags/v}
+        echo "VERSION=$VERSION" >> $GITHUB_ENV
+    
+    - name: Use manual version
+      if: github.event_name == 'workflow_dispatch'
+      run: |
+        echo "VERSION=${{ github.event.inputs.version }}" >> $GITHUB_ENV
+    
+    - name: Deploy version as latest
+      run: |
+        devenv shell mike deploy --push --update-aliases $VERSION latest
+        devenv shell mike set-default --push latest
