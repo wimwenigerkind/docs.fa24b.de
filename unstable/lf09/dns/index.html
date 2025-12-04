@@ -559,6 +559,39 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Der DNS-Auflösungsprozess">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ablauf-einer-dns-auflosung" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ablauf einer DNS-Auflösung
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#detaillierter-ablauf-am-beispiel-von-fa24bde" class="md-nav__link">
+    <span class="md-ellipsis">
+      Detaillierter Ablauf am Beispiel von fa24b.de
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rekursive-vs-iterative-abfrage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rekursive vs. Iterative Abfrage
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -837,6 +870,39 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Der DNS-Auflösungsprozess">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ablauf-einer-dns-auflosung" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ablauf einer DNS-Auflösung
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#detaillierter-ablauf-am-beispiel-von-fa24bde" class="md-nav__link">
+    <span class="md-ellipsis">
+      Detaillierter Ablauf am Beispiel von fa24b.de
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rekursive-vs-iterative-abfrage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rekursive vs. Iterative Abfrage
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1064,37 +1130,96 @@ Ohne DNS wäre es erforderlich, sich für jede Website die entsprechende IP-Adre
 <h2 id="aufbau-und-hierarchie-des-dns">Aufbau und Hierarchie des DNS</h2>
 <h2 id="dns-server-typen-und-ihre-aufgaben">DNS-Server-Typen und ihre Aufgaben</h2>
 <h2 id="der-dns-auflosungsprozess">Der DNS-Auflösungsprozess</h2>
+<p>Der DNS-Auflösungsprozess durchläuft mehrere Stufen, um einen Domainnamen in eine IP-Adresse aufzulösen. Dieser Prozess wird als <strong>rekursive DNS-Abfrage</strong> bezeichnet und folgt der hierarchischen Struktur des Domain Name Systems.</p>
+<h3 id="ablauf-einer-dns-auflosung">Ablauf einer DNS-Auflösung</h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>sequenceDiagram
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    participant Client
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    participant Resolver as DNS-Resolver&lt;br/&gt;(z.B. 1.1.1.1)
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    participant Root as Root-Server&lt;br/&gt;(i.root-servers.net)
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    participant TLD as .de TLD-Server&lt;br/&gt;(n.de.net)
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    participant Auth as Autoritativer Server&lt;br/&gt;(tina.ns.cloudflare.com)
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    Client-&gt;&gt;Resolver: DNS-Query: fa24b.de
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    Note over Resolver: Cache-Prüfung
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    Resolver-&gt;&gt;Root: Wo finde ich .de?
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    Root--&gt;&gt;Resolver: Verweis auf .de TLD-Server&lt;br/&gt;(a.nic.de, n.de.net, ...)
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    Resolver-&gt;&gt;TLD: Wo finde ich fa24b.de?
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    TLD--&gt;&gt;Resolver: Verweis auf Cloudflare NS&lt;br/&gt;(tina.ns.cloudflare.com,&lt;br/&gt;curt.ns.cloudflare.com)
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    Resolver-&gt;&gt;Auth: A-Record für fa24b.de?
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    Auth--&gt;&gt;Resolver: 104.21.63.26&lt;br/&gt;172.67.142.147
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>    Resolver--&gt;&gt;Client: IP-Adressen zurückgeben
+</span></code></pre></div>
+<h3 id="detaillierter-ablauf-am-beispiel-von-fa24bde">Detaillierter Ablauf am Beispiel von fa24b.de</h3>
+<p>Die folgende Abfrage zeigt den tatsächlichen Auflösungsprozess für <code>fa24b.de</code>:</p>
+<ol>
+<li><strong>Start beim Root-Server</strong></li>
+<li>Der DNS-Resolver (z.B. 1.1.1.1 von Cloudflare) beginnt bei einem der 13 Root-Server</li>
+<li>Root-Server: <code>a.root-servers.net</code> bis <code>m.root-servers.net</code></li>
+<li>
+<p>Antwort: Verweis auf die <code>.de</code> TLD-Server</p>
+</li>
+<li>
+<p><strong>Anfrage beim TLD-Server (.de)</strong></p>
+</li>
+<li>Kontaktierter Server: <code>n.de.net</code> (194.146.107.6)</li>
+<li>Weitere .de TLD-Server: <code>a.nic.de</code>, <code>f.nic.de</code>, <code>z.nic.de</code>, <code>l.de.net</code>, <code>s.de.net</code></li>
+<li>
+<p>Antwort: Verweis auf die autoritativen Nameserver von fa24b.de</p>
+</li>
+<li>
+<p><strong>Anfrage beim autoritativen Nameserver</strong></p>
+</li>
+<li>Kontaktierter Server: <code>tina.ns.cloudflare.com</code> (172.64.32.230)</li>
+<li>Alternativer Server: <code>curt.ns.cloudflare.com</code></li>
+<li>
+<p>Antwort: Die tatsächlichen IP-Adressen
+     <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>fa24b.de.    300    IN    A    104.21.63.26
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>fa24b.de.    300    IN    A    172.67.142.147
+</span></code></pre></div></p>
+</li>
+<li>
+<p><strong>Rückgabe an den Client</strong></p>
+</li>
+<li>Der Resolver gibt die IP-Adressen an den Client zurück</li>
+<li>Die Antwort wird für 300 Sekunden (TTL) gecacht</li>
+</ol>
+<h3 id="rekursive-vs-iterative-abfrage">Rekursive vs. Iterative Abfrage</h3>
+<ul>
+<li><strong>Rekursive Abfrage</strong>: Der DNS-Resolver übernimmt die gesamte Arbeit und liefert die finale Antwort</li>
+<li><strong>Iterative Abfrage</strong>: Der Resolver erhält Verweise und muss jeden Server selbst kontaktieren</li>
+</ul>
+<p>Der oben gezeigte Prozess ist eine rekursive Abfrage vom Client zum Resolver, kombiniert mit iterativen Abfragen zwischen Resolver und den DNS-Servern.</p>
 <h2 id="dns-record-typen-resource-records">DNS-Record-Typen (Resource Records)</h2>
 <p>DNS-Records (auch Resource Records genannt) sind Datensätze in der DNS-Datenbank, die verschiedene Informationen über eine Domain enthalten. Jeder Record-Typ erfüllt eine spezifische Aufgabe.</p>
 <h3 id="a-record-address-record">A-Record (Address Record)</h3>
 <p><strong>Funktion</strong>: Ordnet einem Domainnamen eine IPv4-Adresse zu.</p>
 <p><strong>Verwendung</strong>: Dies ist der wichtigste und am häufigsten verwendete Record-Typ für Webseiten und Dienste.</p>
 <p><strong>Beispiel</strong>:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docs.fa24b.de.    3600    IN    A    185.199.108.153
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>docs.fa24b.de.    3600    IN    A    185.199.109.153
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>docs.fa24b.de.    3600    IN    A    185.199.110.153
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>docs.fa24b.de.    3600    IN    A    185.199.111.153
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>docs.fa24b.de.    3600    IN    A    185.199.108.153
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>docs.fa24b.de.    3600    IN    A    185.199.109.153
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>docs.fa24b.de.    3600    IN    A    185.199.110.153
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>docs.fa24b.de.    3600    IN    A    185.199.111.153
 </span></code></pre></div></p>
 <p><strong>Praxisbeispiel</strong>: Die Domain <code>docs.fa24b.de</code> verfügt über mehrere A-Records, die auf verschiedene GitHub Pages Server zeigen. Dies ermöglicht Lastverteilung und erhöht die Verfügbarkeit der Website.</p>
 <h3 id="aaaa-record-ipv6-address-record">AAAA-Record (IPv6 Address Record)</h3>
 <p><strong>Funktion</strong>: Ordnet einem Domainnamen eine IPv6-Adresse zu.</p>
 <p><strong>Verwendung</strong>: Funktioniert wie A-Records, jedoch für IPv6-Netzwerke.</p>
 <p><strong>Beispiel</strong>:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>docs.fa24b.de.    3600    IN    AAAA    2606:50c0:8000::153
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>docs.fa24b.de.    3600    IN    AAAA    2606:50c0:8001::153
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>docs.fa24b.de.    3600    IN    AAAA    2606:50c0:8002::153
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>docs.fa24b.de.    3600    IN    AAAA    2606:50c0:8003::153
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>docs.fa24b.de.    3600    IN    AAAA    2606:50c0:8000::153
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>docs.fa24b.de.    3600    IN    AAAA    2606:50c0:8001::153
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>docs.fa24b.de.    3600    IN    AAAA    2606:50c0:8002::153
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>docs.fa24b.de.    3600    IN    AAAA    2606:50c0:8003::153
 </span></code></pre></div></p>
 <p><strong>Praxisbeispiel</strong>: Die Domain <code>docs.fa24b.de</code> verfügt über mehrere AAAA-Records für IPv6-Konnektivität. Moderne Geräte und Netzwerke nutzen zunehmend IPv6, und diese Records stellen sicher, dass die Website auch über IPv6 erreichbar ist.</p>
 <h3 id="cname-record-canonical-name">CNAME-Record (Canonical Name)</h3>
 <p><strong>Funktion</strong>: Erstellt einen Alias für einen anderen Domainnamen (Weiterleitung auf einen anderen Namen).</p>
 <p><strong>Verwendung</strong>: Wenn mehrere Namen auf dasselbe Ziel zeigen sollen.</p>
 <p><strong>Beispiel 1 - Website-Hosting</strong>:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>docs.fa24b.de.    300    IN    CNAME    wimwenigerkind.github.io.
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>docs.fa24b.de.    300    IN    CNAME    wimwenigerkind.github.io.
 </span></code></pre></div></p>
 <p><strong>Beispiel 2 - DKIM E-Mail-Signierung</strong>:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>selector1._domainkey.fa24b.de.    3600    IN    CNAME    selector1-fa24b-de._domainkey.wimdevgroup.w-v1.dkim.mail.microsoft.
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>selector2._domainkey.fa24b.de.    3600    IN    CNAME    selector2-fa24b-de._domainkey.wimdevgroup.w-v1.dkim.mail.microsoft.
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>selector1._domainkey.fa24b.de.    3600    IN    CNAME    selector1-fa24b-de._domainkey.wimdevgroup.w-v1.dkim.mail.microsoft.
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>selector2._domainkey.fa24b.de.    3600    IN    CNAME    selector2-fa24b-de._domainkey.wimdevgroup.w-v1.dkim.mail.microsoft.
 </span></code></pre></div></p>
 <p><strong>Praxisbeispiel 1</strong>: Die Domain <code>docs.fa24b.de</code> ist ein CNAME-Record, der auf <code>wimwenigerkind.github.io</code> zeigt. Wenn eine Anfrage für <code>docs.fa24b.de</code> eingeht, wird sie zu <code>wimwenigerkind.github.io</code> aufgelöst, welches dann zu den tatsächlichen GitHub Pages IP-Adressen aufgelöst wird. Dies ermöglicht eine flexible Verwaltung, da nur die IP-Adressen von <code>wimwenigerkind.github.io</code> aktualisiert werden müssen, ohne den CNAME zu ändern.</p>
 <p><strong>Praxisbeispiel 2</strong>: Die DKIM-Selektoren für <code>fa24b.de</code> werden über CNAME-Records auf die Microsoft-DKIM-Infrastruktur delegiert. Dies ermöglicht Microsoft, die DKIM-Schlüssel zentral zu verwalten und zu rotieren, ohne dass Änderungen in der Domain-Konfiguration erforderlich sind.</p>
@@ -1103,7 +1228,7 @@ Ohne DNS wäre es erforderlich, sich für jede Website die entsprechende IP-Adre
 <p><strong>Funktion</strong>: Gibt an, welcher Mailserver für den E-Mail-Empfang einer Domain zuständig ist.</p>
 <p><strong>Verwendung</strong>: Für E-Mail-Routing und -Zustellung.</p>
 <p><strong>Beispiel</strong>:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>fa24b.de.    3600    IN    MX    0    fa24b-de.mail.protection.outlook.com.
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>fa24b.de.    3600    IN    MX    0    fa24b-de.mail.protection.outlook.com.
 </span></code></pre></div></p>
 <p><strong>Praxisbeispiel</strong>: E-Mails an <code>user@fa24b.de</code> werden an den Microsoft Exchange Online Protection Server <code>fa24b-de.mail.protection.outlook.com</code> zugestellt. Die Priorität 0 ist die höchste Priorität. Bei mehreren MX-Records würde der Server mit der niedrigsten Prioritätszahl bevorzugt.</p>
 <p>Die Zahl vor dem Servernamen gibt die Priorität an (niedriger = höher priorisiert).</p>
@@ -1112,47 +1237,47 @@ Ohne DNS wäre es erforderlich, sich für jede Website die entsprechende IP-Adre
 <p><strong>Verwendung</strong>: Für verschiedene Zwecke wie SPF, DKIM, Domain-Verifizierung, etc.</p>
 <p><strong>Beispiele</strong>:</p>
 <p><strong>SPF (Sender Policy Framework)</strong> - Verhindert E-Mail-Spoofing:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>fa24b.de.    3600    IN    TXT    &quot;v=spf1 include:spf.protection.outlook.com ~all&quot;
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>fa24b.de.    3600    IN    TXT    &quot;v=spf1 include:spf.protection.outlook.com ~all&quot;
 </span></code></pre></div></p>
 <p><strong>Domain-Verifizierung</strong> - Nachweis der Domain-Inhaberschaft (Microsoft):
-<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>fa24b.de.    3600    IN    TXT    &quot;MS=ms37803661&quot;
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>fa24b.de.    3600    IN    TXT    &quot;MS=ms37803661&quot;
 </span></code></pre></div></p>
 <p><strong>DKIM</strong> - E-Mail-Authentifizierung:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>default._domainkey.fa24b.de.    IN    TXT    &quot;v=DKIM1; k=rsa; p=MIGfMA0...&quot;
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>default._domainkey.fa24b.de.    IN    TXT    &quot;v=DKIM1; k=rsa; p=MIGfMA0...&quot;
 </span></code></pre></div></p>
 <p><strong>Praxisbeispiel</strong>: Die Domain <code>fa24b.de</code> nutzt Microsoft Exchange Online Protection. Der SPF-Record <code>v=spf1 include:spf.protection.outlook.com ~all</code> erlaubt den Microsoft-Servern, E-Mails im Namen der Domain zu versenden. Der Microsoft-Verifizierungsrecord <code>MS=ms37803661</code> bestätigt die Domain-Inhaberschaft. Die DKIM-Signierung erfolgt über CNAME-Delegation an die Microsoft-Infrastruktur (siehe CNAME-Record-Beispiele).</p>
 <h3 id="ns-record-name-server">NS-Record (Name Server)</h3>
 <p><strong>Funktion</strong>: Gibt an, welche DNS-Server für eine Domain oder Subdomain zuständig sind.</p>
 <p><strong>Verwendung</strong>: Delegation der DNS-Verantwortung an bestimmte Nameserver.</p>
 <p><strong>Beispiel</strong>:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>fa24b.de.    86400    IN    NS    tina.ns.cloudflare.com.
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>fa24b.de.    86400    IN    NS    curt.ns.cloudflare.com.
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>fa24b.de.    86400    IN    NS    tina.ns.cloudflare.com.
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>fa24b.de.    86400    IN    NS    curt.ns.cloudflare.com.
 </span></code></pre></div></p>
 <p><strong>Praxisbeispiel</strong>: Die Domain <code>fa24b.de</code> wird von den Cloudflare-Nameservern <code>tina.ns.cloudflare.com</code> und <code>curt.ns.cloudflare.com</code> verwaltet. Diese sind für die Auflösung aller DNS-Anfragen der Domain verantwortlich.</p>
 <h3 id="ptr-record-pointer-record">PTR-Record (Pointer Record)</h3>
 <p><strong>Funktion</strong>: Reverse DNS-Lookup - ordnet einer IP-Adresse einen Domainnamen zu (umgekehrte Richtung).</p>
 <p><strong>Verwendung</strong>: Hauptsächlich für E-Mail-Server und Netzwerk-Troubleshooting.</p>
 <p><strong>Beispiel</strong>:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>153.108.199.185.in-addr.arpa.    3600    IN    PTR    cdn-185-199-108-153.github.com.
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>153.108.199.185.in-addr.arpa.    3600    IN    PTR    cdn-185-199-108-153.github.com.
 </span></code></pre></div></p>
 <p><strong>Praxisbeispiel</strong>: Der PTR-Record für die IP-Adresse <code>185.199.108.153</code> zeigt auf <code>cdn-185-199-108-153.github.com</code>. E-Mail-Server prüfen häufig PTR-Records, um die Legitimität der sendenden IP-Adresse zu verifizieren und Spam zu reduzieren.</p>
 <h3 id="soa-record-start-of-authority">SOA-Record (Start of Authority)</h3>
 <p><strong>Funktion</strong>: Enthält administrative Informationen über die DNS-Zone.</p>
 <p><strong>Verwendung</strong>: Definiert den primären Nameserver und verschiedene Timing-Parameter für die Zone.</p>
 <p><strong>Beispiel</strong>:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>fa24b.de.    1800    IN    SOA    curt.ns.cloudflare.com. dns.cloudflare.com. (
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>                                   2390319800  ; Serial (Versionsnummer)
-</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>                                   10000       ; Refresh (ca. 2,7 Stunden)
-</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>                                   2400        ; Retry (40 Minuten)
-</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>                                   604800      ; Expire (7 Tage)
-</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>                                   1800 )      ; Minimum TTL (30 Minuten)
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>fa24b.de.    1800    IN    SOA    curt.ns.cloudflare.com. dns.cloudflare.com. (
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>                                   2390319800  ; Serial (Versionsnummer)
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>                                   10000       ; Refresh (ca. 2,7 Stunden)
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>                                   2400        ; Retry (40 Minuten)
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>                                   604800      ; Expire (7 Tage)
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>                                   1800 )      ; Minimum TTL (30 Minuten)
 </span></code></pre></div></p>
 <p><strong>Praxisbeispiel</strong>: Der SOA-Record für <code>fa24b.de</code> definiert <code>curt.ns.cloudflare.com</code> als primären Nameserver mit <code>dns.cloudflare.com</code> als Kontakt-E-Mail. Die Serial-Nummer wird bei jeder Änderung erhöht, um sekundären DNS-Servern zu signalisieren, dass Updates verfügbar sind.</p>
 <h3 id="srv-record-service-record">SRV-Record (Service Record)</h3>
 <p><strong>Funktion</strong>: Gibt Informationen über verfügbare Dienste an (Server, Port, Priorität, Gewichtung).</p>
 <p><strong>Verwendung</strong>: Für spezielle Dienste wie VoIP, Instant Messaging, LDAP, etc.</p>
 <p><strong>Beispiel</strong>:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>_sip._tcp.fa24b.de.    3600    IN    SRV    10    60    5060    sipserver.fa24b.de.
+<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>_sip._tcp.fa24b.de.    3600    IN    SRV    10    60    5060    sipserver.fa24b.de.
 </span></code></pre></div></p>
 <p>Format: <code>Priorität Gewichtung Port Zielserver</code></p>
 <p><strong>Praxisbeispiel</strong>: Microsoft Teams oder Skype for Business nutzen SRV-Records, um automatisch die richtigen Server und Ports für die Kommunikation zu finden.</p>
@@ -1160,9 +1285,9 @@ Ohne DNS wäre es erforderlich, sich für jede Website die entsprechende IP-Adre
 <p><strong>Funktion</strong>: Gibt an, welche Zertifizierungsstellen (CAs) SSL/TLS-Zertifikate für die Domain ausstellen dürfen.</p>
 <p><strong>Verwendung</strong>: Erhöhte Sicherheit durch Kontrolle der Zertifikatsausstellung.</p>
 <p><strong>Beispiel</strong>:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>fa24b.de.    3600    IN    CAA    0    issue    &quot;letsencrypt.org&quot;
-</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>fa24b.de.    3600    IN    CAA    0    issuewild &quot;letsencrypt.org&quot;
-</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>fa24b.de.    3600    IN    CAA    0    iodef    &quot;mailto:security@fa24b.de&quot;
+<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>fa24b.de.    3600    IN    CAA    0    issue    &quot;letsencrypt.org&quot;
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>fa24b.de.    3600    IN    CAA    0    issuewild &quot;letsencrypt.org&quot;
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>fa24b.de.    3600    IN    CAA    0    iodef    &quot;mailto:security@fa24b.de&quot;
 </span></code></pre></div></p>
 <p><strong>Praxisbeispiel</strong>: Ausschließlich Let's Encrypt ist berechtigt, Zertifikate für <code>fa24b.de</code> auszustellen. Bei unautorisierten Ausstellungsversuchen erfolgt eine Benachrichtigung per E-Mail an <code>security@fa24b.de</code>.</p>
 <h3 id="zusammenfassung-der-wichtigsten-record-typen">Zusammenfassung der wichtigsten Record-Typen</h3>
@@ -1254,7 +1379,7 @@ Ohne DNS wäre es erforderlich, sich für jede Website die entsprechende IP-Adre
     <span class="md-icon" title="Letztes Update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="4. Dezember 2025 12:28:25 UTC">4. Dezember 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="4. Dezember 2025 13:42:39 UTC">4. Dezember 2025</span>
   </span>
 
     
