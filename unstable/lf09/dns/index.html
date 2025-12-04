@@ -52,6 +52,8 @@
     
       
 
+<!-- Umami Analytics -->
+<script defer src="https://umami.wimwenigerkind.com/script.js" data-website-id="0ef419fc-0931-4db3-9c6b-743aedf3aa5f"></script>
     
     
     
@@ -1480,43 +1482,43 @@
   
 
 
-<h1 id="dns">DNS</h1>
-<h2 id="was-ist-dns-und-warum-brauchen-wir-es">Was ist DNS und warum brauchen wir es?</h2>
-<p>Das <strong>Domain Name System (DNS)</strong> funktioniert wie ein Telefonbuch für Netzwerke. Seine Hauptfunktion ist die Umwandlung
+<h1 id="dns"><abbr title="Domain Name System">DNS</abbr></h1>
+<h2 id="was-ist-dns-und-warum-brauchen-wir-es">Was ist <abbr title="Domain Name System">DNS</abbr> und warum brauchen wir es?</h2>
+<p>Das <strong>Domain Name System (<abbr title="Domain Name System">DNS</abbr>)</strong> funktioniert wie ein Telefonbuch für Netzwerke. Seine Hauptfunktion ist die Umwandlung
 von menschenlesbaren Domainnamen (wie <a href="https://docs.fa24b.de">docs.fa24b.de</a>) in maschinenlesbare
 IP-Adressen (wie 185.199.108.153). So können Webbrowser, E-Mail-Clients und andere Netzwerkdienste die
 richtigen Server erreichen – sowohl im Internet als auch in lokalen Netzwerken.</p>
-<h3 id="warum-ist-dns-notwendig">Warum ist DNS notwendig?</h3>
+<h3 id="warum-ist-dns-notwendig">Warum ist <abbr title="Domain Name System">DNS</abbr> notwendig?</h3>
 <p>Computer kommunizieren über IP-Adressen miteinander. Für Menschen sind diese Zahlenfolgen jedoch schwer zu merken und
 unpraktisch.
-Ohne DNS wäre es erforderlich, sich für jede Website die entsprechende IP-Adresse zu merken:</p>
+Ohne <abbr title="Domain Name System">DNS</abbr> wäre es erforderlich, sich für jede Website die entsprechende IP-Adresse zu merken:</p>
 <ul>
-<li><strong>Mit DNS</strong>: Es wird <code>www.google.com</code> eingegeben</li>
-<li><strong>Ohne DNS</strong>: Es müsste <code>142.250.185.46</code> eingegeben werden</li>
+<li><strong>Mit <abbr title="Domain Name System">DNS</abbr></strong>: Es wird <code>www.google.com</code> eingegeben</li>
+<li><strong>Ohne <abbr title="Domain Name System">DNS</abbr></strong>: Es müsste <code>142.250.185.46</code> eingegeben werden</li>
 </ul>
-<p>DNS löst dieses Problem, indem es als Vermittler zwischen Menschen und Maschinen fungiert.</p>
-<h3 id="die-hauptaufgaben-des-dns">Die Hauptaufgaben des DNS</h3>
+<p><abbr title="Domain Name System">DNS</abbr> löst dieses Problem, indem es als Vermittler zwischen Menschen und Maschinen fungiert.</p>
+<h3 id="die-hauptaufgaben-des-dns">Die Hauptaufgaben des <abbr title="Domain Name System">DNS</abbr></h3>
 <ol>
 <li><strong>Namensauflösung</strong>: Übersetzung von Domainnamen in IP-Adressen (Forward Lookup)</li>
 <li><strong>Reverse Lookup</strong>: Übersetzung von IP-Adressen zurück in Domainnamen</li>
 <li><strong>Lastverteilung</strong>: Verteilung von Anfragen auf mehrere Server</li>
-<li><strong>Redundanz</strong>: Bereitstellung von Ausfallsicherheit durch mehrere DNS-Server</li>
-<li><strong>E-Mail-Routing</strong>: Bestimmung zuständiger Mailserver über MX-Records</li>
+<li><strong>Redundanz</strong>: Bereitstellung von Ausfallsicherheit durch mehrere <abbr title="Domain Name System">DNS</abbr>-Server</li>
+<li><strong>E-Mail-Routing</strong>: Bestimmung zuständiger Mailserver über <abbr title="Mail Exchange">MX</abbr>-Records</li>
 </ol>
-<h3 id="beispiel-einer-dns-anfrage">Beispiel einer DNS-Anfrage</h3>
+<h3 id="beispiel-einer-dns-anfrage">Beispiel einer <abbr title="Domain Name System">DNS</abbr>-Anfrage</h3>
 <p>Bei der Eingabe von <code>docs.fa24b.de</code> in einem Browser läuft folgender Prozess ab:</p>
 <ol>
-<li>Der Browser fragt den lokalen DNS-Resolver nach der IP-Adresse</li>
-<li>Falls nicht im Cache vorhanden, werden verschiedene DNS-Server abgefragt</li>
+<li>Der Browser fragt den lokalen <abbr title="Domain Name System">DNS</abbr>-Resolver nach der IP-Adresse</li>
+<li>Falls nicht im Cache vorhanden, werden verschiedene <abbr title="Domain Name System">DNS</abbr>-Server abgefragt</li>
 <li>Die IP-Adresse <code>185.199.108.153</code> wird zurückgeliefert</li>
 <li>Der Browser kann nun eine Verbindung zum Webserver herstellen</li>
 </ol>
 <p>Dieser gesamte Prozess dauert nur wenige Millisekunden und läuft vollautomatisch im Hintergrund ab.</p>
-<h2 id="aufbau-und-hierarchie-des-dns">Aufbau und Hierarchie des DNS</h2>
-<p>Das DNS ist hierarchisch strukturiert, ähnlich einem umgekehrten Baum. Die Hierarchie besteht aus mehreren Ebenen, wobei
+<h2 id="aufbau-und-hierarchie-des-dns">Aufbau und Hierarchie des <abbr title="Domain Name System">DNS</abbr></h2>
+<p>Das <abbr title="Domain Name System">DNS</abbr> ist hierarchisch strukturiert, ähnlich einem umgekehrten Baum. Die Hierarchie besteht aus mehreren Ebenen, wobei
 jede Ebene für einen Teil des Domainnamens verantwortlich ist. Diese Struktur ermöglicht eine
 skalierbare, ausfallsichere und dezentrale Verwaltung von Domainnamen.</p>
-<h3 id="die-dns-hierarchieebenen">Die DNS-Hierarchieebenen</h3>
+<h3 id="die-dns-hierarchieebenen">Die <abbr title="Domain Name System">DNS</abbr>-Hierarchieebenen</h3>
 <pre class="mermaid"><code>graph TD
     Root[". (Root)"]
     Root --&gt; DE[".de"]
@@ -1540,22 +1542,22 @@ skalierbare, ausfallsichere und dezentrale Verwaltung von Domainnamen.</p>
 <p><strong>Die vier Ebenen im Detail:</strong></p>
 <ol>
 <li><strong>Root-Ebene (.)</strong>: Die oberste Ebene, verwaltet von 13 Root-Server-Systemen</li>
-<li><strong>Top-Level-Domain (TLD)</strong>: Länder- oder themenbezogene Endungen (<code>.de</code>, <code>.com</code>, <code>.org</code>)</li>
+<li><strong>Top-Level-Domain (<abbr title="Top-Level-Domain">TLD</abbr>)</strong>: Länder- oder themenbezogene Endungen (<code>.de</code>, <code>.com</code>, <code>.org</code>)</li>
 <li><strong>Second-Level-Domain</strong>: Der registrierte Domainname (z.B. <code>fa24b</code>)</li>
 <li><strong>Subdomain</strong>: Optionale Unterteilungen unterhalb der Domain (z.B. <code>docs</code>, <code>mail</code>)</li>
 </ol>
-<p>Jede Ebene kann von unterschiedlichen Organisationen oder DNS-Registrars verwaltet werden, was eine dezentrale
+<p>Jede Ebene kann von unterschiedlichen Organisationen oder <abbr title="Domain Name System">DNS</abbr>-Registrars verwaltet werden, was eine dezentrale
 Verwaltung ermöglicht.</p>
 <h3 id="root-ebene">Root-Ebene</h3>
 <p>An der Spitze der Hierarchie steht die Root-Zone (<code>.</code>), die von 13 Root-Server-Systemen betrieben wird.</p>
 <h3 id="top-level-domains-tlds">Top-Level-Domains (TLDs)</h3>
 <p>Unterhalb der Root-Zone befinden sich die Top-Level-Domains wie <code>.com</code>, <code>.org</code>, <code>.net</code>, <code>.de</code>, <code>.fr</code> oder <code>.ch</code>.</p>
 <h3 id="second-level-domains">Second-Level-Domains</h3>
-<p>Die <strong>Second-Level-Domain</strong> ist der Teil direkt unterhalb der TLD:</p>
+<p>Die <strong>Second-Level-Domain</strong> ist der Teil direkt unterhalb der <abbr title="Top-Level-Domain">TLD</abbr>:</p>
 <ul>
 <li><code>fa24b</code> in <code>fa24b.de</code></li>
 </ul>
-<p>In diesem Bereich verwalten typischerweise Firmen, Organisationen oder Provider ihren eigenen DNS-Namensraum.</p>
+<p>In diesem Bereich verwalten typischerweise Firmen, Organisationen oder Provider ihren eigenen <abbr title="Domain Name System">DNS</abbr>-Namensraum.</p>
 <h3 id="subdomains-und-delegation">Subdomains und Delegation</h3>
 <p>Unterhalb der Second-Level-Domain können beliebig viele <strong>Subdomains</strong> angelegt werden:</p>
 <ul>
@@ -1569,14 +1571,14 @@ Verwaltung ermöglicht.</p>
 <li><code>dev.api.docs.fa24b.de</code> - Entwicklungs-API (drei Ebenen tief)</li>
 <li><code>server1.datacenter.berlin.firma.de</code> - Mehrstufige Hierarchie für Organisation</li>
 </ul>
-<p>Es gibt keine technische Begrenzung der Tiefe, jedoch ist die Gesamtlänge eines vollständigen Domainnamens (FQDN) auf
+<p>Es gibt keine technische Begrenzung der Tiefe, jedoch ist die Gesamtlänge eines vollständigen Domainnamens (<abbr title="Fully Qualified Domain Name">FQDN</abbr>) auf
 253 Zeichen begrenzt, wobei jedes Label (Teil zwischen den Punkten) maximal 63 Zeichen lang sein darf.</p>
 <p><strong>Delegation</strong>: Subdomains können wiederum zu <strong>eigenen Zonen</strong> mit eigenen autoritativen Nameservern werden. Dies nennt
 man <strong>Delegation</strong>. So lässt sich die Verwaltung auf verschiedene Abteilungen oder Standorte aufteilen.</p>
 <h3 id="zonen-und-verantwortlichkeiten">Zonen und Verantwortlichkeiten</h3>
-<p>Wichtiger Begriff im DNS ist die <strong>Zone</strong>:</p>
+<p>Wichtiger Begriff im <abbr title="Domain Name System">DNS</abbr> ist die <strong>Zone</strong>:</p>
 <ul>
-<li>eine Zone ist der Teil der DNS-Hierarchie, der von einem Satz autoritativer Nameserver verwaltet wird</li>
+<li>eine Zone ist der Teil der <abbr title="Domain Name System">DNS</abbr>-Hierarchie, der von einem Satz autoritativer Nameserver verwaltet wird</li>
 <li>eine Domain kann mehrere Zonen enthalten, wenn Teilbereiche delegiert werden</li>
 </ul>
 <p>Beispiel:</p>
@@ -1585,27 +1587,27 @@ man <strong>Delegation</strong>. So lässt sich die Verwaltung auf verschiedene 
 <li><code>it.schule.de</code> wird an die IT-Abteilung delegiert und von deren eigenen Nameservern verwaltet</li>
 </ul>
 <p>Dadurch entsteht eine <strong>dezentrale</strong>, aber logisch klar strukturierte Verwaltung des Namensraums.</p>
-<h2 id="dns-server-typen-und-ihre-aufgaben">DNS-Server-Typen und ihre Aufgaben</h2>
-<p>Im Domain Name System übernehmen unterschiedliche DNS-Server spezielle Aufgaben. Zusammengenommen sorgen sie dafür, dass
+<h2 id="dns-server-typen-und-ihre-aufgaben"><abbr title="Domain Name System">DNS</abbr>-Server-Typen und ihre Aufgaben</h2>
+<p>Im Domain Name System übernehmen unterschiedliche <abbr title="Domain Name System">DNS</abbr>-Server spezielle Aufgaben. Zusammengenommen sorgen sie dafür, dass
 Domains wie <code>docs.fa24b.de</code> zuverlässig und schnell aufgelöst werden können.</p>
-<h3 id="rekursiver-resolver-dns-resolver">Rekursiver Resolver (DNS-Resolver)</h3>
+<h3 id="rekursiver-resolver-dns-resolver">Rekursiver Resolver (<abbr title="Domain Name System">DNS</abbr>-Resolver)</h3>
 <p>Der <strong>rekursive Resolver</strong> ist meist der erste Ansprechpartner für Clients:</p>
 <ul>
-<li>läuft oft beim Internetprovider, in Unternehmen oder auf öffentlichen DNS-Diensten z.B. <a href="https://1.1.1.1">1.1.1.1</a>(
+<li>läuft oft beim Internetprovider, in Unternehmen oder auf öffentlichen <abbr title="Domain Name System">DNS</abbr>-Diensten z.B. <a href="https://1.1.1.1">1.1.1.1</a>(
   Cloudflare), <a href="https://8.8.8.8">8.8.8.8</a>(Google)</li>
 <li>nimmt Anfragen von Clients entgegen (z.B. für <code>docs.fa24b.de</code>)</li>
-<li>fragt bei Bedarf weitere DNS-Server (Root, TLD, autoritative Server) ab</li>
+<li>fragt bei Bedarf weitere <abbr title="Domain Name System">DNS</abbr>-Server (Root, <abbr title="Top-Level-Domain">TLD</abbr>, autoritative Server) ab</li>
 <li>speichert Antworten im <strong>Cache</strong>, um zukünftige Anfragen schneller zu beantworten</li>
 </ul>
 <p>Der rekursive Resolver wird typischerweise im Router oder in den Netzwerkeinstellungen des Clients konfiguriert.</p>
 <h3 id="root-server">Root-Server</h3>
-<p>Die <strong>Root-Server</strong> stehen an der Spitze der DNS-Hierarchie:</p>
+<p>Die <strong>Root-Server</strong> stehen an der Spitze der <abbr title="Domain Name System">DNS</abbr>-Hierarchie:</p>
 <ul>
 <li>kennen keine einzelnen Domains wie <code>fa24b.de</code></li>
-<li>liefern nur Hinweise, welche <strong>TLD-Server</strong> für eine Endung wie <code>.de</code> zuständig sind</li>
+<li>liefern nur Hinweise, welche <strong><abbr title="Top-Level-Domain">TLD</abbr>-Server</strong> für eine Endung wie <code>.de</code> zuständig sind</li>
 <li>sind weltweit verteilt und in 13 logische Servergruppen eingeteilt (<code>a.root-servers.net</code> bis <code>m.root-servers.net</code>)</li>
 </ul>
-<p>Die Root-Server bilden die Grundlage für die gesamte DNS-Infrastruktur und ermöglichen die Auflösung aller Domainnamen
+<p>Die Root-Server bilden die Grundlage für die gesamte <abbr title="Domain Name System">DNS</abbr>-Infrastruktur und ermöglichen die Auflösung aller Domainnamen
 weltweit.</p>
 <h4 id="die-13-root-server-systeme">Die 13 Root-Server-Systeme</h4>
 <p>Es gibt weltweit <a href="https://root-servers.org/">13 Root-Server-Systeme</a>, die durch Buchstaben von A bis M identifiziert
@@ -1720,19 +1722,19 @@ verteilt. Dadurch gibt es tatsächlich über 1.000 physische Root-Server-Instanz
 <ul>
 <li><a href="https://www.iana.org/domains/root/servers">IANA Root Servers</a> - Offizielle Liste der Root-Server</li>
 <li><a href="https://root-servers.org/">Root Server Technical Operations</a> - Technische Details und Statistiken</li>
-<li><a href="https://www.internic.net/domain/root.zone">DNS Root Zone</a> - Aktuelle Root-Zone-Datei</li>
+<li><a href="https://www.internic.net/domain/root.zone"><abbr title="Domain Name System">DNS</abbr> Root Zone</a> - Aktuelle Root-Zone-Datei</li>
 <li><a href="https://www.verisign.com/en_US/innovation/dnssec/root-server-map/index.xhtml">Verisign Root Server Map</a> -
   Geografische Verteilung</li>
 </ul>
-<h3 id="tld-server-top-level-domain-server">TLD-Server (Top-Level-Domain-Server)</h3>
-<p>Die <strong>TLD-Server</strong> sind für eine bestimmte Domain-Endung zuständig, z.B. <code>.de</code>:</p>
+<h3 id="tld-server-top-level-domain-server"><abbr title="Top-Level-Domain">TLD</abbr>-Server (Top-Level-Domain-Server)</h3>
+<p>Die <strong><abbr title="Top-Level-Domain">TLD</abbr>-Server</strong> sind für eine bestimmte Domain-Endung zuständig, z.B. <code>.de</code>:</p>
 <ul>
 <li>verwalten Informationen darüber, welche <strong>autoritativen Nameserver</strong> für eine Domain wie <code>fa24b.de</code> zuständig sind</li>
-<li>speichern <em>keine</em> A-Records für <code>docs.fa24b.de</code>, sondern nur NS-Records für <code>fa24b.de</code></li>
+<li>speichern <em>keine</em> A-Records für <code>docs.fa24b.de</code>, sondern nur <abbr title="Name Server">NS</abbr>-Records für <code>fa24b.de</code></li>
 <li>Beispiel: <code>.de</code>-Server wie <code>a.nic.de</code>, <code>n.de.net</code>, <code>z.nic.de</code></li>
 </ul>
-<p>Bei einer Anfrage nach <code>fa24b.de</code> liefern die <code>.de</code>-TLD-Server die zuständigen Cloudflare-Nameserver zurück.</p>
-<p><strong>TLD-Kategorien:</strong></p>
+<p>Bei einer Anfrage nach <code>fa24b.de</code> liefern die <code>.de</code>-<abbr title="Top-Level-Domain">TLD</abbr>-Server die zuständigen Cloudflare-Nameserver zurück.</p>
+<p><strong><abbr title="Top-Level-Domain">TLD</abbr>-Kategorien:</strong></p>
 <ul>
 <li><strong>Generische TLDs (gTLDs)</strong>: z.B. <code>.com</code>, <code>.org</code>, <code>.net</code></li>
 <li><strong>Länderspezifische TLDs (ccTLDs)</strong>: z.B. <code>.de</code>, <code>.fr</code>, <code>.ch</code></li>
@@ -1741,7 +1743,7 @@ verteilt. Dadurch gibt es tatsächlich über 1.000 physische Root-Server-Instanz
 <p><strong>Autoritative Nameserver</strong> liefern die „endgültige Wahrheit" für eine Zone:</p>
 <ul>
 <li>sind für eine bestimmte Domain oder Subdomain zuständig, z.B. <code>fa24b.de</code></li>
-<li>enthalten die eigentlichen DNS-Einträge (A, AAAA, MX, TXT, CNAME, ...)</li>
+<li>enthalten die eigentlichen <abbr title="Domain Name System">DNS</abbr>-Einträge (A, AAAA, <abbr title="Mail Exchange">MX</abbr>, TXT, CNAME, ...)</li>
 <li>Beispiel für <code>fa24b.de</code>:<ul>
 <li><code>tina.ns.cloudflare.com</code></li>
 <li><code>curt.ns.cloudflare.com</code></li>
@@ -1750,28 +1752,28 @@ verteilt. Dadurch gibt es tatsächlich über 1.000 physische Root-Server-Instanz
 </ul>
 <p>Wenn der rekursive Resolver die autoritativen Nameserver von <code>fa24b.de</code> fragt, bekommt er z.B. die A-Records und CNAMEs,
 die für <code>fa24b.de</code> und <code>docs.fa24b.de</code> konfiguriert sind.</p>
-<h3 id="caching-dns-server">Caching-DNS-Server</h3>
-<p>Viele rekursive Resolver arbeiten gleichzeitig als <strong>Caching-DNS-Server</strong>:</p>
+<h3 id="caching-dns-server">Caching-<abbr title="Domain Name System">DNS</abbr>-Server</h3>
+<p>Viele rekursive Resolver arbeiten gleichzeitig als <strong>Caching-<abbr title="Domain Name System">DNS</abbr>-Server</strong>:</p>
 <ul>
-<li>speichern Antworten für die Dauer der <strong>TTL</strong> (Time to Live)</li>
-<li>entlasten Root-, TLD- und autoritative Server</li>
+<li>speichern Antworten für die Dauer der <strong><abbr title="Time to Live">TTL</abbr></strong> (Time to Live)</li>
+<li>entlasten Root-, <abbr title="Top-Level-Domain">TLD</abbr>- und autoritative Server</li>
 <li>sorgen dafür, dass häufig angefragte Domains wie <code>docs.fa24b.de</code> schneller beantwortet werden</li>
 </ul>
 <p>Beispiel: Wenn viele Nutzer kurz hintereinander <code>docs.fa24b.de</code> aufrufen, kommt nach der ersten Auflösung die Antwort
 für eine gewisse Zeit direkt aus dem Cache.</p>
-<h3 id="lokaler-dns-server-zb-im-unternehmen-oder-heimnetz">Lokaler DNS-Server (z.B. im Unternehmen oder Heimnetz)</h3>
-<p>In Unternehmen oder komplexeren Heimnetzen gibt es oft eigene <strong>lokale DNS-Server</strong>:</p>
+<h3 id="lokaler-dns-server-zb-im-unternehmen-oder-heimnetz">Lokaler <abbr title="Domain Name System">DNS</abbr>-Server (z.B. im Unternehmen oder Heimnetz)</h3>
+<p>In Unternehmen oder komplexeren Heimnetzen gibt es oft eigene <strong>lokale <abbr title="Domain Name System">DNS</abbr>-Server</strong>:</p>
 <ul>
 <li>können interne Namen auflösen (z.B. <code>fileserver.fa24b.de</code>, <code>intranet.fa24b.de</code>)</li>
 <li>leiten externe Anfragen (z.B. <code>docs.fa24b.de</code>) an öffentliche rekursive Resolver weiter</li>
-<li>ermöglichen zentrale Verwaltung und Protokollierung von DNS-Anfragen</li>
+<li>ermöglichen zentrale Verwaltung und Protokollierung von <abbr title="Domain Name System">DNS</abbr>-Anfragen</li>
 </ul>
-<p>Im Heimnetz übernimmt diese Rolle häufig der Router, der Anfragen der Clients sammelt und an den Provider-DNS
+<p>Im Heimnetz übernimmt diese Rolle häufig der Router, der Anfragen der Clients sammelt und an den Provider-<abbr title="Domain Name System">DNS</abbr>
 weitergibt.</p>
-<h4 id="lokale-dns-auflosung-ohne-root-server">Lokale DNS-Auflösung ohne Root-Server</h4>
-<p>In lokalen Netzwerken kann die DNS-Auflösung auch ohne Kontakt zu Root-Servern erfolgen:</p>
-<p><strong>1. Lokaler DNS-Server mit eigenen Zonen</strong></p>
-<p>Ein lokaler DNS-Server kann interne Domainnamen direkt auflösen, ohne Root-Server zu kontaktieren:</p>
+<h4 id="lokale-dns-auflosung-ohne-root-server">Lokale <abbr title="Domain Name System">DNS</abbr>-Auflösung ohne Root-Server</h4>
+<p>In lokalen Netzwerken kann die <abbr title="Domain Name System">DNS</abbr>-Auflösung auch ohne Kontakt zu Root-Servern erfolgen:</p>
+<p><strong>1. Lokaler <abbr title="Domain Name System">DNS</abbr>-Server mit eigenen Zonen</strong></p>
+<p>Ein lokaler <abbr title="Domain Name System">DNS</abbr>-Server kann interne Domainnamen direkt auflösen, ohne Root-Server zu kontaktieren:</p>
 <pre class="mermaid"><code>sequenceDiagram
     participant Client
     participant LocalDNS as Lokaler DNS-Server
@@ -1781,10 +1783,10 @@ weitergibt.</p>
     ZoneFile --&gt;&gt; LocalDNS: 192.168.1.100
     LocalDNS --&gt;&gt; Client: IP-Adresse: 192.168.1.100
     Note over Client, LocalDNS: Keine Root-Server&lt;br/&gt;beteiligt!</code></pre>
-<p><strong>Beispiel</strong>: In einem Unternehmensnetzwerk kann <code>server.local</code> oder <code>intranet.firma.de</code> direkt vom lokalen DNS-Server
+<p><strong>Beispiel</strong>: In einem Unternehmensnetzwerk kann <code>server.local</code> oder <code>intranet.firma.de</code> direkt vom lokalen <abbr title="Domain Name System">DNS</abbr>-Server
 aufgelöst werden.</p>
 <p><strong>2. Hosts-Datei</strong></p>
-<p>Noch vor der DNS-Abfrage prüft jedes Betriebssystem die lokale Hosts-Datei:</p>
+<p>Noch vor der <abbr title="Domain Name System">DNS</abbr>-Abfrage prüft jedes Betriebssystem die lokale Hosts-Datei:</p>
 <ul>
 <li><strong>Linux/macOS</strong>: <code>/etc/hosts</code></li>
 <li><strong>Windows</strong>: <code>C:\Windows\System32\drivers\etc\hosts</code></li>
@@ -1794,16 +1796,16 @@ aufgelöst werden.</p>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>192.168.1.10    server.local
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>192.168.1.20    nas.local
 </span></code></pre></div>
-<p><strong>3. mDNS (Multicast DNS)</strong></p>
-<p>Für lokale Netzwerke ohne DNS-Server existiert <strong>mDNS</strong> (verwendet von Apple Bonjour, Avahi):</p>
+<p><strong>3. <abbr title="Multicast DNS">mDNS</abbr> (Multicast <abbr title="Domain Name System">DNS</abbr>)</strong></p>
+<p>Für lokale Netzwerke ohne <abbr title="Domain Name System">DNS</abbr>-Server existiert <strong><abbr title="Multicast DNS">mDNS</abbr></strong> (verwendet von Apple Bonjour, Avahi):</p>
 <ul>
 <li>Auflösung von <code>.local</code> Domainnamen</li>
 <li>Broadcast-basiert im lokalen Netzwerk</li>
 <li>Beispiel: <code>rechner.local</code> wird automatisch gefunden</li>
 <li>Keine zentrale Serverinfrastruktur erforderlich</li>
 </ul>
-<p><strong>4. Split-DNS / Split-Horizon DNS</strong></p>
-<p>Bei Split-DNS liefert ein DNS-Server unterschiedliche Antworten, abhängig davon, ob die Anfrage aus dem internen oder
+<p><strong>4. Split-<abbr title="Domain Name System">DNS</abbr> / Split-Horizon <abbr title="Domain Name System">DNS</abbr></strong></p>
+<p>Bei Split-<abbr title="Domain Name System">DNS</abbr> liefert ein <abbr title="Domain Name System">DNS</abbr>-Server unterschiedliche Antworten, abhängig davon, ob die Anfrage aus dem internen oder
 externen Netzwerk kommt:</p>
 <pre class="mermaid"><code>graph LR
     A[Client intern] --&gt;|Query: intranet . firma . de| B[DNS-Server]
@@ -1814,16 +1816,16 @@ externen Netzwerk kommt:</p>
 <p>Bei einer Anfrage nach <code>docs.fa24b.de</code> arbeiten mehrere Servertypen zusammen:</p>
 <ol>
 <li>Client fragt den <strong>rekursiven Resolver</strong> (z.B. beim Provider oder im Router)</li>
-<li>Resolver fragt bei Bedarf <strong>Root-Server</strong> → erhält Verweis auf <code>.de</code>-TLD-Server</li>
-<li>Resolver fragt <strong>.de TLD-Server</strong> → erhält Verweis auf die autoritativen Nameserver von <code>fa24b.de</code></li>
+<li>Resolver fragt bei Bedarf <strong>Root-Server</strong> → erhält Verweis auf <code>.de</code>-<abbr title="Top-Level-Domain">TLD</abbr>-Server</li>
+<li>Resolver fragt <strong>.de <abbr title="Top-Level-Domain">TLD</abbr>-Server</strong> → erhält Verweis auf die autoritativen Nameserver von <code>fa24b.de</code></li>
 <li>Resolver fragt <strong>autoritativen Nameserver</strong> von <code>fa24b.de</code> → erhält z.B. CNAME/A-Records für <code>docs.fa24b.de</code></li>
 <li>Resolver speichert die Antwort im <strong>Cache</strong> und gibt sie an den Client zurück</li>
 </ol>
 <p>So wird die Last verteilt und die Auflösung bleibt trotz der verteilten Struktur performant und ausfallsicher.</p>
-<h2 id="der-dns-auflosungsprozess">Der DNS-Auflösungsprozess</h2>
-<p>Der DNS-Auflösungsprozess durchläuft mehrere Stufen, um einen Domainnamen in eine IP-Adresse aufzulösen. Dieser Prozess
-wird als <strong>rekursive DNS-Abfrage</strong> bezeichnet und folgt der hierarchischen Struktur des Domain Name Systems.</p>
-<h3 id="ablauf-einer-dns-auflosung">Ablauf einer DNS-Auflösung</h3>
+<h2 id="der-dns-auflosungsprozess">Der <abbr title="Domain Name System">DNS</abbr>-Auflösungsprozess</h2>
+<p>Der <abbr title="Domain Name System">DNS</abbr>-Auflösungsprozess durchläuft mehrere Stufen, um einen Domainnamen in eine IP-Adresse aufzulösen. Dieser Prozess
+wird als <strong>rekursive <abbr title="Domain Name System">DNS</abbr>-Abfrage</strong> bezeichnet und folgt der hierarchischen Struktur des Domain Name Systems.</p>
+<h3 id="ablauf-einer-dns-auflosung">Ablauf einer <abbr title="Domain Name System">DNS</abbr>-Auflösung</h3>
 <pre class="mermaid"><code>sequenceDiagram
     participant Client
     participant Resolver as DNS-Resolver&lt;br/&gt;(z.B. 1.1.1.1)
@@ -1845,16 +1847,16 @@ wird als <strong>rekursive DNS-Abfrage</strong> bezeichnet und folgt der hierarc
 <li>
 <p><strong>Start beim Root-Server</strong></p>
 <ul>
-<li>Der DNS-Resolver (z.B. 1.1.1.1 von Cloudflare) beginnt bei einem der 13 Root-Server</li>
+<li>Der <abbr title="Domain Name System">DNS</abbr>-Resolver (z.B. 1.1.1.1 von Cloudflare) beginnt bei einem der 13 Root-Server</li>
 <li>Root-Server: <code>a.root-servers.net</code> bis <code>m.root-servers.net</code></li>
-<li>Antwort: Verweis auf die <code>.de</code> TLD-Server</li>
+<li>Antwort: Verweis auf die <code>.de</code> <abbr title="Top-Level-Domain">TLD</abbr>-Server</li>
 </ul>
 </li>
 <li>
-<p><strong>Anfrage beim TLD-Server (.de)</strong></p>
+<p><strong>Anfrage beim <abbr title="Top-Level-Domain">TLD</abbr>-Server (.de)</strong></p>
 <ul>
 <li>Kontaktierter Server: <code>n.de.net</code> (194.146.107.6)</li>
-<li>Weitere .de TLD-Server: <code>a.nic.de</code>, <code>f.nic.de</code>, <code>z.nic.de</code>, <code>l.de.net</code>, <code>s.de.net</code></li>
+<li>Weitere .de <abbr title="Top-Level-Domain">TLD</abbr>-Server: <code>a.nic.de</code>, <code>f.nic.de</code>, <code>z.nic.de</code>, <code>l.de.net</code>, <code>s.de.net</code></li>
 <li>Antwort: Verweis auf die autoritativen Nameserver von fa24b.de</li>
 </ul>
 </li>
@@ -1873,19 +1875,19 @@ wird als <strong>rekursive DNS-Abfrage</strong> bezeichnet und folgt der hierarc
 <p><strong>Rückgabe an den Client</strong></p>
 <ul>
 <li>Der Resolver gibt die IP-Adressen an den Client zurück</li>
-<li>Die Antwort wird für 300 Sekunden (TTL) gecacht</li>
+<li>Die Antwort wird für 300 Sekunden (<abbr title="Time to Live">TTL</abbr>) gecacht</li>
 </ul>
 </li>
 </ol>
 <h3 id="rekursive-vs-iterative-abfrage">Rekursive vs. Iterative Abfrage</h3>
 <ul>
-<li><strong>Rekursive Abfrage</strong>: Der DNS-Resolver übernimmt die gesamte Arbeit und liefert die finale Antwort</li>
+<li><strong>Rekursive Abfrage</strong>: Der <abbr title="Domain Name System">DNS</abbr>-Resolver übernimmt die gesamte Arbeit und liefert die finale Antwort</li>
 <li><strong>Iterative Abfrage</strong>: Der Resolver erhält Verweise und muss jeden Server selbst kontaktieren</li>
 </ul>
 <p>Der oben gezeigte Prozess ist eine rekursive Abfrage vom Client zum Resolver, kombiniert mit iterativen Abfragen
-zwischen Resolver und den DNS-Servern.</p>
-<h2 id="dns-record-typen-resource-records">DNS-Record-Typen (Resource Records)</h2>
-<p>DNS-Records (auch Resource Records genannt) sind Datensätze in der DNS-Datenbank, die verschiedene Informationen über
+zwischen Resolver und den <abbr title="Domain Name System">DNS</abbr>-Servern.</p>
+<h2 id="dns-record-typen-resource-records"><abbr title="Domain Name System">DNS</abbr>-Record-Typen (Resource Records)</h2>
+<p><abbr title="Domain Name System">DNS</abbr>-Records (auch Resource Records genannt) sind Datensätze in der <abbr title="Domain Name System">DNS</abbr>-Datenbank, die verschiedene Informationen über
 eine Domain enthalten. Jeder Record-Typ erfüllt eine spezifische Aufgabe.</p>
 <h3 id="a-record-address-record">A-Record (Address Record)</h3>
 <p><strong>Funktion</strong>: Ordnet einem Domainnamen eine IPv4-Adresse zu.</p>
@@ -1915,7 +1917,7 @@ und Netzwerke nutzen zunehmend IPv6, und diese Records stellen sicher, dass die 
 <p><strong>Beispiel 1 - Website-Hosting</strong>:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>docs.fa24b.de.    300    IN    CNAME    wimwenigerkind.github.io.
 </span></code></pre></div>
-<p><strong>Beispiel 2 - DKIM E-Mail-Signierung</strong>:</p>
+<p><strong>Beispiel 2 - <abbr title="DomainKeys Identified Mail">DKIM</abbr> E-Mail-Signierung</strong>:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>selector1._domainkey.fa24b.de.    3600    IN    CNAME    selector1-fa24b-de._domainkey.wimdevgroup.w-v1.dkim.mail.microsoft.
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>selector2._domainkey.fa24b.de.    3600    IN    CNAME    selector2-fa24b-de._domainkey.wimdevgroup.w-v1.dkim.mail.microsoft.
 </span></code></pre></div>
@@ -1923,57 +1925,57 @@ und Netzwerke nutzen zunehmend IPv6, und diese Records stellen sicher, dass die 
 eine Anfrage für <code>docs.fa24b.de</code> eingeht, wird sie zu <code>wimwenigerkind.github.io</code> aufgelöst, welches dann zu den
 tatsächlichen GitHub Pages IP-Adressen aufgelöst wird. Dies ermöglicht eine flexible Verwaltung, da nur die IP-Adressen
 von <code>wimwenigerkind.github.io</code> aktualisiert werden müssen, ohne den CNAME zu ändern.</p>
-<p><strong>Praxisbeispiel 2</strong>: Die DKIM-Selektoren für <code>fa24b.de</code> werden über CNAME-Records auf die Microsoft-DKIM-Infrastruktur
-delegiert. Dies ermöglicht Microsoft, die DKIM-Schlüssel zentral zu verwalten und zu rotieren, ohne dass Änderungen in
+<p><strong>Praxisbeispiel 2</strong>: Die <abbr title="DomainKeys Identified Mail">DKIM</abbr>-Selektoren für <code>fa24b.de</code> werden über CNAME-Records auf die Microsoft-<abbr title="DomainKeys Identified Mail">DKIM</abbr>-Infrastruktur
+delegiert. Dies ermöglicht Microsoft, die <abbr title="DomainKeys Identified Mail">DKIM</abbr>-Schlüssel zentral zu verwalten und zu rotieren, ohne dass Änderungen in
 der Domain-Konfiguration erforderlich sind.</p>
 <p><strong>Wichtig</strong>: Ein CNAME-Record kann nicht zusammen mit anderen Records für denselben Namen existieren.</p>
-<h3 id="mx-record-mail-exchange">MX-Record (Mail Exchange)</h3>
+<h3 id="mx-record-mail-exchange"><abbr title="Mail Exchange">MX</abbr>-Record (Mail Exchange)</h3>
 <p><strong>Funktion</strong>: Gibt an, welcher Mailserver für den E-Mail-Empfang einer Domain zuständig ist.</p>
 <p><strong>Verwendung</strong>: Für E-Mail-Routing und -Zustellung.</p>
 <p><strong>Beispiel</strong>:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>fa24b.de.    3600    IN    MX    0    fa24b-de.mail.protection.outlook.com.
 </span></code></pre></div>
 <p><strong>Praxisbeispiel</strong>: E-Mails an <code>user@fa24b.de</code> werden an den Microsoft Exchange Online Protection Server
-<code>fa24b-de.mail.protection.outlook.com</code> zugestellt. Die Priorität 0 ist die höchste Priorität. Bei mehreren MX-Records
+<code>fa24b-de.mail.protection.outlook.com</code> zugestellt. Die Priorität 0 ist die höchste Priorität. Bei mehreren <abbr title="Mail Exchange">MX</abbr>-Records
 würde der Server mit der niedrigsten Prioritätszahl bevorzugt.</p>
 <p>Die Zahl vor dem Servernamen gibt die Priorität an (niedriger = höher priorisiert).</p>
 <h3 id="txt-record-text-record">TXT-Record (Text Record)</h3>
 <p><strong>Funktion</strong>: Speichert beliebige Textinformationen zu einer Domain.</p>
-<p><strong>Verwendung</strong>: Für verschiedene Zwecke wie SPF, DKIM, Domain-Verifizierung, etc.</p>
+<p><strong>Verwendung</strong>: Für verschiedene Zwecke wie <abbr title="Sender Policy Framework">SPF</abbr>, <abbr title="DomainKeys Identified Mail">DKIM</abbr>, Domain-Verifizierung, etc.</p>
 <p><strong>Beispiele</strong>:</p>
-<p><strong>SPF (Sender Policy Framework)</strong> - Verhindert E-Mail-Spoofing:</p>
+<p><strong><abbr title="Sender Policy Framework">SPF</abbr> (Sender Policy Framework)</strong> - Verhindert E-Mail-Spoofing:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>fa24b.de.    3600    IN    TXT    &quot;v=spf1 include:spf.protection.outlook.com ~all&quot;
 </span></code></pre></div>
 <p><strong>Domain-Verifizierung</strong> - Nachweis der Domain-Inhaberschaft (Microsoft):</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>fa24b.de.    3600    IN    TXT    &quot;MS=ms37803661&quot;
 </span></code></pre></div>
-<p><strong>DKIM</strong> - E-Mail-Authentifizierung:</p>
+<p><strong><abbr title="DomainKeys Identified Mail">DKIM</abbr></strong> - E-Mail-Authentifizierung:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>default._domainkey.fa24b.de.    IN    TXT    &quot;v=DKIM1; k=rsa; p=MIGfMA0...&quot;
 </span></code></pre></div>
-<p><strong>Praxisbeispiel</strong>: Die Domain <code>fa24b.de</code> nutzt Microsoft Exchange Online Protection. Der SPF-Record
+<p><strong>Praxisbeispiel</strong>: Die Domain <code>fa24b.de</code> nutzt Microsoft Exchange Online Protection. Der <abbr title="Sender Policy Framework">SPF</abbr>-Record
 <code>v=spf1 include:spf.protection.outlook.com ~all</code> erlaubt den Microsoft-Servern, E-Mails im Namen der Domain zu
-versenden. Der Microsoft-Verifizierungsrecord <code>MS=ms37803661</code> bestätigt die Domain-Inhaberschaft. Die DKIM-Signierung
+versenden. Der Microsoft-Verifizierungsrecord <code>MS=ms37803661</code> bestätigt die Domain-Inhaberschaft. Die <abbr title="DomainKeys Identified Mail">DKIM</abbr>-Signierung
 erfolgt über CNAME-Delegation an die Microsoft-Infrastruktur (siehe CNAME-Record-Beispiele).</p>
-<h3 id="ns-record-name-server">NS-Record (Name Server)</h3>
-<p><strong>Funktion</strong>: Gibt an, welche DNS-Server für eine Domain oder Subdomain zuständig sind.</p>
-<p><strong>Verwendung</strong>: Delegation der DNS-Verantwortung an bestimmte Nameserver.</p>
+<h3 id="ns-record-name-server"><abbr title="Name Server">NS</abbr>-Record (Name Server)</h3>
+<p><strong>Funktion</strong>: Gibt an, welche <abbr title="Domain Name System">DNS</abbr>-Server für eine Domain oder Subdomain zuständig sind.</p>
+<p><strong>Verwendung</strong>: Delegation der <abbr title="Domain Name System">DNS</abbr>-Verantwortung an bestimmte Nameserver.</p>
 <p><strong>Beispiel</strong>:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>fa24b.de.    86400    IN    NS    tina.ns.cloudflare.com.
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>fa24b.de.    86400    IN    NS    curt.ns.cloudflare.com.
 </span></code></pre></div>
 <p><strong>Praxisbeispiel</strong>: Die Domain <code>fa24b.de</code> wird von den Cloudflare-Nameservern <code>tina.ns.cloudflare.com</code> und
-<code>curt.ns.cloudflare.com</code> verwaltet. Diese sind für die Auflösung aller DNS-Anfragen der Domain verantwortlich.</p>
-<h3 id="ptr-record-pointer-record">PTR-Record (Pointer Record)</h3>
-<p><strong>Funktion</strong>: Reverse DNS-Lookup - ordnet einer IP-Adresse einen Domainnamen zu (umgekehrte Richtung).</p>
+<code>curt.ns.cloudflare.com</code> verwaltet. Diese sind für die Auflösung aller <abbr title="Domain Name System">DNS</abbr>-Anfragen der Domain verantwortlich.</p>
+<h3 id="ptr-record-pointer-record"><abbr title="Pointer Record">PTR</abbr>-Record (Pointer Record)</h3>
+<p><strong>Funktion</strong>: Reverse <abbr title="Domain Name System">DNS</abbr>-Lookup - ordnet einer IP-Adresse einen Domainnamen zu (umgekehrte Richtung).</p>
 <p><strong>Verwendung</strong>: Hauptsächlich für E-Mail-Server und Netzwerk-Troubleshooting.</p>
 <p><strong>Beispiel</strong>:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>153.108.199.185.in-addr.arpa.    3600    IN    PTR    cdn-185-199-108-153.github.com.
 </span></code></pre></div>
-<p><strong>Praxisbeispiel</strong>: Der PTR-Record für die IP-Adresse <code>185.199.108.153</code> zeigt auf <code>cdn-185-199-108-153.github.com</code>.
-E-Mail-Server prüfen häufig PTR-Records, um die Legitimität der sendenden IP-Adresse zu verifizieren und Spam zu
+<p><strong>Praxisbeispiel</strong>: Der <abbr title="Pointer Record">PTR</abbr>-Record für die IP-Adresse <code>185.199.108.153</code> zeigt auf <code>cdn-185-199-108-153.github.com</code>.
+E-Mail-Server prüfen häufig <abbr title="Pointer Record">PTR</abbr>-Records, um die Legitimität der sendenden IP-Adresse zu verifizieren und Spam zu
 reduzieren.</p>
-<h3 id="soa-record-start-of-authority">SOA-Record (Start of Authority)</h3>
-<p><strong>Funktion</strong>: Enthält administrative Informationen über die DNS-Zone.</p>
+<h3 id="soa-record-start-of-authority"><abbr title="Start of Authority">SOA</abbr>-Record (Start of Authority)</h3>
+<p><strong>Funktion</strong>: Enthält administrative Informationen über die <abbr title="Domain Name System">DNS</abbr>-Zone.</p>
 <p><strong>Verwendung</strong>: Definiert den primären Nameserver und verschiedene Timing-Parameter für die Zone.</p>
 <p><strong>Beispiel</strong>:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>fa24b.de.    1800    IN    SOA    curt.ns.cloudflare.com. dns.cloudflare.com. (
@@ -1983,19 +1985,19 @@ reduzieren.</p>
 </span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>                                   604800      ; Expire (7 Tage)
 </span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>                                   1800 )      ; Minimum TTL (30 Minuten)
 </span></code></pre></div>
-<p><strong>Praxisbeispiel</strong>: Der SOA-Record für <code>fa24b.de</code> definiert <code>curt.ns.cloudflare.com</code> als primären Nameserver mit
-<code>dns.cloudflare.com</code> als Kontakt-E-Mail. Die Serial-Nummer wird bei jeder Änderung erhöht, um sekundären DNS-Servern zu
+<p><strong>Praxisbeispiel</strong>: Der <abbr title="Start of Authority">SOA</abbr>-Record für <code>fa24b.de</code> definiert <code>curt.ns.cloudflare.com</code> als primären Nameserver mit
+<code>dns.cloudflare.com</code> als Kontakt-E-Mail. Die Serial-Nummer wird bei jeder Änderung erhöht, um sekundären <abbr title="Domain Name System">DNS</abbr>-Servern zu
 signalisieren, dass Updates verfügbar sind.</p>
-<h3 id="srv-record-service-record">SRV-Record (Service Record)</h3>
+<h3 id="srv-record-service-record"><abbr title="Service Record">SRV</abbr>-Record (Service Record)</h3>
 <p><strong>Funktion</strong>: Gibt Informationen über verfügbare Dienste an (Server, Port, Priorität, Gewichtung).</p>
 <p><strong>Verwendung</strong>: Für spezielle Dienste wie VoIP, Instant Messaging, LDAP, etc.</p>
 <p><strong>Beispiel</strong>:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>_sip._tcp.fa24b.de.    3600    IN    SRV    10    60    5060    sipserver.fa24b.de.
 </span></code></pre></div>
 <p>Format: <code>Priorität Gewichtung Port Zielserver</code></p>
-<p><strong>Praxisbeispiel</strong>: Microsoft Teams oder Skype for Business nutzen SRV-Records, um automatisch die richtigen Server und
+<p><strong>Praxisbeispiel</strong>: Microsoft Teams oder Skype for Business nutzen <abbr title="Service Record">SRV</abbr>-Records, um automatisch die richtigen Server und
 Ports für die Kommunikation zu finden.</p>
-<h3 id="caa-record-certification-authority-authorization">CAA-Record (Certification Authority Authorization)</h3>
+<h3 id="caa-record-certification-authority-authorization"><abbr title="Certification Authority Authorization">CAA</abbr>-Record (Certification Authority Authorization)</h3>
 <p><strong>Funktion</strong>: Gibt an, welche Zertifizierungsstellen (CAs) SSL/TLS-Zertifikate für die Domain ausstellen dürfen.</p>
 <p><strong>Verwendung</strong>: Erhöhte Sicherheit durch Kontrolle der Zertifikatsausstellung.</p>
 <p><strong>Beispiel</strong>:</p>
@@ -2031,61 +2033,85 @@ unautorisierten Ausstellungsversuchen erfolgt eine Benachrichtigung per E-Mail a
 <td><code>www</code> auf Hauptdomain umleiten</td>
 </tr>
 <tr>
-<td><strong>MX</strong></td>
+<td><strong><abbr title="Mail Exchange">MX</abbr></strong></td>
 <td>E-Mail-Routing</td>
 <td>E-Mails empfangen</td>
 </tr>
 <tr>
 <td><strong>TXT</strong></td>
 <td>Textinformationen</td>
-<td>SPF, Domain-Verifizierung</td>
+<td><abbr title="Sender Policy Framework">SPF</abbr>, Domain-Verifizierung</td>
 </tr>
 <tr>
-<td><strong>NS</strong></td>
+<td><strong><abbr title="Name Server">NS</abbr></strong></td>
 <td>Nameserver-Delegation</td>
-<td>DNS-Server festlegen</td>
+<td><abbr title="Domain Name System">DNS</abbr>-Server festlegen</td>
 </tr>
 <tr>
-<td><strong>PTR</strong></td>
-<td>Reverse DNS</td>
+<td><strong><abbr title="Pointer Record">PTR</abbr></strong></td>
+<td>Reverse <abbr title="Domain Name System">DNS</abbr></td>
 <td>E-Mail-Reputation</td>
 </tr>
 <tr>
-<td><strong>SOA</strong></td>
+<td><strong><abbr title="Start of Authority">SOA</abbr></strong></td>
 <td>Zone-Verwaltung</td>
-<td>DNS-Zone-Konfiguration</td>
+<td><abbr title="Domain Name System">DNS</abbr>-Zone-Konfiguration</td>
 </tr>
 <tr>
-<td><strong>SRV</strong></td>
+<td><strong><abbr title="Service Record">SRV</abbr></strong></td>
 <td>Dienst-Lokalisierung</td>
 <td>VoIP, Chat-Dienste</td>
 </tr>
 <tr>
-<td><strong>CAA</strong></td>
+<td><strong><abbr title="Certification Authority Authorization">CAA</abbr></strong></td>
 <td>Zertifikats-Kontrolle</td>
 <td>SSL/TLS-Sicherheit</td>
 </tr>
 </tbody>
 </table>
-<h2 id="dns-caching-und-ttl-time-to-live">DNS-Caching und TTL (Time to Live)</h2>
-<h2 id="dns-sicherheit-bedrohungen-und-schutzmanahmen">DNS-Sicherheit: Bedrohungen und Schutzmaßnahmen</h2>
-<h2 id="praktische-dns-tools-und-befehle">Praktische DNS-Tools und Befehle</h2>
-<h2 id="dns-in-der-praxis-konfiguration-und-verwaltung">DNS in der Praxis: Konfiguration und Verwaltung</h2>
+<h2 id="dns-caching-und-ttl-time-to-live"><abbr title="Domain Name System">DNS</abbr>-Caching und <abbr title="Time to Live">TTL</abbr> (Time to Live)</h2>
+<h2 id="dns-sicherheit-bedrohungen-und-schutzmanahmen"><abbr title="Domain Name System">DNS</abbr>-Sicherheit: Bedrohungen und Schutzmaßnahmen</h2>
+<h2 id="praktische-dns-tools-und-befehle">Praktische <abbr title="Domain Name System">DNS</abbr>-Tools und Befehle</h2>
+<h2 id="dns-in-der-praxis-konfiguration-und-verwaltung"><abbr title="Domain Name System">DNS</abbr> in der Praxis: Konfiguration und Verwaltung</h2>
 <h2 id="zusammenfassung-und-ausblick">Zusammenfassung und Ausblick</h2>
 <h3 id="zusammenfassung">Zusammenfassung</h3>
-<p>Das Domain Name System (DNS) bildet eine fundamentale Infrastrukturkomponente des Internets. Als dezentrales, hierarchisches Verzeichnissystem ermöglicht es die Auflösung menschenlesbarer Domainnamen in maschinenlesbare IP-Adressen und erfüllt damit eine zentrale Vermittlerfunktion in der Netzwerkkommunikation.</p>
-<p><strong>Hierarchische Struktur</strong>: Die DNS-Architektur folgt einem mehrstufigen, baumartig aufgebauten System, das von den 13 Root-Server-Systemen über TLD-Server bis zu autoritativen Nameservern reicht. Jede Ebene übernimmt spezifische Verantwortlichkeiten und ermöglicht durch Delegation eine dezentrale Verwaltung des globalen Namensraums.</p>
-<p><strong>Server-Typen und Auflösungsprozess</strong>: Der DNS-Auflösungsprozess involviert verschiedene Server-Typen mit unterschiedlichen Aufgaben: Rekursive Resolver übernehmen die Anfragen von Clients, Root-Server verweisen auf zuständige TLD-Server, diese wiederum auf autoritative Nameserver, welche die endgültigen DNS-Einträge bereitstellen. Caching-Mechanismen optimieren dabei die Performance und reduzieren die Last auf der Infrastruktur.</p>
-<p><strong>Record-Typen</strong>: DNS unterstützt verschiedene Record-Typen (A, AAAA, CNAME, MX, TXT, NS, PTR, SOA, SRV, CAA), die unterschiedliche Dienste und Funktionen ermöglichen – von der grundlegenden Namensauflösung über E-Mail-Routing bis hin zu Sicherheitsmechanismen wie DKIM und SPF.</p>
-<p><strong>Lokale Auflösung</strong>: Neben der globalen DNS-Infrastruktur existieren lokale Auflösungsmechanismen (Hosts-Datei, lokale DNS-Server, mDNS, Split-DNS), die insbesondere in Unternehmensnetzwerken und Heimnetzwerken zum Einsatz kommen und eine DNS-Auflösung ohne Kontakt zu Root-Servern ermöglichen.</p>
+<p>Das Domain Name System (<abbr title="Domain Name System">DNS</abbr>) bildet eine fundamentale Infrastrukturkomponente des Internets. Als dezentrales,
+hierarchisches Verzeichnissystem ermöglicht es die Auflösung menschenlesbarer Domainnamen in maschinenlesbare
+IP-Adressen und erfüllt damit eine zentrale Vermittlerfunktion in der Netzwerkkommunikation.</p>
+<p><strong>Hierarchische Struktur</strong>: Die <abbr title="Domain Name System">DNS</abbr>-Architektur folgt einem mehrstufigen, baumartig aufgebauten System, das von den 13
+Root-Server-Systemen über <abbr title="Top-Level-Domain">TLD</abbr>-Server bis zu autoritativen Nameservern reicht. Jede Ebene übernimmt spezifische
+Verantwortlichkeiten und ermöglicht durch Delegation eine dezentrale Verwaltung des globalen Namensraums.</p>
+<p><strong>Server-Typen und Auflösungsprozess</strong>: Der <abbr title="Domain Name System">DNS</abbr>-Auflösungsprozess involviert verschiedene Server-Typen mit
+unterschiedlichen Aufgaben: Rekursive Resolver übernehmen die Anfragen von Clients, Root-Server verweisen auf zuständige
+<abbr title="Top-Level-Domain">TLD</abbr>-Server, diese wiederum auf autoritative Nameserver, welche die endgültigen <abbr title="Domain Name System">DNS</abbr>-Einträge bereitstellen.
+Caching-Mechanismen optimieren dabei die Performance und reduzieren die Last auf der Infrastruktur.</p>
+<p><strong>Record-Typen</strong>: <abbr title="Domain Name System">DNS</abbr> unterstützt verschiedene Record-Typen (A, AAAA, CNAME, <abbr title="Mail Exchange">MX</abbr>, TXT, <abbr title="Name Server">NS</abbr>, <abbr title="Pointer Record">PTR</abbr>, <abbr title="Start of Authority">SOA</abbr>, <abbr title="Service Record">SRV</abbr>, <abbr title="Certification Authority Authorization">CAA</abbr>), die
+unterschiedliche Dienste und Funktionen ermöglichen – von der grundlegenden Namensauflösung über E-Mail-Routing bis hin
+zu Sicherheitsmechanismen wie <abbr title="DomainKeys Identified Mail">DKIM</abbr> und <abbr title="Sender Policy Framework">SPF</abbr>.</p>
+<p><strong>Lokale Auflösung</strong>: Neben der globalen <abbr title="Domain Name System">DNS</abbr>-Infrastruktur existieren lokale Auflösungsmechanismen (Hosts-Datei, lokale
+<abbr title="Domain Name System">DNS</abbr>-Server, <abbr title="Multicast DNS">mDNS</abbr>, Split-<abbr title="Domain Name System">DNS</abbr>), die insbesondere in Unternehmensnetzwerken und Heimnetzwerken zum Einsatz kommen und eine
+<abbr title="Domain Name System">DNS</abbr>-Auflösung ohne Kontakt zu Root-Servern ermöglichen.</p>
 <h3 id="ausblick">Ausblick</h3>
-<p>Die DNS-Technologie entwickelt sich kontinuierlich weiter, um aktuellen Anforderungen an Sicherheit, Datenschutz und Performance gerecht zu werden:</p>
-<p><strong>DNS-Sicherheit (DNSSEC)</strong>: Die Implementierung von DNS Security Extensions (DNSSEC) gewinnt zunehmend an Bedeutung. Durch kryptografische Signaturen werden DNS-Antworten authentifiziert und Manipulationen wie DNS-Spoofing und Cache-Poisoning verhindert. Die schrittweise weltweite DNSSEC-Einführung erhöht die Vertrauenswürdigkeit des DNS-Systems.</p>
-<p><strong>Verschlüsselte DNS-Protokolle</strong>: DNS over HTTPS (DoH) und DNS over TLS (DoT) adressieren Datenschutzbedenken durch Verschlüsselung der DNS-Kommunikation. Diese Protokolle verhindern, dass Dritte DNS-Anfragen mitlesen oder manipulieren können, und werden zunehmend von Browsern und Betriebssystemen nativ unterstützt.</p>
-<p><strong>IPv6-Transition</strong>: Der fortschreitende Übergang zu IPv6 führt zu einer vermehrten Nutzung von AAAA-Records. DNS spielt eine zentrale Rolle bei der parallelen Unterstützung von IPv4 und IPv6 (Dual-Stack) und ermöglicht einen reibungslosen Migrationsprozess.</p>
-<p><strong>Performance-Optimierungen</strong>: Technologien wie EDNS (Extension Mechanisms for DNS) erweitern die Möglichkeiten des DNS-Protokolls. Anycast-Routing, geografisch verteilte DNS-Server und intelligente Caching-Strategien verbessern kontinuierlich die Auflösungsgeschwindigkeit und Verfügbarkeit.</p>
-<p><strong>Zukünftige Herausforderungen</strong>: Die zunehmende Komplexität vernetzter Systeme, die steigende Anzahl IoT-Geräte und die Notwendigkeit schnellerer Auflösungszeiten stellen neue Anforderungen an die DNS-Infrastruktur. Gleichzeitig muss DNS gegen zunehmend ausgefeilte Angriffsvektoren wie DDoS-Attacken auf kritische DNS-Infrastruktur geschützt werden.</p>
-<p>DNS bleibt damit ein dynamisches System, das sich an technologische Entwicklungen anpasst und eine unverzichtbare Grundlage für die Funktionsfähigkeit des Internets darstellt.</p>
+<p>Die <abbr title="Domain Name System">DNS</abbr>-Technologie entwickelt sich kontinuierlich weiter, um aktuellen Anforderungen an Sicherheit, Datenschutz und
+Performance gerecht zu werden:</p>
+<p><strong><abbr title="Domain Name System">DNS</abbr>-Sicherheit (<abbr title="DNS Security Extensions">DNSSEC</abbr>)</strong>: Die Implementierung von <abbr title="Domain Name System">DNS</abbr> Security Extensions (<abbr title="DNS Security Extensions">DNSSEC</abbr>) gewinnt zunehmend an Bedeutung.
+Durch kryptografische Signaturen werden <abbr title="Domain Name System">DNS</abbr>-Antworten authentifiziert und Manipulationen wie <abbr title="Domain Name System">DNS</abbr>-Spoofing und
+Cache-Poisoning verhindert. Die schrittweise weltweite <abbr title="DNS Security Extensions">DNSSEC</abbr>-Einführung erhöht die Vertrauenswürdigkeit des
+<abbr title="Domain Name System">DNS</abbr>-Systems.</p>
+<p><strong>Verschlüsselte <abbr title="Domain Name System">DNS</abbr>-Protokolle</strong>: <abbr title="Domain Name System">DNS</abbr> over HTTPS (<abbr title="DNS over HTTPS">DoH</abbr>) und <abbr title="Domain Name System">DNS</abbr> over TLS (<abbr title="DNS over TLS">DoT</abbr>) adressieren Datenschutzbedenken durch
+Verschlüsselung der <abbr title="Domain Name System">DNS</abbr>-Kommunikation. Diese Protokolle verhindern, dass Dritte <abbr title="Domain Name System">DNS</abbr>-Anfragen mitlesen oder manipulieren
+können, und werden zunehmend von Browsern und Betriebssystemen nativ unterstützt.</p>
+<p><strong>IPv6-Transition</strong>: Der fortschreitende Übergang zu IPv6 führt zu einer vermehrten Nutzung von AAAA-Records. <abbr title="Domain Name System">DNS</abbr> spielt
+eine zentrale Rolle bei der parallelen Unterstützung von IPv4 und IPv6 (Dual-Stack) und ermöglicht einen reibungslosen
+Migrationsprozess.</p>
+<p><strong>Performance-Optimierungen</strong>: Technologien wie <abbr title="Extension Mechanisms for DNS">EDNS</abbr> (Extension Mechanisms for <abbr title="Domain Name System">DNS</abbr>) erweitern die Möglichkeiten des
+<abbr title="Domain Name System">DNS</abbr>-Protokolls. Anycast-Routing, geografisch verteilte <abbr title="Domain Name System">DNS</abbr>-Server und intelligente Caching-Strategien verbessern
+kontinuierlich die Auflösungsgeschwindigkeit und Verfügbarkeit.</p>
+<p><strong>Zukünftige Herausforderungen</strong>: Die zunehmende Komplexität vernetzter Systeme, die steigende Anzahl <abbr title="Internet of Things">IoT</abbr>-Geräte und die
+Notwendigkeit schnellerer Auflösungszeiten stellen neue Anforderungen an die <abbr title="Domain Name System">DNS</abbr>-Infrastruktur. Gleichzeitig muss <abbr title="Domain Name System">DNS</abbr>
+gegen zunehmend ausgefeilte Angriffsvektoren wie <abbr title="Distributed Denial of Service">DDoS</abbr>-Attacken auf kritische <abbr title="Domain Name System">DNS</abbr>-Infrastruktur geschützt werden.</p>
+<p><abbr title="Domain Name System">DNS</abbr> bleibt damit ein dynamisches System, das sich an technologische Entwicklungen anpasst und eine unverzichtbare
+Grundlage für die Funktionsfähigkeit des Internets darstellt.</p>
 
 
 
@@ -2108,7 +2134,7 @@ unautorisierten Ausstellungsversuchen erfolgt eine Benachrichtigung per E-Mail a
     <span class="md-icon" title="Letztes Update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="4. Dezember 2025 20:03:04 UTC">4. Dezember 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="4. Dezember 2025 20:08:49 UTC">4. Dezember 2025</span>
   </span>
 
     
