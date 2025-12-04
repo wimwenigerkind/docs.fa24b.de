@@ -41,7 +41,7 @@ Dieser gesamte Prozess dauert nur wenige Millisekunden und läuft vollautomatisc
 Das DNS ist hierarchisch strukturiert, ähnlich einem umgekehrten Baum. Die Hierarchie besteht aus mehreren Ebenen, wobei jede Ebene für einen Teil des Domainnamens verantwortlich ist. Diese Struktur ermöglicht eine
 skalierbare, ausfallsichere und dezentrale Verwaltung von Domainnamen.
 
-### Die DNS-Hierarchie-Ebenen
+### Die DNS-Hierarchieebenen
 
 ```mermaid
 graph TD
