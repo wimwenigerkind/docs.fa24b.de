@@ -597,9 +597,116 @@ unautorisierten Ausstellungsversuchen erfolgt eine Benachrichtigung per E-Mail a
 
 ## DNS-Caching und TTL (Time to Live)
 
+DNS-Resolver speichern Antworten temporär im Cache, um die Auflösungsgeschwindigkeit zu erhöhen und die Last
+auf Root-, TLD- und autoritativen Nameservern zu reduzieren. Die Lebensdauer einer gecachten Antwort wird durch die
+TTL (Time to Live) in Sekunden bestimmt. Eine typische TTL-Angabe steht direkt in DNS-Records und wird von
+rekursiven Resolvern beim Zwischenspeichern respektiert.
+
+### Wichtige Konzepte
+
+- **TTL (Beispiel)**: `docs.fa24b.de. 3600 IN A 185.199.108.153` → TTL = 3600s (1 Stunde).
+- **Cache-Hierarchie**: Clients ↔️ lokaler Resolver ↔️ rekursiver Resolver ↔️ autoritativer Server. Jeder Caching-Layer
+    hält Antworten unabhängig vor.
+- **Negative Caching**: Auch Nicht-Antworten (z.B. `NXDOMAIN`) werden für eine Zeit zwischengespeichert (gemäß
+    SOA/MinTTL-Angaben).
+
+### Vor- und Nachteile verschiedener TTL-Werte
+
+- **Lange TTLs (z. B. 86400s / 24h)**: weniger Abfragen, geringere Last, bessere Verfügbarkeit bei Ausfall von
+    Nameservern. Nachteil: Änderungen (IP-Wechsel, Short-lived Failover) propagieren langsam.
+- **Kurze TTLs (z. B. 60–300s)**: schnelle Propagation bei Änderungen, aber höhere Abfragezahl und erhöhte Last.
+
+Praktische Empfehlung: Setze TTLs situativ. Für stabile Ressourcen längere TTLs, für Dienste mit häufigen
+Änderungen kurze TTLs während der Umstellung und danach wieder erhöhen.
+
+### Beispiel: TTL prüfen
+
+Mit `dig` lässt sich die verbleibende TTL direkt sehen:
+
+```bash
+dig +noall +answer docs.fa24b.de A
+; Ausgabe: docs.fa24b.de. 3600 IN A 185.199.108.153
+```
+
+Mit `dig +trace` lässt sich außerdem der komplette Auflösungsweg (inkl. TTL-Anzeigen) nachvollziehen.
+
 ## DNS-Sicherheit: Bedrohungen und Schutzmaßnahmen
 
+DNS ist ein attraktives Ziel für Angriffe und Manipulationen. Häufige Bedrohungen sind **Cache Poisoning/DNS Spoofing**,
+**DDoS-Angriffe auf Nameserver**, **Registrar-/WHOIS-Hijacking**, **DNS-Tunneling** (Datenexfiltration) und **Man-in-the-Middle**-Angriffe
+auf unverschlüsselten DNS-Transporten.
+
+### Schutzmaßnahmen (Kurzüberblick)
+
+- **DNSSEC**: Signiert DNS-Antworten kryptographisch (RRSIG, DNSKEY). Schützt gegen Manipulation und Cache-Poisoning,
+    indem die Integrität von Records geprüft wird. Wichtiger Hinweis: DNSSEC authentifiziert, verschlüsselt aber nicht.
+- **Verschlüsselte DNS-Protokolle**: DoT (DNS over TLS) und DoH (DNS over HTTPS) schützen die Privatsphäre und
+    Integrität der Transportverbindung gegen Mitlesen und Blockaden.
+- **Harte Authentisierung für Registrar/Nameserver-Accounts**: 2FA, starke Passwörter und Zugangskontrollen
+    verhindern Domain-Hijacking.
+- **TSIG**: Absicherung von Zonentransfers zwischen Nameservern mittels Shared Secrets.
+- **Rate Limiting & Anycast**: DDoS-Resilienz durch Anycast-Deployment und Anfragelimits auf Resolver/Autoren.
+- **Monitoring & Logging**: Anomalien (plötzliche TTL-Änderungen, ungewöhnliche Antwortmuster) frühzeitig erkennen.
+- **Minimale Angriffsfläche**: Nur notwendige Records publizieren, administrative Kontakte schützen, CAA für
+    Zertifikats-Aussteller setzen.
+
+### Kurze Praxis-Checks
+
+- **DNSSEC prüfen**: `dig +dnssec example.com` → prüft Vorhandensein von RRSIG/DNSKEY.
+- **CAA prüfen**: `dig example.com CAA +short` → zeigt, welche CAs zertifizieren dürfen.
+
+Beispiel: DNSSEC-gestützte Abfrage mit `dig`:
+
+```bash
+dig +dnssec fa24b.de A
+; RRSIG-Einträge in der Antwort zeigen, dass die Zone signiert ist
+```
+
+Hinweis: DNSSEC-Einführung erfordert Koordination mit Registrar/Hosting und korrekte Key-Rotation.
+
 ## Praktische DNS-Tools und Befehle
+
+Für Troubleshooting und Audits sind folgende Tools essenziell. Die Beispiele zeigen typische Prüfaufgaben.
+
+- **dig (Linux/macOS, auch Windows via BIND-utils)** – universelles DNS-Diagnosewerkzeug
+    - A-Record: `dig +noall +answer docs.fa24b.de A`
+    - Trace: `dig +trace docs.fa24b.de`
+    - DNSSEC: `dig +dnssec docs.fa24b.de`
+
+- **nslookup** – älteres, aber weit verbreitetes Tool
+    - Interaktive Nutzung: `nslookup` → `server 8.8.8.8` → `set type=MX` → `fa24b.de`
+
+- **host** – einfache Abfragen
+    - `host -t A docs.fa24b.de`
+
+- **PowerShell (Windows)** – `Resolve-DnsName`
+    - Beispiel: `Resolve-DnsName docs.fa24b.de -Type A`
+
+- **rndc / named-checkzone** – Werkzeuge für Administratoren von BIND-Servern (Zonenprüfung, Cache-Management)
+
+- **tcpdump / Wireshark** – Netzwerk-Captures für tiefgehende Analyse von DNS-Paketen
+    - Beispiel: `sudo tcpdump -n -s 0 -vvv port 53`
+
+- **systemd-resolve / systemd-resolved** – Abfragen und Cache-Management auf modernen Linux-Clients
+
+- **Online-Tools** – DNSViz, Zonemaster, intoDNS: grafische/automatisierte Checks (DNSSEC, Delegation, Konfiguration)
+
+### Häufige Admin-Aufgaben (Kurzreferenz)
+
+- **DNS-Cache leeren**:
+    - Windows: `ipconfig /flushdns`
+    - macOS (aktuelles): `sudo killall -HUP mDNSResponder`
+    - systemd/Linux: `sudo systemd-resolve --flush-caches` oder `sudo rndc flush` (BIND)
+
+- **Schnell prüfen, welche Nameserver eine Domain verwendet**:
+    - `dig +short NS fa24b.de`
+
+- **TTL und SOA-Info anzeigen**:
+    - `dig +nocmd fa24b.de SOA +noall +answer`
+
+Diese Tools erlauben sowohl schnelle Checks als auch tiefergehende Untersuchungen bei Incidents. Für Automatisierung
+eignen sich Skripte, die wiederkehrende Prüfungen (DNSSEC-Status, TTL-Änderungen, MX/SOA-Checks) ausführen und
+bei Auffälligkeiten Alarme erstellen.
 
 ## DNS in der Praxis: Konfiguration und Verwaltung
 
