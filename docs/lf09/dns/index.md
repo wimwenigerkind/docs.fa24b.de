@@ -603,7 +603,7 @@ unautorisierten Ausstellungsversuchen erfolgt eine Benachrichtigung per E-Mail a
 
 ## DNS in der Praxis: Konfiguration und Verwaltung
 
-# Zusammenfassung und Ausblick
+## Zusammenfassung und Ausblick
 
 Das Domain Name System (DNS) ist ein grundlegender Bestandteil des Internets. Es sorgt dafür, dass wir Webseiten über leicht merkbare Namen wie docs.fa24b.de aufrufen können, statt uns komplizierte Zahlenfolgen zu merken. Wenn man eine Adresse in den Browser eingibt, sucht DNS im Hintergrund automatisch die passende IP-Adresse des Servers heraus, sodass die gewünschte Seite erreicht werden kann. Dieser Vorgang passiert in Millisekunden und ist für den Nutzer unsichtbar.
 
