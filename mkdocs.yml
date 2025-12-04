@@ -3,9 +3,9 @@ site_url: https://docs.fa24b.de/
 theme:
   name: material
   language: de
+  custom_dir: overrides
   #  logo: https://images.wimwenigerkind.com/wimwenigerkind-transparent-icon.png
   #  favicon: https://images.wimwenigerkind.com/wimwenigerkind-transparent-icon.png
-  #  custom_dir: docs/overrides
   features:
     - navigation.footer
     - content.code.copy
