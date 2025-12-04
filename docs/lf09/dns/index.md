@@ -603,12 +603,15 @@ unautorisierten Ausstellungsversuchen erfolgt eine Benachrichtigung per E-Mail a
 
 ## DNS in der Praxis: Konfiguration und Verwaltung
 
-# Zusammenfassung und Ausblick
+## Zusammenfassung und Ausblick
 
+### Funktion
 Das Domain Name System (DNS) ist ein grundlegender Bestandteil des Internets. Es sorgt dafür, dass wir Webseiten über leicht merkbare Namen wie docs.fa24b.de aufrufen können, statt uns komplizierte Zahlenfolgen zu merken. Wenn man eine Adresse in den Browser eingibt, sucht DNS im Hintergrund automatisch die passende IP-Adresse des Servers heraus, sodass die gewünschte Seite erreicht werden kann. Dieser Vorgang passiert in Millisekunden und ist für den Nutzer unsichtbar.
 
+### Aufbau und Arbeitsweise
 DNS ist hierarchisch aufgebaut und arbeitet in mehreren Schritten: Zuerst wird geprüft, ob die Information bereits gespeichert ist. Wenn nicht, wird schrittweise bei verschiedenen Servern nachgefragt, die jeweils wissen, wer für den nächsten Bereich zuständig ist – bis schließlich der Server erreicht wird, der die endgültige Information über die Domain besitzt. Dieser liefert dann die passende Adresse zurück.
 
 Damit verschiedene Dienste im Internet funktionieren – etwa Webseiten, E-Mail oder bestimmte Anwendungen – speichert DNS verschiedenartige Informationen über eine Domain. Dazu gehören einfache Zuordnungen von Namen zu Adressen, Hinweise auf andere Server, Angaben zu Mailservern oder Verifizierungsinfos für Sicherheitsfunktionen. DNS hilft somit nicht nur bei der Navigation im Web, sondern trägt auch zu Stabilität, Ausfallsicherheit und Sicherheit im Netzwerkverkehr bei.
 
+### Kurzfazit
 Zusammengefasst macht DNS das Internet benutzbar, indem es komplexe technische Abläufe übernimmt und Menschen ermöglicht, Dienste bequem über verständliche Namen zu erreichen, ohne die dahinterliegenden Strukturen und Prozesse kennen zu müssen.
