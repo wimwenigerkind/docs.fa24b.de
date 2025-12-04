@@ -43,12 +43,12 @@ skalierbare, ausfallsichere und dezentrale Verwaltung von Domainnamen.
 
 ### Aufbau einer Domain
 
-Eine Domain wie `www.example.com` wird von rechts nach links gelesen:
+Eine Domain wie `docs.fa24b.de` wird von rechts nach links gelesen:
 
 - `.` \- die (meist unsichtbare) \**Root\-Zone\**
-- `com` \- \**Top\-Level\-Domain (TLD)\**
-- `example` \- \**Second\-Level\-Domain\**
-- `www` \- \**Subdomain\** bzw. Hostname
+- `de` \- \**Top\-Level\-Domain (TLD)\**
+- `fa24b` \- \**Second\-Level\-Domain\**
+- `docs` \- \**Subdomain\** bzw. Hostname
 
 Jede Ebene kann von unterschiedlichen Organisationen verwaltet werden.
 
@@ -71,20 +71,20 @@ Unterhalb der Root\-Zone befinden sich die \**Top\-Level\-Domains\**:
 
 Die TLD\-Server wissen, welche Nameserver für die darunterliegenden Domains zuständig sind, z\.B.:
 
-- `example.com` → autoritative Nameserver von `example.com`
+- `fa24b.de` → autoritative Nameserver von `fa24b.de`
 - `schule.de` → autoritative Nameserver von `schule.de`
 
 ### Second\-Level\-Domains
 
 Die \**Second\-Level\-Domain\** ist der Teil direkt unterhalb der TLD:
 
-- `example` in `example.com`
+- `fa24b` in `fa24b.de`
 - `schule` in `schule.de`
 
 In diesem Bereich verwalten typischerweise Firmen, Organisationen oder Provider ihren eigenen DNS\-Namensraum. Dort
 werden u\.a. festgelegt:
 
-- welche Hostnamen existieren (z\.B. `www.example.com`, `mail.example.com`)
+- welche Hostnamen existieren (z\.B. `docs.fa24b.de`, `mail.fa24b.de`)
 - auf welche IP\-Adressen diese zeigen
 - welche Mailserver zuständig sind (MX\-Records)
 - welche Nameserver autoritativ für die Zone sind (NS\-Records)
@@ -93,9 +93,9 @@ werden u\.a. festgelegt:
 
 Unterhalb der Second\-Level\-Domain können beliebig viele \**Subdomains\** angelegt werden:
 
-- `www.example.com` \- Webserver
-- `mail.example.com` \- Mailserver
-- `intranet.example.com` \- internes Portal
+- `docs.fa24b.de` \- Webserver mit Dokumentation
+- `mail.fa24b.de` \- Mailserver
+- `intranet.fa24b.de` \- internes Portal
 
 Subdomains können wiederum zu \**eigenen Zonen\** mit eigenen autoritativen Nameservern werden. Dies nennt man
 \**Delegation\**. So lässt sich die Verwaltung auf verschiedene Abteilungen oder Standorte aufteilen.
