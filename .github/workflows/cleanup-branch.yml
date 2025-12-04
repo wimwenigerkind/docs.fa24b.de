@@ -1,0 +1,43 @@
+name: Cleanup Branch
+
+on:
+  delete:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+
+jobs:
+  cleanup-docs:
+    if: github.event.ref_type == 'branch' && github.event.ref != 'main' && github.event.ref != 'gh-pages'
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout gh-pages
+      uses: actions/checkout@v4
+      with:
+        ref: gh-pages
+        fetch-depth: 0
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Install Nix
+      uses: cachix/install-nix-action@v26
+      with:
+        github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Setup Cachix
+      uses: cachix/cachix-action@v14
+      with:
+        name: devenv
+
+    - name: Install DevEnv
+      run: nix profile install nixpkgs#devenv
+
+    - name: Configure git
+      run: |
+        git config user.name github-actions[bot]
+        git config user.email github-actions[bot]@users.noreply.github.com
+
+    - name: Delete documentation version
+      run: |
+        devenv shell mike delete --push ${{ github.event.ref }}

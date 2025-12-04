@@ -1,0 +1,49 @@
+name: Deploy Branch to GitHub Pages
+
+on:
+  push:
+    branches-ignore:
+      - main
+      - gh-pages
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages-${{ github.ref_name }}"
+  cancel-in-progress: true
+
+jobs:
+  deploy-branch:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout branch
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Install Nix
+      uses: cachix/install-nix-action@v26
+      with:
+        github_access_token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Setup Cachix
+      uses: cachix/cachix-action@v14
+      with:
+        name: devenv
+    
+    - name: Install DevEnv
+      run: nix profile install nixpkgs#devenv
+    
+    - name: Configure git
+      run: |
+        git config user.name github-actions[bot]
+        git config user.email github-actions[bot]@users.noreply.github.com
+    
+    - name: Deploy branch documentation
+      run: |
+        devenv shell mike deploy --push --update-aliases ${{ github.ref_name }}
