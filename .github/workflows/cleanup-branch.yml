@@ -38,6 +38,13 @@ jobs:
         git config user.name github-actions[bot]
         git config user.email github-actions[bot]@users.noreply.github.com
 
+    - name: Sanitize version name
+      id: sanitize
+      run: |
+        VERSION="${{ github.event.ref }}"
+        SANITIZED="${VERSION//\//-}"
+        echo "version=$SANITIZED" >> $GITHUB_OUTPUT
+
     - name: Delete documentation version
       run: |
-        devenv shell mike delete --push ${{ github.event.ref }}
+        devenv shell mike delete --push ${{ steps.sanitize.outputs.version }}
