@@ -86,24 +86,11 @@ Jede Ebene kann von unterschiedlichen Organisationen oder DNS-Registrars verwalt
 
 ### Root-Ebene
 
-An der Spitze der Hierarchie steht die Root-Zone:
-
-- wird von 13 **Root-Server-Systemen** betrieben
-- kennt keine einzelnen Hostnamen
-- verweist ausschließlich auf die zuständigen Nameserver der TLDs (z.B. `.de`, `.com`, `.org`)
-
-Die Root-Server bilden die Grundlage für die gesamte DNS-Infrastruktur und ermöglichen die Auflösung aller Domainnamen weltweit.
+An der Spitze der Hierarchie steht die Root-Zone (`.`), die von 13 Root-Server-Systemen betrieben wird.
 
 ### Top-Level-Domains (TLDs)
 
-Unterhalb der Root-Zone befinden sich die Top-Level-Domains:
-
-- **Generische TLDs (gTLDs)**: z.B. `.com`, `.org`, `.net`
-- **Länderspezifische TLDs (ccTLDs)**: z.B. `.de`, `.fr`, `.ch`
-
-Die TLD-Server kennen die autoritativen Nameserver für die darunterliegenden Domains:
-
-- Anfrage nach `fa24b.de` → Verweis auf `tina.ns.cloudflare.com` und `curt.ns.cloudflare.com`
+Unterhalb der Root-Zone befinden sich die Top-Level-Domains wie `.com`, `.org`, `.net`, `.de`, `.fr` oder `.ch`.
 
 ### Second-Level-Domains
 
@@ -145,9 +132,35 @@ Beispiel:
 
 Dadurch entsteht eine **dezentrale**, aber logisch klar strukturierte Verwaltung des Namensraums.
 
-### Die 13 Root-Server-Systeme
+## DNS-Server-Typen und ihre Aufgaben
 
-Es gibt weltweit [13 Root-Server-Systeme](https://root-servers.org/), die durch Buchstaben von A bis M identifiziert werden. Diese Server bilden die Grundlage des globalen DNS-Systems:
+Im Domain Name System übernehmen unterschiedliche DNS-Server spezielle Aufgaben. Zusammengenommen sorgen sie dafür, dass
+Domains wie `docs.fa24b.de` zuverlässig und schnell aufgelöst werden können.
+
+### Rekursiver Resolver (DNS-Resolver)
+
+Der **rekursive Resolver** ist meist der erste Ansprechpartner für Clients:
+
+- läuft oft beim Internetprovider, in Unternehmen oder auf öffentlichen DNS-Diensten z.B. [1.1.1.1](1.1.1.1)(Cloudflare), [8.8.8.8](8.8.8.8)(Google)
+- nimmt Anfragen von Clients entgegen (z.B. für `docs.fa24b.de`)
+- fragt bei Bedarf weitere DNS-Server (Root, TLD, autoritative Server) ab
+- speichert Antworten im **Cache**, um zukünftige Anfragen schneller zu beantworten
+
+Der rekursive Resolver wird typischerweise im Router oder in den Netzwerkeinstellungen des Clients konfiguriert.
+
+### Root-Server
+
+Die **Root-Server** stehen an der Spitze der DNS-Hierarchie:
+
+- kennen keine einzelnen Domains wie `fa24b.de`
+- liefern nur Hinweise, welche **TLD-Server** für eine Endung wie `.de` zuständig sind
+- sind weltweit verteilt und in 13 logische Servergruppen eingeteilt (`a.root-servers.net` bis `m.root-servers.net`)
+
+Die Root-Server bilden die Grundlage für die gesamte DNS-Infrastruktur und ermöglichen die Auflösung aller Domainnamen weltweit.
+
+#### Die 13 Root-Server-Systeme
+
+Es gibt weltweit [13 Root-Server-Systeme](https://root-servers.org/), die durch Buchstaben von A bis M identifiziert werden:
 
 | Bezeichnung | Hostname | IPv4 | IPv6 | Betreiber |
 |-------------|----------|------|------|-----------|
@@ -174,91 +187,6 @@ Es gibt weltweit [13 Root-Server-Systeme](https://root-servers.org/), die durch 
 - [DNS Root Zone](https://www.internic.net/domain/root.zone) - Aktuelle Root-Zone-Datei
 - [Verisign Root Server Map](https://www.verisign.com/en_US/innovation/dnssec/root-server-map/index.xhtml) - Geografische Verteilung
 
-### DNS-Auflösung im lokalen Netzwerk
-
-Die DNS-Auflösung muss nicht immer über die Root-Server erfolgen. In lokalen Netzwerken gibt es alternative Wege:
-
-#### 1. Lokaler DNS-Server (ohne Root-Server)
-
-In Unternehmensnetzwerken oder Heimnetzwerken kann ein lokaler DNS-Server interne Domainnamen auflösen, ohne jemals Root-Server zu kontaktieren:
-
-```mermaid
-sequenceDiagram
-    participant Client
-    participant LocalDNS as Lokaler DNS-Server
-    participant ZoneFile as Lokale Zone-Datei
-
-    Client->>LocalDNS: DNS-Query: server.local
-    LocalDNS->>ZoneFile: Suche in lokaler Zone
-    ZoneFile-->>LocalDNS: 192.168.1.100
-    LocalDNS-->>Client: IP-Adresse: 192.168.1.100
-
-    Note over Client,LocalDNS: Keine Root-Server<br/>beteiligt!
-```
-
-**Beispiel**: In einem Unternehmensnetzwerk kann `server.local` oder `intranet.firma.de` direkt vom lokalen DNS-Server aufgelöst werden.
-
-#### 2. Hosts-Datei
-
-Noch vor der DNS-Abfrage prüft jedes Betriebssystem die lokale Hosts-Datei:
-
-- **Linux/macOS**: `/etc/hosts`
-- **Windows**: `C:\Windows\System32\drivers\etc\hosts`
-
-```
-# /etc/hosts
-127.0.0.1       localhost
-192.168.1.10    server.local
-192.168.1.20    nas.local
-```
-
-#### 3. Split-DNS / Split-Horizon DNS
-
-Bei Split-DNS liefert ein DNS-Server unterschiedliche Antworten, abhängig davon, ob die Anfrage aus dem internen oder externen Netzwerk kommt:
-
-```mermaid
-graph LR
-    A[Client intern] -->|Query: intranet.firma.de| B[DNS-Server]
-    C[Client extern] -->|Query: intranet.firma.de| B
-
-    B -->|Intern| D[192.168.1.100<br/>private IP]
-    B -->|Extern| E[Keine Antwort<br/>NXDOMAIN]
-```
-
-#### 4. mDNS (Multicast DNS)
-
-Für lokale Netzwerke ohne DNS-Server existiert **mDNS** (verwendet von Apple Bonjour, Avahi):
-
-- Auflösung von `.local` Domainnamen
-- Broadcast-basiert im lokalen Netzwerk
-- Beispiel: `rechner.local` wird automatisch gefunden
-
-## DNS-Server-Typen und ihre Aufgaben
-
-Im Domain Name System übernehmen unterschiedliche DNS-Server spezielle Aufgaben. Zusammengenommen sorgen sie dafür, dass
-Domains wie `docs.fa24b.de` zuverlässig und schnell aufgelöst werden können.
-
-### Rekursiver Resolver (DNS-Resolver)
-
-Der **rekursive Resolver** ist meist der erste Ansprechpartner für Clients:
-
-- läuft oft beim Internetprovider, in Unternehmen oder auf öffentlichen DNS-Diensten z.B. [1.1.1.1](1.1.1.1)(Cloudflare), [8.8.8.8](8.8.8.8)(Google)
-- nimmt Anfragen von Clients entgegen (z.B. für `docs.fa24b.de`)
-- fragt bei Bedarf weitere DNS-Server (Root, TLD, autoritative Server) ab
-- speichert Antworten im **Cache**, um zukünftige Anfragen schneller zu beantworten
-
-Der rekursive Resolver wird typischerweise im Router oder in den Netzwerkeinstellungen des Clients konfiguriert.
-
-### Root-Server
-
-Die **Root-Server** stehen an der Spitze der DNS-Hierarchie:
-
-- kennen keine einzelnen Domains wie `fa24b.de`
-- liefern nur Hinweise, welche **TLD-Server** für eine Endung wie `.de` zuständig sind
-- sind weltweit verteilt und in 13 logische Servergruppen eingeteilt (`a.root-servers.net` bis `m.root-servers.net`)
-
-Ohne Root-Server könnte der Auflösungsprozess nicht bei Null gestartet werden.
-
 ### TLD-Server (Top-Level-Domain-Server)
 
 Die **TLD-Server** sind für eine bestimmte Domain-Endung zuständig, z.B. `.de`:
@@ -268,6 +196,11 @@ Die **TLD-Server** sind für eine bestimmte Domain-Endung zuständig, z.B. `.de`
 - Beispiel: `.de`-Server wie `a.nic.de`, `n.de.net`, `z.nic.de`
 
 Bei einer Anfrage nach `fa24b.de` liefern die `.de`-TLD-Server die zuständigen Cloudflare-Nameserver zurück.
+
+**TLD-Kategorien:**
+
+- **Generische TLDs (gTLDs)**: z.B. `.com`, `.org`, `.net`
+- **Länderspezifische TLDs (ccTLDs)**: z.B. `.de`, `.fr`, `.ch`
 
 ### Autoritative Nameserver
 
