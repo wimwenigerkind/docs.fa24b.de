@@ -1,13 +1,13 @@
 # DNS
 
-# Was ist DNS und warum brauchen wir es?
+## Was ist DNS und warum brauchen wir es?
 
 Das **Domain Name System (DNS)** funktioniert wie ein Telefonbuch für Netzwerke. Seine Hauptfunktion ist die Umwandlung
 von menschenlesbaren Domainnamen (wie [docs.fa24b.de](https://docs.fa24b.de)) in maschinenlesbare
 IP-Adressen (wie 185.199.108.153). So können Webbrowser, E-Mail-Clients und andere Netzwerkdienste die
 richtigen Server erreichen – sowohl im Internet als auch in lokalen Netzwerken.
 
-## Warum ist DNS notwendig?
+### Warum ist DNS notwendig?
 
 Computer kommunizieren über IP-Adressen miteinander. Für Menschen sind diese Zahlenfolgen jedoch schwer zu merken und unpraktisch.
 Ohne DNS wäre es erforderlich, sich für jede Website die entsprechende IP-Adresse zu merken:
@@ -17,7 +17,7 @@ Ohne DNS wäre es erforderlich, sich für jede Website die entsprechende IP-Adre
 
 DNS löst dieses Problem, indem es als Vermittler zwischen Menschen und Maschinen fungiert.
 
-## Die Hauptaufgaben des DNS
+### Die Hauptaufgaben des DNS
 
 1. **Namensauflösung**: Übersetzung von Domainnamen in IP-Adressen (Forward Lookup)
 2. **Reverse Lookup**: Übersetzung von IP-Adressen zurück in Domainnamen
@@ -25,7 +25,7 @@ DNS löst dieses Problem, indem es als Vermittler zwischen Menschen und Maschine
 4. **Redundanz**: Bereitstellung von Ausfallsicherheit durch mehrere DNS-Server
 5. **E-Mail-Routing**: Bestimmung zuständiger Mailserver über MX-Records
 
-## Beispiel einer DNS-Anfrage
+### Beispiel einer DNS-Anfrage
 
 Bei der Eingabe von `docs.fa24b.de` in einem Browser läuft folgender Prozess ab:
 
@@ -36,17 +36,17 @@ Bei der Eingabe von `docs.fa24b.de` in einem Browser läuft folgender Prozess ab
 
 Dieser gesamte Prozess dauert nur wenige Millisekunden und läuft vollautomatisch im Hintergrund ab.
 
-# Aufbau und Hierarchie des DNS
+## Aufbau und Hierarchie des DNS
 
-# DNS-Server-Typen und ihre Aufgaben
+## DNS-Server-Typen und ihre Aufgaben
 
-# Der DNS-Auflösungsprozess
+## Der DNS-Auflösungsprozess
 
-# DNS-Record-Typen (Resource Records)
+## DNS-Record-Typen (Resource Records)
 
 DNS-Records (auch Resource Records genannt) sind Datensätze in der DNS-Datenbank, die verschiedene Informationen über eine Domain enthalten. Jeder Record-Typ erfüllt eine spezifische Aufgabe.
 
-## A-Record (Address Record)
+### A-Record (Address Record)
 
 **Funktion**: Ordnet einem Domainnamen eine IPv4-Adresse zu.
 
@@ -62,7 +62,7 @@ docs.fa24b.de.    3600    IN    A    185.199.111.153
 
 **Praxisbeispiel**: Die Domain `docs.fa24b.de` verfügt über mehrere A-Records, die auf verschiedene GitHub Pages Server zeigen. Dies ermöglicht Lastverteilung und erhöht die Verfügbarkeit der Website.
 
-## AAAA-Record (IPv6 Address Record)
+### AAAA-Record (IPv6 Address Record)
 
 **Funktion**: Ordnet einem Domainnamen eine IPv6-Adresse zu.
 
@@ -78,7 +78,7 @@ docs.fa24b.de.    3600    IN    AAAA    2606:50c0:8003::153
 
 **Praxisbeispiel**: Die Domain `docs.fa24b.de` verfügt über mehrere AAAA-Records für IPv6-Konnektivität. Moderne Geräte und Netzwerke nutzen zunehmend IPv6, und diese Records stellen sicher, dass die Website auch über IPv6 erreichbar ist.
 
-## CNAME-Record (Canonical Name)
+### CNAME-Record (Canonical Name)
 
 **Funktion**: Erstellt einen Alias für einen anderen Domainnamen (Weiterleitung auf einen anderen Namen).
 
@@ -101,7 +101,7 @@ selector2._domainkey.fa24b.de.    3600    IN    CNAME    selector2-fa24b-de._dom
 
 **Wichtig**: Ein CNAME-Record kann nicht zusammen mit anderen Records für denselben Namen existieren.
 
-## MX-Record (Mail Exchange)
+### MX-Record (Mail Exchange)
 
 **Funktion**: Gibt an, welcher Mailserver für den E-Mail-Empfang einer Domain zuständig ist.
 
@@ -116,7 +116,7 @@ fa24b.de.    3600    IN    MX    0    fa24b-de.mail.protection.outlook.com.
 
 Die Zahl vor dem Servernamen gibt die Priorität an (niedriger = höher priorisiert).
 
-## TXT-Record (Text Record)
+### TXT-Record (Text Record)
 
 **Funktion**: Speichert beliebige Textinformationen zu einer Domain.
 
@@ -141,7 +141,7 @@ default._domainkey.fa24b.de.    IN    TXT    "v=DKIM1; k=rsa; p=MIGfMA0..."
 
 **Praxisbeispiel**: Die Domain `fa24b.de` nutzt Microsoft Exchange Online Protection. Der SPF-Record `v=spf1 include:spf.protection.outlook.com ~all` erlaubt den Microsoft-Servern, E-Mails im Namen der Domain zu versenden. Der Microsoft-Verifizierungsrecord `MS=ms37803661` bestätigt die Domain-Inhaberschaft. Die DKIM-Signierung erfolgt über CNAME-Delegation an die Microsoft-Infrastruktur (siehe CNAME-Record-Beispiele).
 
-## NS-Record (Name Server)
+### NS-Record (Name Server)
 
 **Funktion**: Gibt an, welche DNS-Server für eine Domain oder Subdomain zuständig sind.
 
@@ -155,7 +155,7 @@ fa24b.de.    86400    IN    NS    curt.ns.cloudflare.com.
 
 **Praxisbeispiel**: Die Domain `fa24b.de` wird von den Cloudflare-Nameservern `tina.ns.cloudflare.com` und `curt.ns.cloudflare.com` verwaltet. Diese sind für die Auflösung aller DNS-Anfragen der Domain verantwortlich.
 
-## PTR-Record (Pointer Record)
+### PTR-Record (Pointer Record)
 
 **Funktion**: Reverse DNS-Lookup - ordnet einer IP-Adresse einen Domainnamen zu (umgekehrte Richtung).
 
@@ -168,7 +168,7 @@ fa24b.de.    86400    IN    NS    curt.ns.cloudflare.com.
 
 **Praxisbeispiel**: Der PTR-Record für die IP-Adresse `185.199.108.153` zeigt auf `cdn-185-199-108-153.github.com`. E-Mail-Server prüfen häufig PTR-Records, um die Legitimität der sendenden IP-Adresse zu verifizieren und Spam zu reduzieren.
 
-## SOA-Record (Start of Authority)
+### SOA-Record (Start of Authority)
 
 **Funktion**: Enthält administrative Informationen über die DNS-Zone.
 
@@ -186,7 +186,7 @@ fa24b.de.    1800    IN    SOA    curt.ns.cloudflare.com. dns.cloudflare.com. (
 
 **Praxisbeispiel**: Der SOA-Record für `fa24b.de` definiert `curt.ns.cloudflare.com` als primären Nameserver mit `dns.cloudflare.com` als Kontakt-E-Mail. Die Serial-Nummer wird bei jeder Änderung erhöht, um sekundären DNS-Servern zu signalisieren, dass Updates verfügbar sind.
 
-## SRV-Record (Service Record)
+### SRV-Record (Service Record)
 
 **Funktion**: Gibt Informationen über verfügbare Dienste an (Server, Port, Priorität, Gewichtung).
 
@@ -201,7 +201,7 @@ Format: `Priorität Gewichtung Port Zielserver`
 
 **Praxisbeispiel**: Microsoft Teams oder Skype for Business nutzen SRV-Records, um automatisch die richtigen Server und Ports für die Kommunikation zu finden.
 
-## CAA-Record (Certification Authority Authorization)
+### CAA-Record (Certification Authority Authorization)
 
 **Funktion**: Gibt an, welche Zertifizierungsstellen (CAs) SSL/TLS-Zertifikate für die Domain ausstellen dürfen.
 
@@ -216,7 +216,7 @@ fa24b.de.    3600    IN    CAA    0    iodef    "mailto:security@fa24b.de"
 
 **Praxisbeispiel**: Ausschließlich Let's Encrypt ist berechtigt, Zertifikate für `fa24b.de` auszustellen. Bei unautorisierten Ausstellungsversuchen erfolgt eine Benachrichtigung per E-Mail an `security@fa24b.de`.
 
-## Zusammenfassung der wichtigsten Record-Typen
+### Zusammenfassung der wichtigsten Record-Typen
 
 | Record-Typ | Hauptverwendung | Beispiel-Szenario |
 |------------|-----------------|-------------------|
@@ -231,12 +231,12 @@ fa24b.de.    3600    IN    CAA    0    iodef    "mailto:security@fa24b.de"
 | **SRV** | Dienst-Lokalisierung | VoIP, Chat-Dienste |
 | **CAA** | Zertifikats-Kontrolle | SSL/TLS-Sicherheit |
 
-# DNS-Caching und TTL (Time to Live)
+## DNS-Caching und TTL (Time to Live)
 
-# DNS-Sicherheit: Bedrohungen und Schutzmaßnahmen
+## DNS-Sicherheit: Bedrohungen und Schutzmaßnahmen
 
-# Praktische DNS-Tools und Befehle
+## Praktische DNS-Tools und Befehle
 
-# DNS in der Praxis: Konfiguration und Verwaltung
+## DNS in der Praxis: Konfiguration und Verwaltung
 
-# Zusammenfassung und Ausblick
+## Zusammenfassung und Ausblick
